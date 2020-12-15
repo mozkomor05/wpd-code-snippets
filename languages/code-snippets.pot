@@ -14,28 +14,330 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: code-snippets.php:16, php/admin-menus/class-import-menu.php:104
-msgid "Code Snippets"
+#: code-snippets.php:16
+msgid "WPDistro Code Snippets"
 msgstr ""
 
 #: code-snippets.php:17
-msgid "https://github.com/sheabunge/code-snippets"
+msgid "https://github.com/mozkomor05/wpd-code-snippets"
 msgstr ""
 
 #: code-snippets.php:18
-msgid "An easy, clean and simple way to run code snippets on your site. No need to edit to your theme's functions.php file again!"
+msgid "A fork of Code Snippets, that allows you to share and download snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your Wordpress Distribution."
 msgstr ""
 
 #: code-snippets.php:19
-msgid "Code Snippets Pro"
+msgid "WPDistro"
 msgstr ""
 
 #: code-snippets.php:20
-msgid "https://codesnippets.pro"
+msgid "https://wpdistro.com"
 msgstr ""
 
-#: php/class-admin.php:68, php/class-admin.php:129, php/admin-menus/class-manage-menu.php:23, php/admin-menus/class-manage-menu.php:52, php/admin-menus/class-manage-menu.php:91, php/views/manage.php:21
+#: php/admin-menus/class-admin-menu.php:124
+msgid "You are not authorized to access this page."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:23
+msgctxt "menu label"
+msgid "Edit Snippet"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:24, php/views/edit.php:33
+msgid "Edit Snippet"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:50
+msgctxt "menu label"
+msgid "Add New"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:51, php/views/edit.php:39
+msgid "Add New Snippet"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:187
+msgid "Don't Panic"
+msgstr ""
+
+#. translators: %d: line where error was produced
+#: php/admin-menus/class-edit-menu.php:189
+msgid "The code snippet you are trying to save produced a fatal error on line %d:"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:191
+msgid "The previous version of the snippet is unchanged, and the rest of this site should be functioning normally as before."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:192
+msgid "Please use the back button in your browser to return to the previous page and try to fix the code error."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:193
+msgid "If you prefer, you can close this page and discard the changes you just made. No changes will be made to this site."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:336, php/class-list-table.php:365
+msgid "Description"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:369, php/class-list-table.php:366
+msgid "Tags"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:374
+msgid "Enter a list of tags; separated by commas"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:387
+msgid "Snippets with a lower priority number will run before those with a higher number."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:388, php/class-list-table.php:368
+msgid "Priority"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:405
+msgid "Run snippet everywhere"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:406
+msgid "Only run in administration area"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:407
+msgid "Only run on site front-end"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:408
+msgid "Only run once"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:411
+msgid "Scope"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:432
+msgid "Sharing Settings"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:436
+msgid "Allow this snippet to be activated on individual sites on the network"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:508
+msgid "The snippet has been deactivated due to an error in the code."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:503
+msgid "The snippet has been deactivated due to an error on line %d:"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:515
+msgid "An error occurred when saving the snippet."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:521
+msgid "Snippet <strong>added</strong>."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:522
+msgid "Snippet <strong>updated</strong>."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:523
+msgid "Snippet <strong>added</strong> and <strong>activated</strong>."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:524
+msgid "Snippet <strong>added</strong> and <strong>executed</strong>."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:525
+msgid "Snippet <strong>updated</strong> and <strong>activated</strong>."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:526
+msgid "Snippet <strong>updated</strong> and <strong>deactivated</strong>."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:608, php/views/edit.php:90
+msgid "Save Changes"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:619
+msgid "Save Changes and Activate"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:617
+msgid "Save Changes and Deactivate"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:612
+msgid "Save Changes and Execute Once"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:632, php/class-list-table.php:414
+msgid "Download"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:635, php/class-list-table.php:163, php/class-list-table.php:415
+msgid "Export"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:636, php/class-list-table.php:172, php/class-list-table.php:416
+msgid "Delete"
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:663
+msgid "You are about to permanently delete this snippet."
+msgstr ""
+
+#: php/admin-menus/class-edit-menu.php:664, php/class-list-table.php:177
+msgid "'Cancel' to stop, 'OK' to delete."
+msgstr ""
+
+#: php/admin-menus/class-import-menu.php:15
+msgctxt "menu label"
+msgid "Import"
+msgstr ""
+
+#: php/admin-menus/class-import-menu.php:16, php/views/import.php:19
+msgid "Import Snippets"
+msgstr ""
+
+#: php/admin-menus/class-import-menu.php:104
+msgid "Code Snippets"
+msgstr ""
+
+#: php/admin-menus/class-import-menu.php:105
+msgid "Import snippets from a code snippets export file"
+msgstr ""
+
+#: php/admin-menus/class-import-menu.php:117
+msgid "An error occurred when processing the import files."
+msgstr ""
+
+#. translators: 1: amount of snippets imported, 2: link to Snippets menu
+#: php/admin-menus/class-import-menu.php:133
+msgid "Successfully imported <strong>%1$d</strong> snippet. <a href=\"%2$s\">Have fun!</a>"
+msgid_plural "Successfully imported <strong>%1$d</strong> snippets. <a href=\"%2$s\">Have fun!</a>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: php/admin-menus/class-import-menu.php:127
+msgid "No snippets were imported."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:22
+msgctxt "menu label"
+msgid "All Snippets"
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:23, php/admin-menus/class-manage-menu.php:52, php/admin-menus/class-manage-menu.php:91, php/class-admin.php:68, php/class-admin.php:129, php/views/manage.php:21
 msgid "Snippets"
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:53
+msgctxt "top-level menu label"
+msgid "Snippets"
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:92
+msgctxt "tools submenu label"
+msgid "Snippets"
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:140, php/class-list-table.php:207, php/class-list-table.php:411, php/views/edit.php:110
+msgid "Activate"
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:141, php/class-list-table.php:207, php/class-list-table.php:412, php/views/edit.php:104
+msgid "Deactivate"
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:142
+msgid "An error occurred when attempting to activate"
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:155
+msgid "<strong>Warning:</strong> Safe mode is active and snippets will not execute! Remove the <code>CODE_SNIPPETS_SAFE_MODE</code> constant from <code>wp-config.php</code> to turn off safe mode. <a href=\"https://github.com/sheabunge/code-snippets/wiki/Safe-Mode\" target=\"_blank\">Help</a>"
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:161
+msgid "Snippet <strong>executed</strong>."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:162
+msgid "Snippet <strong>activated</strong>."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:163
+msgid "Selected snippets <strong>activated</strong>."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:164
+msgid "Snippet <strong>deactivated</strong>."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:165
+msgid "Selected snippets <strong>deactivated</strong>."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:166
+msgid "Snippet <strong>deleted</strong>."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:167
+msgid "Selected snippets <strong>deleted</strong>."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:168
+msgid "Snippet <strong>cloned</strong>."
+msgstr ""
+
+#: php/admin-menus/class-manage-menu.php:169
+msgid "Selected snippets <strong>cloned</strong>."
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:16
+msgctxt "menu label"
+msgid "Settings"
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:17
+msgid "Snippets Settings"
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:38
+msgid "All settings have been reset to their defaults."
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:82
+msgid "Settings"
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:87, php/views/edit.php:47, php/views/import.php:26
+msgctxt "snippets"
+msgid "Manage"
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:92, php/views/edit.php:36, php/views/import.php:31, php/views/manage.php:24
+msgctxt "snippet"
+msgid "Add New"
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:97, php/views/edit.php:52, php/views/manage.php:29
+msgctxt "snippets"
+msgid "Import"
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:118
+msgid "Reset to Default"
+msgstr ""
+
+#: php/admin-menus/class-settings-menu.php:144, php/settings/settings.php:209
+msgid "Settings saved."
 msgstr ""
 
 #: php/class-admin.php:69
@@ -212,20 +514,8 @@ msgstr ""
 msgid "Clone"
 msgstr ""
 
-#: php/class-list-table.php:163, php/class-list-table.php:415, php/admin-menus/class-edit-menu.php:635
-msgid "Export"
-msgstr ""
-
-#: php/class-list-table.php:172, php/class-list-table.php:416, php/admin-menus/class-edit-menu.php:636
-msgid "Delete"
-msgstr ""
-
 #: php/class-list-table.php:176
 msgid "You are about to permanently delete the selected item."
-msgstr ""
-
-#: php/class-list-table.php:177, php/admin-menus/class-edit-menu.php:664
-msgid "'Cancel' to stop, 'OK' to delete."
 msgstr ""
 
 #: php/class-list-table.php:155
@@ -242,14 +532,6 @@ msgstr ""
 
 #: php/class-list-table.php:206, php/class-list-table.php:411
 msgid "Network Activate"
-msgstr ""
-
-#: php/class-list-table.php:207, php/class-list-table.php:412, php/admin-menus/class-manage-menu.php:141, php/views/edit.php:104
-msgid "Deactivate"
-msgstr ""
-
-#: php/class-list-table.php:207, php/class-list-table.php:411, php/admin-menus/class-manage-menu.php:140, php/views/edit.php:110
-msgid "Activate"
 msgstr ""
 
 #: php/class-list-table.php:201
@@ -287,24 +569,8 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: php/class-list-table.php:365, php/admin-menus/class-edit-menu.php:336
-msgid "Description"
-msgstr ""
-
-#: php/class-list-table.php:366, php/admin-menus/class-edit-menu.php:369
-msgid "Tags"
-msgstr ""
-
 #: php/class-list-table.php:367
 msgid "Modified"
-msgstr ""
-
-#: php/class-list-table.php:368, php/admin-menus/class-edit-menu.php:388
-msgid "Priority"
-msgstr ""
-
-#: php/class-list-table.php:414, php/admin-menus/class-edit-menu.php:632
-msgid "Download"
 msgstr ""
 
 #. translators: %s: total number of snippets
@@ -463,268 +729,6 @@ msgstr ""
 
 #: php/class-validator.php:216
 msgid "Parse error: syntax error, unexpected end of snippet"
-msgstr ""
-
-#: php/admin-menus/class-admin-menu.php:124
-msgid "You are not authorized to access this page."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:23
-msgctxt "menu label"
-msgid "Edit Snippet"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:24, php/views/edit.php:33
-msgid "Edit Snippet"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:50
-msgctxt "menu label"
-msgid "Add New"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:51, php/views/edit.php:39
-msgid "Add New Snippet"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:187
-msgid "Don't Panic"
-msgstr ""
-
-#. translators: %d: line where error was produced
-#: php/admin-menus/class-edit-menu.php:189
-msgid "The code snippet you are trying to save produced a fatal error on line %d:"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:191
-msgid "The previous version of the snippet is unchanged, and the rest of this site should be functioning normally as before."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:192
-msgid "Please use the back button in your browser to return to the previous page and try to fix the code error."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:193
-msgid "If you prefer, you can close this page and discard the changes you just made. No changes will be made to this site."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:374
-msgid "Enter a list of tags; separated by commas"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:387
-msgid "Snippets with a lower priority number will run before those with a higher number."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:405
-msgid "Run snippet everywhere"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:406
-msgid "Only run in administration area"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:407
-msgid "Only run on site front-end"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:408
-msgid "Only run once"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:411
-msgid "Scope"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:432
-msgid "Sharing Settings"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:436
-msgid "Allow this snippet to be activated on individual sites on the network"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:508
-msgid "The snippet has been deactivated due to an error in the code."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:503
-msgid "The snippet has been deactivated due to an error on line %d:"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:515
-msgid "An error occurred when saving the snippet."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:521
-msgid "Snippet <strong>added</strong>."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:522
-msgid "Snippet <strong>updated</strong>."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:523
-msgid "Snippet <strong>added</strong> and <strong>activated</strong>."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:524
-msgid "Snippet <strong>added</strong> and <strong>executed</strong>."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:525
-msgid "Snippet <strong>updated</strong> and <strong>activated</strong>."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:526
-msgid "Snippet <strong>updated</strong> and <strong>deactivated</strong>."
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:608, php/views/edit.php:90
-msgid "Save Changes"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:619
-msgid "Save Changes and Activate"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:617
-msgid "Save Changes and Deactivate"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:612
-msgid "Save Changes and Execute Once"
-msgstr ""
-
-#: php/admin-menus/class-edit-menu.php:663
-msgid "You are about to permanently delete this snippet."
-msgstr ""
-
-#: php/admin-menus/class-import-menu.php:15
-msgctxt "menu label"
-msgid "Import"
-msgstr ""
-
-#: php/admin-menus/class-import-menu.php:16, php/views/import.php:19
-msgid "Import Snippets"
-msgstr ""
-
-#: php/admin-menus/class-import-menu.php:105
-msgid "Import snippets from a code snippets export file"
-msgstr ""
-
-#: php/admin-menus/class-import-menu.php:117
-msgid "An error occurred when processing the import files."
-msgstr ""
-
-#. translators: 1: amount of snippets imported, 2: link to Snippets menu
-#: php/admin-menus/class-import-menu.php:133
-msgid "Successfully imported <strong>%1$d</strong> snippet. <a href=\"%2$s\">Have fun!</a>"
-msgid_plural "Successfully imported <strong>%1$d</strong> snippets. <a href=\"%2$s\">Have fun!</a>"
-msgstr[0] ""
-msgstr[1] ""
-
-#: php/admin-menus/class-import-menu.php:127
-msgid "No snippets were imported."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:22
-msgctxt "menu label"
-msgid "All Snippets"
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:53
-msgctxt "top-level menu label"
-msgid "Snippets"
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:92
-msgctxt "tools submenu label"
-msgid "Snippets"
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:142
-msgid "An error occurred when attempting to activate"
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:155
-msgid "<strong>Warning:</strong> Safe mode is active and snippets will not execute! Remove the <code>CODE_SNIPPETS_SAFE_MODE</code> constant from <code>wp-config.php</code> to turn off safe mode. <a href=\"https://github.com/sheabunge/code-snippets/wiki/Safe-Mode\" target=\"_blank\">Help</a>"
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:161
-msgid "Snippet <strong>executed</strong>."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:162
-msgid "Snippet <strong>activated</strong>."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:163
-msgid "Selected snippets <strong>activated</strong>."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:164
-msgid "Snippet <strong>deactivated</strong>."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:165
-msgid "Selected snippets <strong>deactivated</strong>."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:166
-msgid "Snippet <strong>deleted</strong>."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:167
-msgid "Selected snippets <strong>deleted</strong>."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:168
-msgid "Snippet <strong>cloned</strong>."
-msgstr ""
-
-#: php/admin-menus/class-manage-menu.php:169
-msgid "Selected snippets <strong>cloned</strong>."
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:16
-msgctxt "menu label"
-msgid "Settings"
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:17
-msgid "Snippets Settings"
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:38
-msgid "All settings have been reset to their defaults."
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:82
-msgid "Settings"
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:87, php/views/edit.php:47, php/views/import.php:26
-msgctxt "snippets"
-msgid "Manage"
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:92, php/views/edit.php:36, php/views/import.php:31, php/views/manage.php:24
-msgctxt "snippet"
-msgid "Add New"
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:97, php/views/edit.php:52, php/views/manage.php:29
-msgctxt "snippets"
-msgid "Import"
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:118
-msgid "Reset to Default"
-msgstr ""
-
-#: php/admin-menus/class-settings-menu.php:144, php/settings/settings.php:209
-msgid "Settings saved."
 msgstr ""
 
 #: php/settings/settings-fields.php:42

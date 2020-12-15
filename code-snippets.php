@@ -14,11 +14,11 @@
  */
 
 /*
-Plugin Name: Code Snippets
-Plugin URI:  https://github.com/sheabunge/code-snippets
-Description: An easy, clean and simple way to run code snippets on your site. No need to edit to your theme's functions.php file again!
-Author:      Code Snippets Pro
-Author URI:  https://codesnippets.pro
+Plugin Name: WPDistro Code Snippets
+Plugin URI:  https://github.com/mozkomor05/wpd-code-snippets
+Description: A fork of Code Snippets, that allows you to share and download snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your Wordpress Distribution.
+Author:      WPDistro
+Author URI:  https://wpdistro.com
 Version:     2.14.0
 License:     MIT
 License URI: license.txt

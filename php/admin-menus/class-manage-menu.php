@@ -206,60 +206,63 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 		$snippet = new Code_Snippet( $snippet_data );
 		$field = $_POST['field'];
 
-		if ( 'priority' === $field ) {
+		switch ($field) {
+            case 'priority': {
+                if ( ! isset( $snippet_data['priority'] ) || ! is_numeric( $snippet_data['priority'] ) ) {
+                    wp_send_json_error( array(
+                        'type'    => 'param_error',
+                        'message' => 'missing snippet priority data',
+                    ) );
+                }
 
-			if ( ! isset( $snippet_data['priority'] ) || ! is_numeric( $snippet_data['priority'] ) ) {
-				wp_send_json_error( array(
-					'type'    => 'param_error',
-					'message' => 'missing snippet priority data',
-				) );
-			}
+                global $wpdb;
 
-			global $wpdb;
+                $wpdb->update(
+                    code_snippets()->db->get_table_name( $snippet->network ),
+                    array( 'priority' => $snippet->priority ),
+                    array( 'id' => $snippet->id ),
+                    array( '%d' ),
+                    array( '%d' )
+                );
+                break;
+            }
+            case 'active': {
 
-			$wpdb->update(
-				code_snippets()->db->get_table_name( $snippet->network ),
-				array( 'priority' => $snippet->priority ),
-				array( 'id' => $snippet->id ),
-				array( '%d' ),
-				array( '%d' )
-			);
+                if ( ! isset( $snippet_data['active'] ) ) {
+                    wp_send_json_error( array(
+                        'type'    => 'param_error',
+                        'message' => 'missing snippet active data',
+                    ) );
+                }
 
-		} elseif ( 'active' === $field ) {
+                if ( $snippet->shared_network ) {
+                    $active_shared_snippets = get_option( 'active_shared_network_snippets', array() );
 
-			if ( ! isset( $snippet_data['active'] ) ) {
-				wp_send_json_error( array(
-					'type'    => 'param_error',
-					'message' => 'missing snippet active data',
-				) );
-			}
+                    if ( in_array( $snippet->id, $active_shared_snippets, true ) !== $snippet->active ) {
 
-			if ( $snippet->shared_network ) {
-				$active_shared_snippets = get_option( 'active_shared_network_snippets', array() );
+                        $active_shared_snippets = $snippet->active ?
+                            array_merge( $active_shared_snippets, array( $snippet->id ) ) :
+                            array_diff( $active_shared_snippets, array( $snippet->id ) );
 
-				if ( in_array( $snippet->id, $active_shared_snippets, true ) !== $snippet->active ) {
+                        update_option( 'active_shared_network_snippets', $active_shared_snippets );
+                    }
+                } else {
 
-					$active_shared_snippets = $snippet->active ?
-						array_merge( $active_shared_snippets, array( $snippet->id ) ) :
-						array_diff( $active_shared_snippets, array( $snippet->id ) );
-
-					update_option( 'active_shared_network_snippets', $active_shared_snippets );
-				}
-			} else {
-
-				if ( $snippet->active ) {
-					$result = activate_snippet( $snippet->id, $snippet->network );
-					if ( ! $result ) {
-						wp_send_json_error( array(
-							'type'    => 'action_error',
-							'message' => 'error activating snippet',
-						) );
-					}
-				} else {
-					deactivate_snippet( $snippet->id, $snippet->network );
-				}
-			}
-		}
+                    if ( $snippet->active ) {
+                        $result = activate_snippet( $snippet->id, $snippet->network );
+                        if ( ! $result ) {
+                            wp_send_json_error( array(
+                                'type'    => 'action_error',
+                                'message' => 'error activating snippet',
+                            ) );
+                        }
+                    } else {
+                        deactivate_snippet( $snippet->id, $snippet->network );
+                    }
+                }
+                break;
+            }
+        }
 
 		wp_send_json_success();
 	}

@@ -29,6 +29,11 @@ class Code_Snippets {
 	 */
 	public $db;
 
+    /**
+     * @var Code_Snippets_API
+     */
+    public $api;
+
 	/**
 	 * @var Code_Snippets_Admin
 	 */
@@ -65,6 +70,8 @@ class Code_Snippets {
 		/* Database operation functions */
 		$this->db = new Code_Snippets_DB();
 
+		$this->api = new Code_Snippets_API();
+
 		/* Snippet operation functions */
 		require_once $includes_path . '/snippet-ops.php';
 		require_once $includes_path . '/import-export.php';
@@ -74,6 +81,9 @@ class Code_Snippets {
 
 		/* Backwards compatibility functions */
 		require_once $includes_path . '/functions.php';
+
+		/* WPDistro API functions */
+        require_once $includes_path . '/wpd-api.php';
 
 		/* General Administration functions */
 		if ( is_admin() ) {
@@ -111,6 +121,7 @@ class Code_Snippets {
 	public function get_menu_slug( $menu = '' ) {
 		$add = array( 'single', 'add', 'add-new', 'add-snippet', 'new-snippet', 'add-new-snippet' );
 		$edit = array( 'edit', 'edit-snippet' );
+        $browse = array( 'browse' );
 		$import = array( 'import', 'import-snippets', 'import-code-snippets' );
 		$settings = array( 'settings', 'snippets-settings' );
 
@@ -122,6 +133,8 @@ class Code_Snippets {
 			return 'import-code-snippets';
 		} elseif ( in_array( $menu, $settings, true ) ) {
 			return 'snippets-settings';
+        } elseif ( in_array( $menu, $browse, true ) ) {
+            return 'browse-snippets';
 		} else {
 			return 'snippets';
 		}

@@ -55,7 +55,7 @@ gulp.task('css', (done) => {
 		cssnano({'preset': ['default', {'discardComments': {'removeAll': true}}]})
 	];
 
-	const dir_css = ['edit.css', 'manage.css'];
+	const dir_css = ['edit.css', 'manage.css', "browse.css"];
 
 	return gulp.series(
 		() => gulp.src(src_files.css)
@@ -82,10 +82,7 @@ gulp.task('test-js', () => {
 		},
 		extends: 'eslint:recommended',
 		rules: {
-			'quotes': ['error', 'single'],
-			'linebreak-style': ['error', 'unix'],
 			'eqeqeq': ['warn', 'always'],
-			'indent': ['error', 'tab', {'SwitchCase': 1}]
 		}
 	};
 
@@ -116,6 +113,7 @@ function bundlejs(file, babel_config) {
 gulp.task('js', gulp.series('test-js', gulp.parallel(
 	() => bundlejs('js/editor.js'),
 	() => bundlejs('js/manage.js'),
+	() => bundlejs('js/browse.js'),
 	() => bundlejs('js/edit.js'),
 	() => bundlejs('js/edit-tags.js'),
 	() => bundlejs('js/settings.js'),

@@ -18,6 +18,7 @@ class Code_Snippets_Admin {
 
 	public function load_classes() {
 		$this->menus['manage'] = new Code_Snippets_Manage_Menu();
+        $this->menus['browse'] = new Code_Snippets_Browse_Menu();
 		$this->menus['edit'] = new Code_Snippets_Edit_Menu();
 		$this->menus['import'] = new Code_Snippets_Import_Menu();
 
