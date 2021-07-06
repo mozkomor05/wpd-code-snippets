@@ -4,6 +4,7 @@ class WPD_Snippet
 {
     public $raw_array;
 
+    public $id;
     public $name;
     public $url;
     public $description;
@@ -36,6 +37,7 @@ class WPD_Snippet
     {
         $this->raw_array = $fields;
 
+        $this->id = $fields['id'];
         $this->name = wp_kses($fields['title']['rendered'], self::plugins_allowed_tags);
         $this->slug = $fields["slug"];
         $this->url = $fields["link"];
@@ -45,9 +47,19 @@ class WPD_Snippet
         $this->code = $fields["acf"]["code"];
     }
 
-    public function request_author()
+    public function request_author($force_request = false)
     {
-        $data = wpd_request($this->author_endpoint, true);
+        $data = null;
+
+        if (!$force_request && is_array($this->raw_array) && array_key_exists('author', $this->raw_array)) {
+            $author = $this->raw_array['author'];
+
+            if (array_key_exists('name', $author))
+                $data = $author;
+        }
+
+        if (empty($data))
+            $data = wpd_request($this->author_endpoint, true);
 
         return (object)array(
             "name" => wp_kses($data['name'], self::plugins_allowed_tags),
@@ -55,9 +67,18 @@ class WPD_Snippet
         );
     }
 
-    public function request_tags() {
-        $tags = array();
+    public function request_tags($force_request = false)
+    {
+        if (!$force_request && is_array($this->raw_array) && array_key_exists('tags', $this->raw_array)) {
+            $tags = $this->raw_array['tags'];
 
+            if (count($tags) == 0 || array_key_exists('name', $tags[0]))
+                return array_map(function ($x) {
+                    return (object)$x;
+                }, $tags);
+        }
+
+        $tags = array();
         foreach ($this->raw_array["_links"]["wp:term"] as $i => $term) {
             if ($term["taxonomy"] !== "post_tag")
                 continue;
@@ -69,7 +90,7 @@ class WPD_Snippet
 
             $tag = $tag[0];
 
-            $tags[] = (object) array (
+            $tags[] = (object)array(
                 "name" => $tag["name"],
                 "link" => $tag["link"]
             );

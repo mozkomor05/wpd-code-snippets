@@ -83,7 +83,7 @@ class Code_Snippets_Browse_Menu extends Code_Snippets_Admin_Menu
             'code-snippets-browse-js',
             'code_snippets_browse_i18n',
             array(
-                'waiting' => __('Installing...', 'code-snippets'),
+                'waiting' => __('Importing...', 'code-snippets'),
                 'installed' => __('Imported', 'code-snippets'),
                 'install_error' => __('Error occurred', 'code-snippets')
             )

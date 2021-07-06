@@ -60,8 +60,8 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table
         $this->process_requested_actions();
 
         $per_page = 20;
-
         $snippets = apply_filters('code_snippets/list_table/wpd_get_snippets', wpd_list_posts($this->get_pagenum(), $per_page, $total));
+
         $this->items = $snippets;
 
         $this->set_pagination_args(
@@ -204,7 +204,7 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table
             $compatible_wp = is_wp_version_compatible($requires_wp);
             $action_links = array();
 
-            $num_ratings = empty($wpd_snippet['num_ratings']) ? 0 : $wpd_snippet['num_ratings'];
+            $num_ratings = empty($wpd_snippet['rating_reviews_count']) ? 0 : $wpd_snippet['rating_reviews_count'];
             $tags = $snippet->request_tags();
 
             //$status = install_plugin_install_status($plugin);
@@ -298,8 +298,8 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table
                 __('View snippet site')
             );
 
-            if (!empty($wpd_snippet['icons'])) {
-                $plugin_icon_url = $wpd_snippet['icons'];
+            if (!empty($wpd_snippet['featured_media'])) {
+                $plugin_icon_url = $wpd_snippet['featured_image_src'];
             } else {
                 $plugin_icon_url = "";
             }
@@ -392,8 +392,8 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table
                         <?php
                         wp_star_rating(
                             array(
-                                'rating' => empty($wpd_snippet['rating']) ? 0 : $wpd_snippet['rating'],
-                                'type' => 'percent',
+                                'rating' => empty($wpd_snippet['meta']['_jet_reviews_average_rating']) ? 0 : $wpd_snippet['meta']['_jet_reviews_average_rating'],
+                                'type' => 'rating',
                                 'number' => $num_ratings,
                             )
                         );

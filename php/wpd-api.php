@@ -49,7 +49,9 @@ function wpd_install_remote_snippet(string $endpoint)
         "tags" => array_column($snippet->request_tags(), "name"),
         "code" => $snippet->code,
         "priority" => 10,
-        "scope" => "global"
+        "scope" => "global",
+        "remote" => true,
+        "remote_id" =>  $snippet->id
     );
 
     save_snippet(new Code_Snippet($args));
