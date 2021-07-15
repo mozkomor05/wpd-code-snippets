@@ -136,6 +136,11 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 				export_snippets( array( $_POST['snippet_id'] ) );
 			}
 
+            /* Push the snippet if the button was clicked */
+            if ( isset( $_POST['push_snippet'] ) ) {
+                push_snippet( array( $_POST['snippet_id'] ) );
+            }
+
 			/* Download the snippet if the button was clicked */
 			if ( isset( $_POST['download_snippet'] ) ) {
 				download_snippets( array( $_POST['snippet_id'] ) );
@@ -633,6 +638,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 			}
 
 			$actions['export_snippet'] = __( 'Export', 'code-snippets' );
+            $actions['push_snippet'] = __( 'Push', 'code-snippets' );
 			$actions['delete_snippet'] = __( 'Delete', 'code-snippets' );
 		}
 

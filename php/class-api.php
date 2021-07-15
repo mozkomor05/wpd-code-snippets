@@ -1,35 +1,67 @@
 <?php
 
-class Code_Snippets_API
-{
-    const WPD_URL = "https://wpdistro.com/wp-json/wp/v2/";
+class Code_Snippets_API {
+	const WPD_URL = 'https://wpdistro.com/wp-json/wp/v2/';
 
-    public function request($action, $headers, $isUrl, $retrieveBody)
-    {
-        global $wp_version;
+	protected function get_http_args( $args ): array {
+		global $wp_version;
 
-        $http_args = array_merge(array(
-            'timeout' => 15,
-            'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url('/'),
-        ), $headers);
+		return wp_parse_args( $args, array(
+			'timeout'    => 15,
+			'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url( '/' ),
+		) );
+	}
 
-        $request = wp_remote_get(($isUrl ? "" : self::WPD_URL) . $action, $http_args);
+	protected function detect_error( $request ) {
+		if ( is_wp_error( $request ) ) {
+			return new WP_Error(
+				'wpd_api_failed',
+				__( 'An unexpected error occurred. Failed to fetch WPDistro API.', 'code-snippets' ),
+				$request->get_error_message()
+			);
+		} else {
+			return $request;
+		}
+	}
 
-        if (is_wp_error($request)) {
-            $res = new WP_Error(
-                'wpd_api_failed',
-                sprintf(
-                    __('An unexpected error occurred. Failed to fetch WPDistro API.', 'code-snippets')
-                ),
-                $request->get_error_message()
-            );
-        } else {
-            if ($retrieveBody)
-                $res = json_decode(wp_remote_retrieve_body($request), true);
-            else
-                $res = $request;
-        }
+	protected function get_request_url( $action ) {
+		return wp_http_validate_url( $action ) ? $action : self::WPD_URL . $action;
+	}
 
-        return $res;
-    }
+	/**
+	 * @param $action
+	 * @param $headers
+	 *
+	 * @return array|WP_Error
+	 */
+	public function get_request( $action, $headers ) {
+		$http_args = $this->get_http_args( array(
+			'headers' => $headers,
+		) );
+		$url       = $this->get_request_url( $action );
+		$request   = wp_remote_get( $url, $http_args );
+
+		return $this->detect_error( $request );
+	}
+
+	/**
+	 * @param $action
+	 * @param $body
+	 * @param $headers
+	 *
+	 * @return array|WP_Error
+	 */
+	public function post_request( $action, $body, $headers ) {
+		$headers   = wp_parse_args( $headers, array(
+			'Content-Type' => 'application/json; charset=utf-8',
+		) );
+		$http_args = $this->get_http_args( array(
+			'headers' => $headers,
+			'body'    => $body,
+		) );
+		$url       = $this->get_request_url( $action );
+		$request   = wp_remote_post( $url, $http_args );
+
+		return $this->detect_error( $request );
+	}
 }

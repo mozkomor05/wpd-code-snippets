@@ -161,6 +161,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 				'edit'   => esc_html__( 'Edit', 'code-snippets' ),
 				'clone'  => esc_html__( 'Clone', 'code-snippets' ),
 				'export' => esc_html__( 'Export', 'code-snippets' ),
+                'push' => esc_html__( 'Push', 'code-snippets' ),
 			);
 
 			foreach ( $simple_actions as $action => $label ) {
@@ -413,6 +414,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 			'clone-selected'      => __( 'Clone', 'code-snippets' ),
 			'download-selected'   => __( 'Download', 'code-snippets' ),
 			'export-selected'     => __( 'Export', 'code-snippets' ),
+            'push-selected'       => __( 'Push', 'code-snippets' ),
 			'delete-selected'     => __( 'Delete', 'code-snippets' ),
 		);
 
@@ -651,6 +653,11 @@ class Code_Snippets_List_Table extends WP_List_Table {
 				export_snippets( array( $id ) );
 				break;
 
+            case 'push':
+                prepare_snippet_to_push( $id );
+                break;
+
+
 			case 'download':
 				download_snippets( array( $id ) );
 				break;
@@ -750,6 +757,12 @@ class Code_Snippets_List_Table extends WP_List_Table {
 			case 'export-selected':
 				export_snippets( $ids );
 				break;
+
+            case 'push-selected':
+                foreach ( $ids as $id ) {
+                    push_snippet( $id );
+                }
+                break;
 
 			case 'download-selected':
 				download_snippets( $ids );
