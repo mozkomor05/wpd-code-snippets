@@ -585,8 +585,8 @@ function push_snippet( $id ){
         $snippet_desc = "";
     }
 
-    $username = 'pavel';
-    $password = '2OOj$^o8RsDCNXSZz)F@b!XU';
+    $username = 'username';
+    $password = 'password';
     $rest_api_url_create = 'https://wpdistro.com/wp-json/wp/v2/posts';
 
     $data_string = json_encode([
