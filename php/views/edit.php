@@ -84,8 +84,9 @@ if ( ! $snippet->id ) {
 
 		<?php if ( apply_filters( 'code_snippets/extra_save_buttons', true ) ) { ?>
 			<p class="submit-inline">
+			<button type="button" id="run_code_wpd" class="button button-primary">Run code</button>
 				<?php
-
+				//submit_button("Run code", "primary", 'submit', false, array("class" => "run_code_wpd"));
 				$actions['save_snippet'] = array(
 					__( 'Save Changes', 'code-snippets' ),
 					__( 'Save Snippet', 'code-snippets' ),
@@ -132,7 +133,7 @@ if ( ! $snippet->id ) {
 			<textarea id="snippet_code" name="snippet_code" rows="200" spellcheck="false" style="font-family: monospace; width: 100%;"><?php
 				echo esc_textarea( $snippet->code );
 				?></textarea>
-
+			
 			<div class="snippet-editor-help">
 
 				<div class="editor-help-tooltip cm-s-<?php
@@ -206,6 +207,39 @@ if ( ! $snippet->id ) {
 			</div>
 		</div>
 
+
+		<div id="snippet_output" contenteditable></div>
+		<button type="button" id="run_code_wpd" class="button button-primary">Run code</button>
+		<div id="snippet_setting_div">
+			<div id="snippet_settings_wrapper">
+			<?php
+			if($snippet->snippet_settings == []){
+				$snip_settings = [];
+				$snip_values = [];
+			} else {
+			 	$snip_settings = unserialize($snippet->snippet_settings);
+				$snip_values = unserialize($snippet->snippet_values);
+			}
+			foreach($snip_settings as $key => $setting):
+			?>
+			<div id="snippet_setting_<?= $key ?>">
+			    <input type="text" class="label" value="<?= $setting['label'] ?>">
+    <select class="data_type">
+          <option value="string">String</option>
+          <option value="number">Number</option>
+          <option value="boolean">Boolean</option>
+    </select>
+    <input type="text" class="replace" value="<?=$setting['replace'] ?>">
+    <input type="text" class="default_value" value="<?= $setting['default_value'] ?>">
+    <input type="text" class="setting_value" value="<?= $snip_values[$setting['replace']] ?>">
+    </div>
+	<?php endforeach; ?>
+			</div>
+			<button type="button" id="add_variable_wpd" class="button button-primary">Add variable</button>
+			<button type="button" id="remove_variable_wpd" class="button button-primary">Remove variable</button>
+		</div>
+		<input type="hidden" id="snippet_snippet_settings" name="snippet_snippet_settings" value="">
+		<input type="hidden" id="snippet_snippet_values" name="snippet_snippet_values" value="">
 		<?php
 		/* Allow plugins to add fields and content to this page */
 		do_action( 'code_snippets/admin/single', $snippet );

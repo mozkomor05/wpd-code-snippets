@@ -56,7 +56,9 @@ class Code_Snippet
         'modified' => null,
         'remote' => false,
         'remote_id' => null,
-        'remote_data' => []
+        'remote_data' => [],
+        'snippet_settings' => [],
+        'snippet_values' => []
 	);
 
     /**
@@ -179,7 +181,7 @@ class Code_Snippet
 
             return;
         }
-
+        
         /* Check if the field value should be filtered */
         if (method_exists($this, 'prepare_' . $field)) {
             $value = call_user_func(array($this, 'prepare_' . $field), $value);
