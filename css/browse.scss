@@ -1,0 +1,24 @@
+.snippet-card .default-snippet-icon:before {
+	font-family: code-snippets !important;
+	content: "\e600";
+	color: grey;
+	font-size: 6rem;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+}
+
+.snippet-card .column-updated a:not(:last-child)::after {
+	content: ", ";
+}
+
+.snippet-card .action-button:not(.snippet-install-button) {
+	pointer-events: none;
+}
+
+.snippet-card .action-button.snippet-installed-button {
+	color: darkgrey;
+	border-color: darkgrey;
+	background: #88d088;
+	pointer-events: none;
+}
