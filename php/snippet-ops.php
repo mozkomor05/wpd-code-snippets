@@ -540,3 +540,127 @@ function execute_active_snippets() {
 
 	return true;
 }
+
+
+/**
+ * Pushes a snippet to the database
+ *
+ * @param int $id The ID of the snippet to push
+ *
+ */
+
+// Snippet popup - work in progress
+function prepare_snippet_to_push( $id ){
+
+    $snippet_id = $id;
+
+    echo "
+    <div onclick=this.style.display='none';document.getElementById('push-popup').style.display='none'; style='z-index: 999;position: fixed;left: 0;top: 0;width: 100%;height: 100%;background: rgba(0,0,0,.5);'></div>
+    <div style='z-index:1000;position: fixed;left: 50%;top: 50%;width:400px;padding: 2px;background: white;border-radius: 2px;transform: translate(-50%, -50%);' id='push-popup'>
+        <div style='width: calc(100% - 20px);height: 50px;padding-left:20px;color:white;font-size:20px;line-height:50px;background: #2271b1;border-radius: 2px 2px 0 0'>Push snippet</div>
+        <form method='post' style='padding: 20px'>
+            <label style='width: 40%;float: left;font-size: 16px;font-weight: 600'>Description:</label>
+            <textarea placeholder='Snippet description' type='text' name='desc' style='float:left;width: calc(60% - 2px);' rows='4'></textarea>
+            <div style='float:right;display:block;width:100%;margin:10px 0 20px 0'>
+                <button type='submit' style='cursor: pointer;float: right;width: 25%;height:30px;border: none;background: #2c3338;color: white' name='push-snippet-final' value='" . $snippet_id . "'>Push</button>
+            </div>
+        </form>
+    </div>
+    ";
+
+
+}
+
+function push_snippet( $id ){
+
+    $site_url = get_home_url();
+
+    $snippet = get_snippet( $id );
+
+    $snippet_url = preg_replace('/[[:space:]]+/', '-', strtolower($snippet->name));
+
+    if(isset($_POST['desc'])){
+        $snippet_desc = $_POST['desc'];
+    }else{
+        $snippet_desc = "";
+    }
+
+    $username = 'username';
+    $password = 'password';
+    $rest_api_url_create = 'https://wpdistro.com/wp-json/wp/v2/posts';
+
+    $data_string = json_encode([
+        'title'             => $snippet->name,
+        'content'           => $snippet_desc . '
+                <br>
+                | This snippet was pushed from <strong>' . $site_url . '</strong>
+            ',
+        'status'            => 'publish',
+        'featured_media'    => '499',
+    ]);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $rest_api_url_create);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($data_string),
+        'Authorization: Basic ' . base64_encode($username . ':' . $password),
+    ]);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $result = curl_exec($ch);
+    $response = json_decode($result, true);
+
+    if (curl_errno($ch)) {
+        $error_msg = curl_error($ch);
+        var_dump($error_msg);
+    }
+
+    curl_close($ch);
+
+    $rest_api_url_edit = 'https://wpdistro.com/wp-json/acf/v3/posts/'. $response["id"]. '/code';
+    $code = json_encode([
+        'fields' => [
+            'code' => $snippet->code
+        ]
+    ]);
+
+    $ch2 = curl_init();
+    curl_setopt($ch2, CURLOPT_URL, $rest_api_url_edit);
+    curl_setopt($ch2, CURLOPT_PUT, 0);
+    curl_setopt($ch2, CURLOPT_POSTFIELDS, $code);
+
+    curl_setopt($ch2, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($code),
+        'Authorization: Basic ' . base64_encode($username . ':' . $password),
+    ]);
+
+    curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+    if (curl_errno($ch2)) {
+        $error_msg = curl_error($ch2);
+        var_dump($error_msg);
+    }
+    $result = curl_exec($ch2);
+    curl_close($ch2);
+
+
+    // Set remote_id in the database
+
+    global $wpdb;
+    $table = "wp_snippets";
+
+    $remote_id = $response["id"];
+
+    $wpdb->update( $table, array( 'remote' => '1' ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
+    $wpdb->update( $table, array( 'remote_id' => $remote_id ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
+
+}
+
+
+

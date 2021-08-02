@@ -171,6 +171,8 @@ class Code_Snippets_DB {
 				priority    SMALLINT    NOT NULL DEFAULT 10,
 				active      TINYINT(1)  NOT NULL DEFAULT 0,
 				modified    DATETIME    NOT NULL DEFAULT '0000-00-00 00:00:00',
+                remote      BOOLEAN     NOT NULL DEFAULT '',
+				remote_id   BIGINT(20)  NOT NULL DEFAULT '',
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
