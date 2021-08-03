@@ -115,6 +115,7 @@ gulp.task('js', gulp.series('test-js', gulp.parallel(
 	() => bundlejs('js/manage.js'),
 	() => bundlejs('js/browse.js'),
 	() => bundlejs('js/edit.js'),
+	() => bundlejs('js/console.js'),
 	() => bundlejs('js/edit-tags.js'),
 	() => bundlejs('js/settings.js'),
 	() => bundlejs('js/front-end.js', {

@@ -272,7 +272,9 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 				$snippet->active = 0;
 			}
 		}
-
+		if($snippet->snippet_settings == "") $snippet->snippet_settings = "[]";
+		$snippet->snippet_settings = json_decode($snippet->snippet_settings, true);
+		$snippet->snippet_values = json_decode($snippet->snippet_values, true);
 		/* Save the snippet to the database */
 		$snippet_id = save_snippet( $snippet );
 
@@ -556,6 +558,15 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 			plugins_url( 'js/min/edit.js', $plugin->file ),
 			array(), $plugin->version, true
 		);
+
+		wp_enqueue_script(
+			'code-snippets-console-menu',
+			plugins_url( 'js/min/console.js', $plugin->file ),
+			array(), $plugin->version, true
+		);
+
+		wp_localize_script( 'code-snippets-console-menu', 'wpdajax',
+		array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 		$atts = code_snippets_get_editor_atts( array(), true );
 		$inline_script = 'var code_snippets_editor_atts = ' . $atts . ';';

@@ -30,7 +30,7 @@ Domain Path: /languages
 if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
-
+require_once __DIR__ . '/vendor/autoload.php';
 /**
  * The full path to the main file of this plugin
  *

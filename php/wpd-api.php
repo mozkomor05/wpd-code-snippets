@@ -3,6 +3,8 @@
 if ( ! class_exists( 'WPD_Snippet' ) ) {
 	require_once dirname( __FILE__ ) . '/wpd_snippet.php';
 }
+use WPConsole\Core\Console\Psy\Output\ShellOutput;
+use WPConsole\Core\Console\Psy\Shell;
 
 /**
  * @param string $action Endpoint (or whole URL) to request
@@ -88,3 +90,73 @@ function wpd_install_remote_snippet( string $endpoint ): bool {
 
 	return true;
 }
+
+/*add_action( 'rest_api_init', 'register_wpd_endpoints' );
+function register_endpoints() {
+    register_rest_route( 'wpd', '/evaluate', array(
+      'methods' => WP_REST_Server::CREATABLE,
+      'callback' => 'evaluate_wpd_console' ),
+    );
+}
+
+
+function evaluate_wpd_console(WP_REST_Request $request){
+	try {
+		$timer = microtime( true );
+		$input = $request['input'];
+
+		$config = new \Psy\Configuration( [
+			'configDir' => WP_CONTENT_DIR,
+		] );
+
+		$output = new ShellOutput( ShellOutput::VERBOSITY_NORMAL, true );
+
+		$config->setOutput( $output );
+		$config->setColorMode( \Psy\Configuration::COLOR_MODE_DISABLED );
+
+		$psysh = new Shell( $config );
+
+		$psysh->setOutput( $output );
+
+		$psysh->addCode( $input );
+
+		extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
+
+		ob_start( [ $psysh, 'writeStdout' ], 1 );
+
+		set_error_handler( [ $psysh, 'handleError' ] );
+
+		$_ = eval( $psysh->onExecute( $psysh->flushCode() ?: \Psy\ExecutionClosure::NOOP_INPUT ) );
+
+		restore_error_handler();
+
+		$psysh->setScopeVariables( get_defined_vars() );
+		$psysh->writeReturnValue( $_ );
+
+		ob_end_flush();
+
+		if ( $output->exception ) {
+			throw $output->exception;
+		}
+
+		$execution_time = microtime( true ) - $timer;
+
+		$data = [
+			'output'         => $output->outputMessage,
+			'dump'           => $wp_console_dump,
+			'execution_time' => number_format( $execution_time, 3, '.', '' ),
+		];
+
+		return rest_ensure_response( $data );
+
+	} catch ( Throwable $e ) {
+		ob_end_flush();
+
+		return new WP_Error( 'wp_console_rest_error', $e->getMessage(), [
+			'input'  => $request['input'],
+			'status' => 422,
+			'trace'  => $e->getTraceAsString(),
+		] );
+	}
+}*/
+

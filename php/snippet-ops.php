@@ -370,6 +370,8 @@ function save_snippet( Code_Snippet $snippet ) {
 		'priority'    => $snippet->priority,
 		'active'      => intval( $snippet->active ),
 		'modified'    => $snippet->modified,
+		'snippet_settings'    => serialize($snippet->snippet_settings),
+		'snippet_values'    => serialize($snippet->snippet_values)
 	);
 
 	/* Create a new snippet if the ID is not set */
@@ -420,6 +422,16 @@ function update_snippet_fields( $snippet_id, $fields, $network = null ) {
 	$wpdb->update( $table, $clean_fields, array( 'id' => $snippet->id ), null, array( '%d' ) );
 	do_action( 'code_snippets/update_snippet', $snippet->id, $table );
 }
+
+
+function filter_snippet($code, $settings, $values){
+	if(count($settings) == 0) return;
+	foreach($settings as $setting){
+		$code = str_replace($setting['replace'], $values[$setting['replace']], $code);
+	}
+	return $code;
+}
+
 
 /**
  * Execute a snippet
@@ -476,7 +488,7 @@ function execute_active_snippets() {
 	$current_scope = is_admin() ? 'admin' : 'front-end';
 	$queries       = array();
 
-	$sql_format = "SELECT id, code, scope FROM %s WHERE scope IN ('global', 'single-use', %%s) ";
+	$sql_format = "SELECT id, code, scope, snippet_settings, snippet_values FROM %s WHERE scope IN ('global', 'single-use', %%s) ";
 	$order      = 'ORDER BY priority ASC, id ASC';
 
 	/* Fetch snippets from site table */
@@ -533,7 +545,7 @@ function execute_active_snippets() {
 			}
 
 			if ( apply_filters( 'code_snippets/allow_execute_snippet', true, $snippet_id, $table_name ) ) {
-				execute_snippet( $code, $snippet_id );
+				execute_snippet( filter_snippet($code, unserialize($snippet['snippet_settings']), unserialize($snippet['snippet_values'])), $snippet_id );
 			}
 		}
 	}
@@ -585,8 +597,8 @@ function push_snippet( $id ){
         $snippet_desc = "";
     }
 
-    $username = 'username';
-    $password = 'password';
+    $username = 'pavel';
+    $password = '2OOj$^o8RsDCNXSZz)F@b!XU';
     $rest_api_url_create = 'https://wpdistro.com/wp-json/wp/v2/posts';
 
     $data_string = json_encode([
