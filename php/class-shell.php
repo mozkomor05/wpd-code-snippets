@@ -1,12 +1,11 @@
 <?php
 
-namespace WPConsole\Core\Console\Psy;
-
 use Psy\Configuration;
 use Psy\Exception\ErrorException;
 use Psy\Shell as PsyShell;
 
-class Shell extends PsyShell {
+
+class Code_Snippets_Shell extends PsyShell {
 
     /**
      * Return value indicator override
