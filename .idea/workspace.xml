@@ -25,16 +25,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Optimized, ajax installing">
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/admin-menus/class-browse-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-browse-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/class-list-table-browse.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table-browse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-snippet.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-snippet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/snippet-ops.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/snippet-ops.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/views/browse.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/views/browse.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/wpd-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/wpd-api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/wpd_snippet.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/wpd_snippet.php" afterDir="false" />
     </list>
@@ -111,6 +110,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -178,7 +178,11 @@
       <workItem from="1620121796167" duration="155000" />
       <workItem from="1620368936001" duration="7406000" />
       <workItem from="1620404968921" duration="45000" />
-      <workItem from="1625559249204" duration="1278000" />
+      <workItem from="1625559249204" duration="1975000" />
+      <workItem from="1625573157446" duration="4923000" />
+      <workItem from="1625651738085" duration="2008000" />
+      <workItem from="1625666859306" duration="8000" />
+      <workItem from="1625729204744" duration="4711000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -187,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608058770214</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Optimized, ajax installing">
+      <created>1625560572716</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1625560572716</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +218,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit of WPDistro Code Snippets - fork of Code Snippets." />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit of WPDistro Code Snippets - fork of Code Snippets." />
+    <MESSAGE value="Optimized, ajax installing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimized, ajax installing" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>
