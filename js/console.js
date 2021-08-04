@@ -1,9 +1,13 @@
 jQuery("#run_code_wpd").click(function(){
+    var codeToRun = code_snippets_editor.getValue();
+    jQuery("#snippet_settings_wrapper").children().each(function(){
+        codeToRun = codeToRun.replace(jQuery(this).find(".replace").val(), jQuery(this).find(".setting_value").val());
+    });
     jQuery.ajax({
         type: "post",
         dataType: "json",
         url: wpdajax.ajax_url,
-        data: {"action": "evaluatewpd", "input": btoa(code_snippets_editor.getValue())},
+        data: {"action": "evaluatewpd", "input": btoa(codeToRun)},
         success: function(msg){
             jQuery("#snippet_output").html(msg.output);
         }

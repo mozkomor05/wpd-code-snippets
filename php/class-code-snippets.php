@@ -35,6 +35,11 @@ class Code_Snippets {
     public $api;
 
 	/**
+	 * @var Code_Snippets_Console
+	 */
+    public $console;
+
+	/**
 	 * @var Code_Snippets_Admin
 	 */
 	public $admin;
@@ -71,6 +76,8 @@ class Code_Snippets {
 		$this->db = new Code_Snippets_DB();
 
 		$this->api = new Code_Snippets_API();
+		
+		$this->console = new Code_Snippets_Console();
 
 		/* Snippet operation functions */
 		require_once $includes_path . '/snippet-ops.php';
