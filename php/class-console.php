@@ -5,7 +5,15 @@ class Code_Snippets_Console {
 	{
 		add_action( 'wp_ajax_nopriv_evaluatewpd', array($this, 'evaluate_wpd_console') );
 		add_action( 'wp_ajax_evaluatewpd', array($this, 'evaluate_wpd_console') );
+		add_action( 'wp_ajax_nopriv_getsnippetcontent', array($this, 'get_snippet_content') );
+		add_action( 'wp_ajax_getsnippetcontent', array($this, 'get_snippet_content') );
 		#add_action( 'rest_api_init', array($this, 'register_wpd_endpoints') );
+	}
+
+	function get_snippet_content(){
+		$id = $_POST['id'];
+		$snippet = get_snippet($id);
+		wp_send_json(["code" => $snippet->code]);
 	}
 
 	function register_wpd_endpoints() {

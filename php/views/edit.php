@@ -84,8 +84,9 @@ if ( ! $snippet->id ) {
 
 		<?php if ( apply_filters( 'code_snippets/extra_save_buttons', true ) ) { ?>
 			<p class="submit-inline">
-			<button type="button" id="run_code_wpd" class="button button-primary">Run code</button>
+			
 				<?php
+				//<button type="button" id="run_code_wpd" class="button button-primary">Run code</button>
 				//submit_button("Run code", "primary", 'submit', false, array("class" => "run_code_wpd"));
 				$actions['save_snippet'] = array(
 					__( 'Save Changes', 'code-snippets' ),
@@ -206,14 +207,29 @@ if ( ! $snippet->id ) {
 				</div>
 			</div>
 		</div>
-
-
+		<?php $all_snippets = get_snippets( array() );
+		foreach($all_snippets as $key => $snippet_from_db){
+			if(0 !== $snippet->id){
+				if($snippet_from_db->id == $snippet->id) array_splice($all_snippets, $key, 1);
+			}
+		}
+		if(count($all_snippets) > 0):
+		?>
+		<select name="snippet_template" id="snippet_template">
+		<option disabled selected value> -- select an option -- </option>
+<?php foreach($all_snippets as $snippet_from_db): ?>
+		<option value="<?= $snippet_from_db->id ?>"><?= $snippet_from_db->name ?></option>
+		<?php endforeach; 
+		endif;?>
+		</select>
 		<div id="snippet_output" contenteditable></div>
 		<button type="button" id="run_code_wpd" class="button button-primary">Run code</button>
 		<div id="snippet_setting_div">
-			<div id="snippet_settings_wrapper">
+			<button type="button" id="advanced_view_wpd" class="button button-primary">Advanced view</button><br/>
+
+			<div id="snippet_values_wrapper" >
 			<?php
-			if($snippet->snippet_settings == []){
+			if($snippet->snippet_settings == [] || $snippet->snippet_settings == ""){
 				$snip_settings = [];
 				$snip_values = [];
 			} else {
@@ -221,6 +237,16 @@ if ( ! $snippet->id ) {
 				$snip_values = unserialize($snippet->snippet_values);
 			}
 			foreach($snip_settings as $key => $setting):
+				?>
+				<div id="snippet_setting_<?= $key ?>">
+			    <label class="label" assignedTo="<?= $setting['replace'] ?>" ><?= $setting['label'] ?></label>
+    			<input type="text" class="setting_value" value="<?= $snip_values[$setting['replace']] ?>">
+    </div>
+	<?php endforeach; ?>
+			</div>
+			<div id="snippet_settings_wrapper" style="display:none">
+			
+			<?php foreach($snip_settings as $key => $setting):
 			?>
 			<div id="snippet_setting_<?= $key ?>">
 			    <input type="text" class="label" value="<?= $setting['label'] ?>">

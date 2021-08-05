@@ -272,7 +272,21 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 				$snippet->active = 0;
 			}
 		}
-		if($snippet->snippet_settings == "") $snippet->snippet_settings = "[]";
+		if(!isset($_POST['snippet_snippet_settings']) && !isset($_POST['snippet_snippet_values']) ){
+			$code_error = true;
+		}
+		if(!isset($_POST['snippet_snippet_settings']) && isset($_POST['snippet_snippet_values']) ){
+			$db = code_snippets()->db;
+			global $wpdb;
+			$original_snippet = new Code_Snippet($wpdb->get_row($wpdb->prepare("SELECT * FROM {$db->table} WHERE id = (%s)", $_POST['snippet_id']), ARRAY_A)); 
+			$snippet->snippet_settings = json_encode(unserialize($original_snippet->snippet_settings));
+		} 
+		if(isset($_POST['snippet_snippet_settings']) && !isset($_POST['snippet_snippet_values']) ){
+			$db = code_snippets()->db;
+			global $wpdb;
+			$original_snippet = new Code_Snippet($wpdb->get_row($wpdb->prepare("SELECT * FROM {$db->table} WHERE id = (%s)", $_POST['snippet_id']), ARRAY_A)); 
+			$snippet->snippet_values = json_encode(unserialize($original_snippet->snippet_values));
+		}
 		$snippet->snippet_settings = json_decode($snippet->snippet_settings, true);
 		$snippet->snippet_values = json_decode($snippet->snippet_values, true);
 		/* Save the snippet to the database */
