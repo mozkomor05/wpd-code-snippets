@@ -273,7 +273,12 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 			}
 		}
 		if(!isset($_POST['snippet_snippet_settings']) && !isset($_POST['snippet_snippet_values']) ){
-			$code_error = true;
+			if(!isset($_POST['has_no_settings'])){
+				$code_error = true;
+			} else {
+				$snippet->snippet_settings = json_encode(array());
+				$snippet->snippet_values = json_encode(array());
+			}
 		}
 		if(!isset($_POST['snippet_snippet_settings']) && isset($_POST['snippet_snippet_values']) ){
 			$db = code_snippets()->db;

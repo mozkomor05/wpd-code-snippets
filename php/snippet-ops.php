@@ -371,7 +371,9 @@ function save_snippet( Code_Snippet $snippet ) {
 		'active'      => intval( $snippet->active ),
 		'modified'    => $snippet->modified,
 		'snippet_settings'    => serialize($snippet->snippet_settings),
-		'snippet_values'    => serialize($snippet->snippet_values)
+		'snippet_values'    => serialize($snippet->snippet_values),
+		'remote' => $snippet->remote,
+		'remote_id' => $snippet->remote_id,
 	);
 
 	/* Create a new snippet if the ID is not set */
@@ -425,6 +427,7 @@ function update_snippet_fields( $snippet_id, $fields, $network = null ) {
 
 
 function filter_snippet($code, $settings, $values){
+	if($settings == null) return;
 	if(count($settings) == 0) return;
 	foreach($settings as $setting){
 		$code = str_replace($setting['replace'], $values[$setting['replace']], $code);

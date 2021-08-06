@@ -97,12 +97,18 @@ var returnforvalues = function(){
 const form = document.getElementById('snippet-form');
 form.addEventListener('submit', function(event){ 
     jQuery('#snippet_snippet_settings').val(testikfunkce());
+    var empty = 0;
     if(jQuery('#snippet_snippet_settings').val() == "[]"){
         jQuery("#snippet_snippet_settings").prop('disabled', true);
+        empty++;
     }
     jQuery('#snippet_snippet_values').val(returnforvalues());
     if(jQuery('#snippet_snippet_values').val() == "{}"){
         jQuery("#snippet_snippet_values").prop('disabled', true);
+        empty++;
+    }
+    if(empty == 2){
+        jQuery(form).append('<input type="hidden" id="has_no_settings" name="has_no_settings" value="true">');
     }
 });
 jQuery("#remove_variable_wpd").click(function(){
