@@ -175,6 +175,7 @@ class Code_Snippets_DB {
 				remote_id   BIGINT(20)  NOT NULL DEFAULT 0,
 				snippet_settings    LONGTEXT    NOT NULL DEFAULT '',
 				snippet_values      LONGTEXT    NOT NULL DEFAULT '',
+				is_template         BOOLEAN     NOT NULL DEFAULT false,
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
