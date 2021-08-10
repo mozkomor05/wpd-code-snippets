@@ -55,10 +55,11 @@ class Code_Snippet
         'created' => null,
         'modified' => null,
         'remote' => false,
-        'remote_id' => null,
+        'remote_id' => 0,
         'remote_data' => [],
         'snippet_settings' => [],
-        'snippet_values' => []
+        'snippet_values' => [],
+        'is_template' => false,
 	);
 
     /**

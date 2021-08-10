@@ -207,11 +207,23 @@ if ( ! $snippet->id ) {
 				</div>
 			</div>
 		</div>
+		<input type="checkbox" id="snippet_is_template" name="snippet_is_template" value="is_template" <?php if($snippet->is_template): ?> checked <?php endif; ?> >
+  		<label for="is_template">Snippet is template</label><br>
 		<?php $all_snippets = get_snippets( array() );
 		foreach($all_snippets as $key => $snippet_from_db){
 			if(0 !== $snippet->id){
-				if($snippet_from_db->id == $snippet->id) array_splice($all_snippets, $key, 1);
-			}
+				if($snippet_from_db->id == $snippet->id){
+					array_splice($all_snippets, $key, 1);
+				} else {
+					if(!$snippet_from_db->is_template){
+						array_splice($all_snippets, $key, 1);
+					}
+				} 
+			} else {
+				if(!$snippet_from_db->is_template){
+					array_splice($all_snippets, $key, 1);
+				}
+			} 
 		}
 		if(count($all_snippets) > 0):
 		?>

@@ -374,6 +374,7 @@ function save_snippet( Code_Snippet $snippet ) {
 		'snippet_values'    => serialize($snippet->snippet_values),
 		'remote' => $snippet->remote,
 		'remote_id' => $snippet->remote_id,
+		'is_template' => $snippet->is_template,
 	);
 
 	/* Create a new snippet if the ID is not set */
