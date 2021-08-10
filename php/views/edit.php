@@ -214,16 +214,12 @@ if ( ! $snippet->id ) {
 			if(0 !== $snippet->id){
 				if($snippet_from_db->id == $snippet->id){
 					array_splice($all_snippets, $key, 1);
-				} else {
-					if(!$snippet_from_db->is_template){
-						array_splice($all_snippets, $key, 1);
-					}
-				} 
-			} else {
-				if(!$snippet_from_db->is_template){
-					array_splice($all_snippets, $key, 1);
+					continue;
 				}
-			} 
+			}
+			if(!$snippet_from_db->is_template){
+				array_splice($all_snippets, $key, 1);
+			}
 		}
 		if(count($all_snippets) > 0):
 		?>

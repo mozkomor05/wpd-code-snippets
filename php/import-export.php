@@ -118,7 +118,7 @@ function import_snippets_xml( $file, $multisite = null, $dup_action = 'ignore' )
 	$dom->load( $file );
 
 	$snippets_xml = $dom->getElementsByTagName( 'snippet' );
-	$fields = array( 'name', 'description', 'desc', 'code', 'tags', 'scope' );
+	$fields = array( 'name', 'description', 'desc', 'code', 'tags', 'scope');
 
 	$snippets = array();
 
@@ -258,7 +258,7 @@ function export_snippets( $ids, $table_name = '' ) {
 	foreach ( $raw_snippets as $snippet ) {
 		$snippet = new Code_Snippet( $snippet );
 
-		$fields = array( 'name', 'desc', 'tags', 'scope', 'code', 'priority' );
+		$fields = array( 'name', 'desc', 'tags', 'scope', 'code', 'priority', 'snippet_settings', 'snippet_values', 'is_template');
 		$final_snippet = array();
 
 		foreach ( $fields as $field ) {
