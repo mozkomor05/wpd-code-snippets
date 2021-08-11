@@ -3,7 +3,7 @@
 /**
  * This class handles the add/edit menu
  */
-class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
+class Code_Snippets_Edit_Template_Menu extends Code_Snippets_Admin_Menu {
 
 	/**
 	 * The snippet object currently being edited
@@ -19,9 +19,9 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	public function __construct() {
 
 		parent::__construct(
-			'edit',
-			_x( 'Edit Snippet', 'menu label', 'code-snippets' ),
-			__( 'Edit Snippet', 'code-snippets' )
+			'edit-template',
+			_x( 'Edit Template', 'menu label', 'code-snippets' ),
+			__( 'Edit Template', 'code-snippets' )
 		);
 	}
 
@@ -46,9 +46,9 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 
 		/* Add New Snippet menu */
 		$this->add_menu(
-			code_snippets()->get_menu_slug( 'add' ),
-			_x( 'Add New', 'menu label', 'code-snippets' ),
-			__( 'Add New Snippet', 'code-snippets' )
+			code_snippets()->get_menu_slug( 'add-template' ),
+			_x( 'Add New Template', 'menu label', 'code-snippets' ),
+			__( 'Add New Template', 'code-snippets' )
 		);
 	}
 
@@ -69,7 +69,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 
 		/* Don't allow visiting the edit snippet page without a valid ID */
 		if ( $screen->base === $edit_hook && ( ! isset( $_REQUEST['id'] ) || 0 === $this->snippet->id ) ) {
-			wp_redirect( code_snippets()->get_menu_url( 'add' ) );
+			wp_redirect( code_snippets()->get_menu_url( 'add-template' ) );
 			exit;
 		}
 
@@ -104,11 +104,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 */
 	public function load_snippet_data() {
 		$edit_id = isset( $_REQUEST['id'] ) && intval( $_REQUEST['id'] ) ? absint( $_REQUEST['id'] ) : 0;
-		if(isset($_REQUEST['is_template'])){
-            $this->snippet = get_snippet_template( $edit_id );
-        } else {
-            $this->snippet = get_snippet( $edit_id );
-        }
+		$this->snippet = get_snippet_template( $edit_id );
 	}
 
 	/**
@@ -323,7 +319,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 		/* If the saved snippet ID is invalid, display an error message */
 		if ( ! $snippet_id || $snippet_id < 1 ) {
 			/* An error occurred */
-			wp_redirect( add_query_arg( 'result', 'save-error', code_snippets()->get_menu_url( 'add' ) ) );
+			wp_redirect( add_query_arg( 'result', 'save-error', code_snippets()->get_menu_url( 'add-template' ) ) );
 			exit;
 		}
 
@@ -331,7 +327,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 		if ( isset( $code_error ) && $code_error ) {
 			wp_redirect( add_query_arg(
 				array( 'id' => $snippet_id, 'result' => 'code-error' ),
-				code_snippets()->get_menu_url( 'edit' )
+				code_snippets()->get_menu_url( 'edit-template' )
 			) );
 			exit;
 		}
@@ -351,7 +347,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 		/* Redirect to edit snippet page */
 		$redirect_uri = add_query_arg(
 			array( 'id' => $snippet_id, 'result' => $result ),
-			code_snippets()->get_menu_url( 'edit' )
+			code_snippets()->get_menu_url( 'edit-template' )
 		);
 
 		wp_redirect( esc_url_raw( $redirect_uri ) );
@@ -486,7 +482,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 			return false;
 		}
 
-		$snippet = get_snippet( intval( $snippet_id ) );
+		$snippet = get_snippet_template( intval( $snippet_id ) );
 
 		if ( '' === $snippet->code ) {
 			return false;

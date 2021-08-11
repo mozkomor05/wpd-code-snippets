@@ -89,6 +89,64 @@ function get_snippets( array $ids = array(), $multisite = null, array $args = ar
 	return apply_filters( 'code_snippets/get_snippets', $snippets, $multisite );
 }
 
+
+function get_snippet_templates(array $ids = array(), $multisite = null, array $args = array() ){
+    /** @var wpdb $wpdb */
+    global $wpdb;
+
+    $args = wp_parse_args( $args, array(
+        'limit'       => 0,
+        'orderby'     => '',
+        'order'       => 'desc',
+    ) );
+
+    $db        = code_snippets()->db;
+    $multisite = $db->validate_network_param( $multisite );
+    $table     = $db->templates_table;
+
+    $ids_count = count( $ids );
+
+    /* If only one ID has been passed in, defer to the get_snippet() function */
+    if ( 1 === $ids_count ) {
+        return array( get_snippet_template( $ids[0] ) );
+    }
+
+    $where = $order = $limit = '';
+
+    /* Build a query containing the specified IDs if there are any */
+    if ( $ids_count > 1 ) {
+        $where = $wpdb->prepare( sprintf(
+            ' AND id IN (%s)',
+            implode( ',', array_fill( 0, $ids_count, '%d' ) )
+        ), $ids );
+    }
+
+    /* Restrict the active status of retrieved snippets if requested */
+
+    /* Apply custom ordering if requested */
+    if ( $args['orderby'] ) {
+        $order_dir = 'ASC' === strtoupper( $args['order'] ) ? 'ASC' : 'DESC';
+        $order     = $wpdb->prepare( ' ORDER BY %s %s', $args['orderby'], $order_dir );
+    }
+
+    /* Limit the number of retrieved snippets if requested */
+    if ( intval( $args['limit'] ) > 0 ) {
+        $limit = sprintf( ' LIMIT %d', intval( $args['limit'] ) );
+    }
+
+    /* Retrieve the results from the database */
+    $sql      = "SELECT * FROM $table WHERE 1=1 $where $order $limit;";
+    $snippets = $wpdb->get_results( $sql, ARRAY_A );
+
+    /* Convert snippets to snippet objects */
+    foreach ( $snippets as $index => $snippet ) {
+        $snippet['network'] = $multisite;
+        $snippets[ $index ] = new Code_Snippet( $snippet );
+    }
+
+    return apply_filters( 'code_snippets/get_snippet_templates', $snippets, $multisite );
+}
+
 /**
  * Gets all of the used tags from the database
  * @since 2.0
@@ -177,6 +235,33 @@ function get_snippet( $id = 0, $multisite = null ) {
 
 	return apply_filters( 'code_snippets/get_snippet', $snippet, $id, $multisite );
 }
+
+function get_snippet_template( $id = 0, $multisite = null ) {
+    /** @var wpdb $wpdb */
+    global $wpdb;
+
+    $id    = absint( $id );
+    $table = code_snippets()->db->templates_table;
+
+    if ( 0 !== $id ) {
+
+        /* Retrieve the snippet from the database */
+        $snippet = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE id = %d", $id ) );
+
+        /* Unescape the snippet data, ready for use */
+        $snippet = new Code_Snippet( $snippet );
+
+    } else {
+
+        /* Get an empty snippet object */
+        $snippet = new Code_Snippet();
+    }
+    $snippet->is_template = true;
+    $snippet->network = $multisite;
+
+    return apply_filters( 'code_snippets/get_snippet_template', $snippet, $id, $multisite );
+}
+
 
 /**
  * Activates a snippet
@@ -341,6 +426,19 @@ function delete_snippet( $id, $multisite = null ) {
 	do_action( 'code_snippets/delete_snippet', $id, $multisite );
 }
 
+function delete_snippet_template( $id, $multisite = null ) {
+    /** @var wpdb $wpdb */
+    global $wpdb;
+
+    $wpdb->delete(
+        code_snippets()->db->templates_table,
+        array( 'id' => $id ),
+        array( '%d' )
+    );
+
+    do_action( 'code_snippets/delete_snippet_template', $id, $multisite );
+}
+
 /**
  * Saves a snippet to the database.
  *
@@ -368,15 +466,20 @@ function save_snippet( Code_Snippet $snippet ) {
 		'tags'        => $snippet->tags_list,
 		'scope'       => $snippet->scope,
 		'priority'    => $snippet->priority,
-		'active'      => intval( $snippet->active ),
+
 		'modified'    => $snippet->modified,
 		'snippet_settings'    => serialize($snippet->snippet_settings),
 		'snippet_values'    => serialize($snippet->snippet_values),
 		'remote' => $snippet->remote,
 		'remote_id' => $snippet->remote_id,
-		'is_template' => $snippet->is_template,
+		//'is_template' => $snippet->is_template,
 	);
-
+    if($snippet->is_template){
+        $table = code_snippets()->db->templates_table;
+    } else {
+        $data['active'] = intval( $snippet->active );
+    }
+    //unset($data[array_search('is_template', array_values($data))]);
 	/* Create a new snippet if the ID is not set */
 	if ( 0 === $snippet->id ) {
 		$wpdb->insert( $table, $data, '%s' );

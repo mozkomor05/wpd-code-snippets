@@ -5,14 +5,14 @@ class Code_Snippets_Console {
 	function __construct() {
 		add_action( 'wp_ajax_nopriv_evaluatewpd', array( $this, 'evaluate_wpd_console' ) );
 		add_action( 'wp_ajax_evaluatewpd', array( $this, 'evaluate_wpd_console' ) );
-		add_action( 'wp_ajax_nopriv_getsnippetcontent', array( $this, 'get_snippet_content' ) );
-		add_action( 'wp_ajax_getsnippetcontent', array( $this, 'get_snippet_content' ) );
+		add_action( 'wp_ajax_nopriv_getsnippetcontent', array( $this, 'get_snippet_template_content' ) );
+		add_action( 'wp_ajax_getsnippetcontent', array( $this, 'get_snippet_template_content' ) );
 		// add_action( 'rest_api_init', array($this, 'register_wpd_endpoints') );
 	}
 
-	function get_snippet_content() {
+	function get_snippet_template_content() {
 		$id      = $_POST['id'];
-		$snippet = get_snippet( $id );
+		$snippet = get_snippet_template( $id );
 		wp_send_json( array( 'code' => $snippet->code ) );
 	}
 

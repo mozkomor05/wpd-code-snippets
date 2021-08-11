@@ -168,13 +168,14 @@ function import_snippets_xml( $file, $multisite = null, $dup_action = 'ignore' )
  *
  * @return array
  */
-function code_snippets_prepare_export( $format, $ids, $table_name = '', $mime_type = '' ) {
+function code_snippets_prepare_export( $format, $ids, $table_name = '', $mime_type = '', $template = false) {
 	global $wpdb;
 
 	/* Fetch the snippets from the database */
 	if ( '' === $table_name ) {
 		$table_name = code_snippets()->db->get_table_name();
 	}
+	if($template) $table_name = code_snippets()->db->templates_table;
 
 	if ( count( $ids ) ) {
 
@@ -251,14 +252,14 @@ function download_snippets( $ids, $table_name = '' ) {
  * @param array  $ids        list of snippet IDs to export
  * @param string $table_name name of the database table to fetch snippets from
  */
-function export_snippets( $ids, $table_name = '' ) {
-	$raw_snippets = code_snippets_prepare_export( 'json', $ids, $table_name, 'application/json' );
+function export_snippets( $ids, $table_name = '', $template = false) {
+	$raw_snippets = code_snippets_prepare_export( 'json', $ids, $table_name, 'application/json', $template);
 	$final_snippets = array();
 
 	foreach ( $raw_snippets as $snippet ) {
 		$snippet = new Code_Snippet( $snippet );
 
-		$fields = array( 'name', 'desc', 'tags', 'scope', 'code', 'priority', 'snippet_settings', 'snippet_values', 'is_template');
+		$fields = array( 'name', 'desc', 'tags', 'scope', 'code', 'priority', 'snippet_settings', 'snippet_values');
 		$final_snippet = array();
 
 		foreach ( $fields as $field ) {
