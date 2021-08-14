@@ -25,21 +25,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Optimized, ajax installing">
-      <change afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="code format &amp; small bugs">
+      <change afterPath="$PROJECT_DIR$/wpd-code-snippets.2.14.0.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gulpfile.babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.babel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/code-snippets.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/console.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/console.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/manage.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/manage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-code-snippets.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/phpcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-shelloutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-shelloutput.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,10 +129,12 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="dumpAutoload C:/Users/mozko/OneDrive/Documents/Programming and projects/WPDistro/wpd-code-snippets/composer.json" value="--no-interaction --ansi --verbose --optimize" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/php" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -208,10 +204,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="Gulp.js.default" />
         <item itemvalue="Gulp.js.package" />
         <item itemvalue="Gulp.js.js" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -248,7 +244,7 @@
       <workItem from="1625729204744" duration="4711000" />
       <workItem from="1628448426834" duration="85000" />
       <workItem from="1628499065385" duration="16000" />
-      <workItem from="1628580619955" duration="462000" />
+      <workItem from="1628580619955" duration="5735000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -264,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625560572716</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="code format &amp; small bugs">
+      <created>1628581465678</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1628581465678</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,7 +288,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit of WPDistro Code Snippets - fork of Code Snippets." />
     <MESSAGE value="Optimized, ajax installing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimized, ajax installing" />
+    <MESSAGE value="code format &amp; small bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="code format &amp; small bugs" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>

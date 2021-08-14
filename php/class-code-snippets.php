@@ -29,15 +29,15 @@ class Code_Snippets {
 	 */
 	public $db;
 
-    /**
-     * @var Code_Snippets_API
-     */
-    public $api;
+	/**
+	 * @var Code_Snippets_API
+	 */
+	public $api;
 
 	/**
 	 * @var Code_Snippets_Console
 	 */
-    public $console;
+	public $console;
 
 	/**
 	 * @var Code_Snippets_Admin
@@ -57,7 +57,7 @@ class Code_Snippets {
 	 */
 	function __construct( $version, $file ) {
 		$this->version = $version;
-		$this->file = $file;
+		$this->file    = $file;
 
 		add_action( 'init', array( $this, 'load_textdomain' ), 9 );
 
@@ -76,7 +76,7 @@ class Code_Snippets {
 		$this->db = new Code_Snippets_DB();
 
 		$this->api = new Code_Snippets_API();
-		
+
 		$this->console = new Code_Snippets_Console();
 
 		/* Snippet operation functions */
@@ -90,7 +90,7 @@ class Code_Snippets {
 		require_once $includes_path . '/functions.php';
 
 		/* WPDistro API functions */
-        require_once $includes_path . '/wpd-api.php';
+		require_once $includes_path . '/wpd-api.php';
 
 		/* General Administration functions */
 		if ( is_admin() ) {
@@ -121,15 +121,15 @@ class Code_Snippets {
 	/**
 	 * Fetch the admin menu slug for a snippets menu
 	 *
-	 * @param  string $menu The menu to retrieve the slug for
+	 * @param string $menu The menu to retrieve the slug for
 	 *
 	 * @return string       The menu's slug
 	 */
 	public function get_menu_slug( $menu = '' ) {
-		$add = array( 'single', 'add', 'add-new', 'add-snippet', 'new-snippet', 'add-new-snippet' );
-		$edit = array( 'edit', 'edit-snippet' );
-        $browse = array( 'browse' );
-		$import = array( 'import', 'import-snippets', 'import-code-snippets' );
+		$add      = array( 'single', 'add', 'add-new', 'add-snippet', 'new-snippet', 'add-new-snippet' );
+		$edit     = array( 'edit', 'edit-snippet' );
+		$browse   = array( 'browse' );
+		$import   = array( 'import', 'import-snippets', 'import-code-snippets' );
 		$settings = array( 'settings', 'snippets-settings' );
 
 		if ( in_array( $menu, $edit, true ) ) {
@@ -140,8 +140,8 @@ class Code_Snippets {
 			return 'import-code-snippets';
 		} elseif ( in_array( $menu, $settings, true ) ) {
 			return 'snippets-settings';
-        } elseif ( in_array( $menu, $browse, true ) ) {
-            return 'browse-snippets';
+		} elseif ( in_array( $menu, $browse, true ) ) {
+			return 'browse-snippets';
 		} else {
 			return 'snippets';
 		}
@@ -150,8 +150,8 @@ class Code_Snippets {
 	/**
 	 * Fetch the URL to a snippets admin menu
 	 *
-	 * @param  string $menu The menu to retrieve the URL to
-	 * @param  string $context The URL scheme to use
+	 * @param string $menu The menu to retrieve the URL to
+	 * @param string $context The URL scheme to use
 	 *
 	 * @return string          The menu's URL
 	 */
@@ -160,7 +160,7 @@ class Code_Snippets {
 
 		if ( $this->admin->is_compact_menu() && 'network' !== $context ) {
 			$base_slug = $this->get_menu_slug();
-			$url = 'tools.php?page=' . $base_slug;
+			$url       = 'tools.php?page=' . $base_slug;
 
 			if ( $slug !== $base_slug ) {
 				$url .= '&sub=' . $slug;
@@ -182,7 +182,7 @@ class Code_Snippets {
 	/**
 	 * Fetch the admin menu slug for a snippets menu
 	 *
-	 * @param int    $snippet_id The snippet
+	 * @param int $snippet_id The snippet
 	 * @param string $context The URL scheme to use
 	 *
 	 * @return string The URL to the edit snippet page for that snippet
@@ -197,8 +197,8 @@ class Code_Snippets {
 	/**
 	 * Determine whether the current user can perform actions on snippets.
 	 *
-	 * @since 2.8.6
 	 * @return boolean Whether the current user has the required capability
+	 * @since 2.8.6
 	 */
 	public function current_user_can() {
 		return current_user_can( $this->get_cap() );
@@ -229,8 +229,8 @@ class Code_Snippets {
 	 * If multisite, checks if *Enable Administration Menus: Snippets* is active
 	 * under the *Settings > Network Settings* network admin menu
 	 *
-	 * @since 2.0
 	 * @return string The capability required to manage snippets
+	 * @since 2.0
 	 */
 	public function get_cap() {
 

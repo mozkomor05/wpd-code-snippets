@@ -30,7 +30,9 @@ Domain Path: /languages
 if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
+
 require_once __DIR__ . '/vendor/autoload.php';
+
 /**
  * The full path to the main file of this plugin
  *
@@ -45,6 +47,7 @@ define( 'CODE_SNIPPETS_FILE', __FILE__ );
 
 /**
  * Enable autoloading of plugin classes
+ *
  * @param $class_name
  */
 function code_snippets_autoload( $class_name ) {
@@ -67,7 +70,7 @@ function code_snippets_autoload( $class_name ) {
 
 	$class_path = dirname( __FILE__ ) . '/php/';
 
-	if ( 'Menu' === substr( $class_name, -4, 4 ) ) {
+	if ( 'Menu' === substr( $class_name, - 4, 4 ) ) {
 		$class_path .= 'admin-menus/';
 	}
 
@@ -84,8 +87,8 @@ try {
 /**
  * Retrieve the instance of the main plugin class
  *
- * @since 2.6.0
  * @return Code_Snippets
+ * @since 2.6.0
  */
 function code_snippets() {
 	static $plugin;

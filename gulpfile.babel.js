@@ -162,7 +162,7 @@ gulp.task('clean', () =>
 gulp.task('package', gulp.series(
     () => gulp.src(['dist', pkg.name, `${pkg.name}.*.zip`], {read: false, allowEmpty: true})
         .pipe(clean()),
-    () => gulp.src(['code-snippets.php', 'uninstall.php', 'php/**/*', 'readme.txt', 'license.txt', 'languages/**/*', 'css/font/**/*'])
+    () => gulp.src(['code-snippets.php', 'uninstall.php', 'php/**/*', 'readme.txt', 'license.txt', 'languages/**/*', 'css/font/**/*', 'vendor/*'])
         .pipe(copy(pkg.name)),
     () => gulp.src('css/min/**/*.css')
         .pipe(change((content) => content.replace(/\/\*# sourceMappingURL=[\w.-]+\.map \*\/\s+$/, '')))

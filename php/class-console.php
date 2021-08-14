@@ -1,5 +1,7 @@
 <?php
 
+use \Psy\Configuration;
+
 class Code_Snippets_Console {
 
 	function __construct() {
@@ -7,7 +9,6 @@ class Code_Snippets_Console {
 		add_action( 'wp_ajax_evaluatewpd', array( $this, 'evaluate_wpd_console' ) );
 		add_action( 'wp_ajax_nopriv_getsnippetcontent', array( $this, 'get_snippet_content' ) );
 		add_action( 'wp_ajax_getsnippetcontent', array( $this, 'get_snippet_content' ) );
-		// add_action( 'rest_api_init', array($this, 'register_wpd_endpoints') );
 	}
 
 	function get_snippet_content() {
@@ -24,30 +25,27 @@ class Code_Snippets_Console {
 	}
 
 
-	function evaluate_wpd_console() {
+	public function evaluate_wpd_console() {
+		$timer = microtime( true );
+		$input = base64_decode( $_POST['input'] );
+
+
+		$config = new Configuration( array(
+			'configDir' => WP_CONTENT_DIR,
+		) );
+
+		$output = new Code_Snippets_ShellOutput( Code_Snippets_ShellOutput::VERBOSITY_NORMAL, true );
+
+		$config->setOutput( $output );
+		$config->setColorMode( Configuration::COLOR_MODE_DISABLED );
+
+		$psysh = new Code_Snippets_Shell( $config );
+		$psysh->setOutput( $output );
+		$psysh->addCode( $input );
+
 		try {
-			$timer = microtime( true );
-			$input = base64_decode( $_POST['input'] );
-
-			$config = new \Psy\Configuration( array(
-				'configDir' => WP_CONTENT_DIR,
-			) );
-
-			$output = new Code_Snippets_ShellOutput( Code_Snippets_ShellOutput::VERBOSITY_NORMAL, true );
-
-			$config->setOutput( $output );
-			$config->setColorMode( \Psy\Configuration::COLOR_MODE_DISABLED );
-
-			$psysh = new Code_Snippets_Shell( $config );
-
-			$psysh->setOutput( $output );
-
-			$psysh->addCode( $input );
-
 			extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
-
 			ob_start( array( $psysh, 'writeStdout' ), 1 );
-
 			set_error_handler( array( $psysh, 'handleError' ) );
 
 			$_ = eval( $psysh->onExecute( $psysh->flushCode() ?: \Psy\ExecutionClosure::NOOP_INPUT ) );
@@ -75,7 +73,7 @@ class Code_Snippets_Console {
 			ob_end_flush();
 			wp_send_json_error( array(
 				'message' => $e->getMessage(),
-				'input'   => $_POST['input'],
+				'input'   => $input,
 				'status'  => 422,
 				'trace'   => $e->getTraceAsString(),
 			) );
