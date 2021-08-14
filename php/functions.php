@@ -41,6 +41,10 @@ function get_snippet_edit_url( $snippet_id, $context = 'self' ) {
 	return code_snippets()->get_snippet_edit_url( $snippet_id, $context );
 }
 
+function get_snippet_template_edit_url( $snippet_id, $context = 'self' ) {
+    return code_snippets()->get_snippet_template_edit_url( $snippet_id, $context );
+}
+
 /**
  * Get the required capability to perform a certain action on snippets.
  * Does not check if the user has this capability or not.

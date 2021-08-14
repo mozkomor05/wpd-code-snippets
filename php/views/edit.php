@@ -100,19 +100,20 @@ if ( ! $snippet->id ) {
 					);
 
 				} elseif ( ! $snippet->shared_network || ! is_network_admin() ) {
+                    if(!$snippet->is_template) {
+                        if ($snippet->active) {
+                            $actions['save_snippet_deactivate'] = array(
+                                __('Deactivate', 'code-snippets'),
+                                __('Save Snippet and Deactivate', 'code-snippets'),
+                            );
 
-					if ( $snippet->active ) {
-						$actions['save_snippet_deactivate'] = array(
-							__( 'Deactivate', 'code-snippets' ),
-							__( 'Save Snippet and Deactivate', 'code-snippets' ),
-						);
-
-					} else {
-						$actions['save_snippet_activate'] = array(
-							__( 'Activate', 'code-snippets' ),
-							__( 'Save Snippet and Activate', 'code-snippets' ),
-						);
-					}
+                        } else {
+                            $actions['save_snippet_activate'] = array(
+                                __('Activate', 'code-snippets'),
+                                __('Save Snippet and Activate', 'code-snippets'),
+                            );
+                        }
+                    }
 				}
 
 				foreach ( $actions as $action => $labels ) {
@@ -207,23 +208,15 @@ if ( ! $snippet->id ) {
 				</div>
 			</div>
 		</div>
-		<input type="checkbox" id="snippet_is_template" name="snippet_is_template" value="is_template" <?php if($snippet->is_template): ?> checked <?php endif; ?> >
+		<input type="hidden" id="snippet_is_template" name="snippet_is_template" <?php if($snippet->is_template): ?> value="is_template" <?php endif; ?> >
   		<label for="is_template">Snippet is template</label><br>
-		<?php $all_snippets = get_snippets( array() );
+		<?php $all_snippets = get_snippet_templates( array() );
 		foreach($all_snippets as $key => $snippet_from_db){
 			if(0 !== $snippet->id){
 				if($snippet_from_db->id == $snippet->id){
 					array_splice($all_snippets, $key, 1);
-				} else {
-					if(!$snippet_from_db->is_template){
-						array_splice($all_snippets, $key, 1);
-					}
-				} 
-			} else {
-				if(!$snippet_from_db->is_template){
-					array_splice($all_snippets, $key, 1);
 				}
-			} 
+			}
 		}
 		if(count($all_snippets) > 0):
 		?>

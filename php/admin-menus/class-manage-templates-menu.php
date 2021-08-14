@@ -5,7 +5,7 @@
  * @since   2.4.0
  * @package Code_Snippets
  */
-class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
+class Code_Snippets_Manage_Templates_Menu extends Code_Snippets_Admin_Menu {
 
 	/**
 	 * Holds the list table class
@@ -18,9 +18,9 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 	 */
 	public function __construct() {
 
-		parent::__construct( 'manage',
-			_x( 'All Snippets', 'menu label', 'code-snippets' ),
-			__( 'Snippets', 'code-snippets' )
+		parent::__construct( 'manage-templates',
+			_x( 'All Snippet Templates', 'menu label', 'code-snippets' ),
+			__( 'Snippet Templates', 'code-snippets' )
 		);
 	}
 
@@ -31,74 +31,13 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 		parent::run();
 
 		if ( code_snippets()->admin->is_compact_menu() ) {
-			add_action( 'admin_menu', array( $this, 'register_compact_menu' ), 2 );
-			add_action( 'network_admin_menu', array( $this, 'register_compact_menu' ), 2 );
+			//add_action( 'admin_menu', array( $this, 'register_compact_menu' ), 2 );
+			//add_action( 'network_admin_menu', array( $this, 'register_compact_menu' ), 2 );
 		}
-
-		add_filter( 'set-screen-option', array( $this, 'save_screen_option' ), 10, 3 );
-		add_action( 'wp_ajax_update_code_snippet', array( $this, 'ajax_callback' ) );
+        add_filter( 'set-screen-option', array( $this, 'save_screen_option' ), 10, 3 );
+		add_action( 'wp_ajax_update_code_snippet_template', array( $this, 'ajax_callback' ) );
 	}
 
-	/**
-	 * Register the top-level 'Snippets' menu and associated 'Manage' subpage
-	 *
-	 * @uses add_menu_page() to register a top-level menu
-	 * @uses add_submenu_page() to register a sub-menu
-	 */
-	function register() {
-
-		/* Register the top-level menu */
-		add_menu_page(
-			__( 'Snippets', 'code-snippets' ),
-			_x( 'Snippets', 'top-level menu label', 'code-snippets' ),
-			code_snippets()->get_cap(),
-			code_snippets()->get_menu_slug(),
-			array( $this, 'render' ),
-			'div', // icon is added through CSS
-			is_network_admin() ? 21 : 67
-		);
-
-		/* Register the sub-menu */
-		parent::register();
-	}
-
-	public function register_compact_menu() {
-
-		if ( ! code_snippets()->admin->is_compact_menu() ) {
-			return;
-		}
-
-		$sub = code_snippets()->get_menu_slug( isset( $_GET['sub'] ) ? $_GET['sub'] : 'snippets' );
-
-		$classmap = array(
-			'snippets'             => 'manage',
-            'add-snippet'          => 'edit',
-            'edit-template'        => 'edit-template',
-			'edit-snippet'         => 'edit',
-			'import-code-snippets' => 'import',
-			'snippets-settings'    => 'settings',
-		);
-
-		if ( isset( $classmap[ $sub ], code_snippets()->admin->menus[ $classmap[ $sub ] ] ) ) {
-			/** @var Code_Snippets_Admin_Menu $class */
-			$class = code_snippets()->admin->menus[ $classmap[ $sub ] ];
-		} else {
-			$class = $this;
-		}
-
-		/* Add a submenu to the Tools menu */
-		$hook = add_submenu_page(
-			'tools.php',
-			__( 'Snippets', 'code-snippets' ),
-			_x( 'Snippets', 'tools submenu label', 'code-snippets' ),
-			code_snippets()->get_cap(),
-			code_snippets()->get_menu_slug(),
-			array( $class, 'render' )
-		);
-
-		add_action( 'load-' . $hook, array( $class, 'load' ) );
-
-	}
 
 	/**
 	 * Executed when the admin page is loaded
@@ -107,11 +46,11 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 		parent::load();
 
 		/* Load the contextual help tabs */
-		$contextual_help = new Code_Snippets_Contextual_Help( 'manage' );
+		$contextual_help = new Code_Snippets_Contextual_Help( 'manage-templates' );
 		$contextual_help->load();
 
 		/* Initialize the list table class */
-		$this->list_table = new Code_Snippets_List_Table();
+		$this->list_table = new Code_Snippets_List_Table_Templates();
 		$this->list_table->prepare_items();
 	}
 
@@ -236,7 +175,7 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
                     ) );
                 }
 
-                if ( $snippet->shared_network ) {
+                /*if ( $snippet->shared_network ) {
                     $active_shared_snippets = get_option( 'active_shared_network_snippets', array() );
 
                     if ( in_array( $snippet->id, $active_shared_snippets, true ) !== $snippet->active ) {
@@ -260,7 +199,7 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
                     } else {
                         deactivate_snippet( $snippet->id, $snippet->network );
                     }
-                }
+                }*/
                 break;
             }
         }

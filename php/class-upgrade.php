@@ -53,7 +53,8 @@ class Code_Snippets_Upgrade {
 			return;
 		}
 
-		$sample_snippets = $this->get_sample_content();
+        $sample_snippets = $this->get_sample_content();
+
 
 		$this->db->create_table( $table_name );
 
@@ -70,6 +71,11 @@ class Code_Snippets_Upgrade {
 			$role = get_role( apply_filters( 'code_snippets_role', 'administrator' ) );
 			$role->remove_cap( apply_filters( 'code_snippets_cap', 'manage_snippets' ) );
 		}
+
+        $sample_snippet_templates = $this->get_sample_templates_content();
+        foreach ( $sample_snippet_templates as $sample_snippet ) {
+            save_snippet( $sample_snippet );
+        }
 
 		if ( false === $prev_version ) {
 			if ( apply_filters( 'code_snippets/create_sample_content', true ) ) {
@@ -208,4 +214,24 @@ class Code_Snippets_Upgrade {
 
 		return $snippets;
 	}
+
+
+    private function get_sample_templates_content() {
+        $tag = "\n\n" . esc_html__( 'You can remove it, or edit it to add your own content.', 'code-snippets' );
+
+        $snippets_data = array();
+
+        foreach (glob(dirname( CODE_SNIPPETS_FILE ) . '\templates\*') as $filename) {
+            $snippets_data[basename($filename)] = json_decode(file_get_contents($filename), true);
+        }
+        $snippets = array();
+
+        foreach ( $snippets_data as $sample_name => $snippet_data ) {
+            $snippets[ $sample_name ] = new Code_Snippet( $snippet_data );
+            $snippets[ $sample_name ]->is_template = true;
+        }
+
+        return $snippets;
+    }
+
 }
