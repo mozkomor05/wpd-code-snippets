@@ -25,15 +25,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="code format &amp; small bugs">
-      <change afterPath="$PROJECT_DIR$/wpd-code-snippets.2.14.0.zip" afterDir="false" />
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="gulp fixed &amp; scripts cleared">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/code-snippets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/console.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/console.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-code-snippets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-shelloutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-shelloutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gulpfile.babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.babel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,6 +240,7 @@
       <workItem from="1628448426834" duration="85000" />
       <workItem from="1628499065385" duration="16000" />
       <workItem from="1628580619955" duration="5735000" />
+      <workItem from="1628954744676" duration="847000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -267,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628581465678</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="gulp fixed &amp; scripts cleared">
+      <created>1628954786929</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1628954786929</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,7 +292,8 @@
     <MESSAGE value="Initial commit of WPDistro Code Snippets - fork of Code Snippets." />
     <MESSAGE value="Optimized, ajax installing" />
     <MESSAGE value="code format &amp; small bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="code format &amp; small bugs" />
+    <MESSAGE value="gulp fixed &amp; scripts cleared" />
+    <option name="LAST_COMMIT_MESSAGE" value="gulp fixed &amp; scripts cleared" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>
