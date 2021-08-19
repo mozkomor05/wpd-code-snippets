@@ -10,9 +10,12 @@ jQuery(function ($) {
             type: "post",
             dataType: "json",
             url: ajaxurl,
-            data: {"action": "evaluatewpd", "input": btoa(codeToRun)},
+            data: {"action": "evaluatewpd", "input": btoa(encodeURIComponent(codeToRun))},
             success: function (msg) {
-                $("#snippet_output").html(msg.output);
+                $("#snippet_output").html(msg.output ? msg.output : msg.data.output);
+            },
+            error: function (msg) {
+                $("#snippet_output").html(msg.data.output);
             }
         });
     });

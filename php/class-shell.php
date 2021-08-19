@@ -53,6 +53,11 @@ class Code_Snippets_Shell extends PsyShell {
      * @return void
      */
     public function handleError( $errno, $errstr, $errfile, $errline ) {
-        $this->config->getOutput()->exception = new ErrorException( $errstr, 0, $errno, $errfile, $errline );
+        $this->config->getOutput()->exception = new ErrorException( $errstr, $errno, $errno, $errfile, $errline );
+        if($errno == 1) {
+            $this->writeStdout("<span style='color:red'>" . $errstr . " at line " . $errline . "</span>");
+        } else {
+            $this->writeStdout($errstr . " at line " . $errline);
+        }
     }
 }

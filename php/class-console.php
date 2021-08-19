@@ -27,23 +27,24 @@ class Code_Snippets_Console {
 
 	public function evaluate_wpd_console() {
 		$timer = microtime( true );
-		$input = base64_decode( $_POST['input'] );
+		$input = rawurldecode(base64_decode( $_POST['input'] ));
 
 
 		$config = new Configuration( array(
 			'configDir' => WP_CONTENT_DIR,
 		) );
 
-		$output = new Code_Snippets_ShellOutput( Code_Snippets_ShellOutput::VERBOSITY_NORMAL, true );
+		$output = new Code_Snippets_ShellOutput( Code_Snippets_ShellOutput::VERBOSITY_DEBUG, true );
 
 		$config->setOutput( $output );
-		$config->setColorMode( Configuration::COLOR_MODE_DISABLED );
+		$config->setColorMode( Configuration::COLOR_MODE_AUTO );
 
 		$psysh = new Code_Snippets_Shell( $config );
 		$psysh->setOutput( $output );
-		$psysh->addCode( $input );
+
 
 		try {
+            $psysh->addCode( $input );
 			extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
 			ob_start( array( $psysh, 'writeStdout' ), 1 );
 			set_error_handler( array( $psysh, 'handleError' ) );
@@ -56,15 +57,18 @@ class Code_Snippets_Console {
 			$psysh->writeReturnValue( $_ );
 
 			ob_end_flush();
-
+            $output_text = $output->outputMessage;
 			if ( $output->exception ) {
-				throw $output->exception;
+			    if(E_ERROR == $output->exception->getCode()){
+                    $output_text = $output->exception->getMessage() . " at " . $output->exception->getLine();
+                }
+                //echo "";
 			}
 
 			$execution_time = microtime( true ) - $timer;
 
 			$data = array(
-				'output'         => $output->outputMessage,
+				'output'         => $output_text,
 				'execution_time' => number_format( $execution_time, 3, '.', '' ),
 			);
 			wp_send_json( $data );
@@ -72,7 +76,7 @@ class Code_Snippets_Console {
 		} catch ( Throwable $e ) {
 			ob_end_flush();
 			wp_send_json_error( array(
-				'message' => $e->getMessage(),
+				'output'  => "<span style='color:red'>" .$e->getMessage() . "\n" . $e->getTraceAsString() . "</span>",
 				'input'   => $input,
 				'status'  => 422,
 				'trace'   => $e->getTraceAsString(),

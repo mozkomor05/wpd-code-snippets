@@ -209,7 +209,6 @@ if ( ! $snippet->id ) {
 			</div>
 		</div>
 		<input type="hidden" id="snippet_is_template" name="snippet_is_template" <?php if($snippet->is_template): ?> value="is_template" <?php endif; ?> >
-  		<label for="is_template">Snippet is template</label><br>
 		<?php $all_snippets = get_snippet_templates( array() );
 		foreach($all_snippets as $key => $snippet_from_db){
 			if(0 !== $snippet->id){
