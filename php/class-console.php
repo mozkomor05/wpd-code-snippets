@@ -13,8 +13,8 @@ class Code_Snippets_Console {
 
 	function get_snippet_content() {
 		$id      = $_POST['id'];
-		$snippet = get_snippet( $id );
-		wp_send_json( array( 'code' => $snippet->code ) );
+		$snippet = get_snippet_template( $id );
+		wp_send_json( array('id' => $id, 'code' => $snippet->code ) );
 	}
 
 	function register_wpd_endpoints() {

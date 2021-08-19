@@ -219,7 +219,12 @@ if ( ! $snippet->id ) {
 			}
 		}
 		if(count($all_snippets) > 0):
-		?>
+        $json = array();
+        foreach($all_snippets as $snippet_from_db){
+            $json[$snippet_from_db->id] = unserialize($snippet_from_db->snippet_settings);
+        }
+        echo "<script>var codeSnippetTemplateSettings = " . json_encode($json) . ";</script>";
+        ?>
 		<select name="snippet_template" id="snippet_template">
 		<option disabled selected value> -- select an option -- </option>
 <?php foreach($all_snippets as $snippet_from_db): ?>
@@ -227,6 +232,12 @@ if ( ! $snippet->id ) {
 		<?php endforeach; 
 		endif;?>
 		</select>
+        <div id="snippet_template_settings">
+            <div id="snippet_template_settings_wrapper">
+
+            </div>
+            <button type="button" id="execute_template" class="button button-primary">Execute template</button>
+        </div>
 		<div id="snippet_output" contenteditable></div>
 		<button type="button" id="run_code_wpd" class="button button-primary">Run code</button>
 		<div id="snippet_setting_div">

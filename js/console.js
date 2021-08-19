@@ -24,17 +24,40 @@ jQuery(function ($) {
     }
 
     $("#snippet_template").change(function () {
+        eval("debugger");
+        var id = $(this).children(":selected").val();
+        var settings = window.codeSnippetTemplateSettings[parseInt(id)];
+        settings.forEach(function(item, index){
+            $("#snippet_template_settings_wrapper").append(`
+            <div id="snippet_template_setting_${index}"> 
+          <label class="label" assignedTo="${index}" >${item['label']}</label>
+          <input type="text" class="setting_value" value="${item['default_value']}">
+        </div>        
+`);
+        });
+        $("#snippet_template_settings").show();
+
+
+
+    });
+
+    $("#execute_template").click(function () {
+        var id = $("#snippet_template").children(":selected").val();
         $.ajax({
             type: "post",
             dataType: "json",
             url: ajaxurl,
-            data: {"action": "getsnippetcontent", "id": $(this).children(":selected").val()},
+            data: {"action": "getsnippetcontent", "id": id},
             success: function (msg) {
+                $("#snippet_template_settings_wrapper").children().each(function (index) {
+                    msg.code = msg.code.replace(window.codeSnippetTemplateSettings[id][index]["replace"], $(this).find(".setting_value").val());
+                });
                 insertTextAtCursor(window.code_snippets_editor, msg.code);
                 $("#snippet_template").prop("selectedIndex", 0);
+                $("#snippet_template_settings_wrapper").html("");
+                $("#snippet_template_settings").hide();
             }
         });
-
     });
 
     let advanced_wpd_enabled = false;

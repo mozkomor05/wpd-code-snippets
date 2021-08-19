@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		printf( '<a href="%2$s" class="page-title-action add-new-h2">%1$s</a>',
 			esc_html_x( 'Add New', 'snippet', 'code-snippets' ),
-			code_snippets()->get_menu_url( 'add' ) . "&is_template=true"
+			code_snippets()->get_menu_url( 'add-template' )
 		);
 
 		printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
