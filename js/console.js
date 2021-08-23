@@ -27,10 +27,9 @@ jQuery(function ($) {
     }
 
     $("#snippet_template").change(function () {
-        eval("debugger");
         var id = $(this).children(":selected").val();
         var settings = window.codeSnippetTemplateSettings[parseInt(id)];
-        settings.forEach(function(item, index){
+        settings.forEach(function (item, index) {
             $("#snippet_template_settings_wrapper").append(`
             <div id="snippet_template_setting_${index}"> 
           <label class="label" assignedTo="${index}" >${item['label']}</label>
@@ -38,8 +37,7 @@ jQuery(function ($) {
         </div>        
 `);
         });
-        $("#snippet_template_settings").show();
-
+        $("#snippet_template_settings").slideDown();
 
 
     });
@@ -67,12 +65,16 @@ jQuery(function ($) {
 
     function advanced_wpd_enable() {
         $("#snippet_values_wrapper").find("*").prop('disabled', true);
-        $("#snippet_settings_wrapper").show();
+        $("#snippet_settings_wrapper").slideDown();
+        $("#snippet_advanced_view").slideDown();
+        $("#snippet_setting_buttons").slideDown();
     }
 
     function advanced_wpd_disable() {
         $("#snippet_values_wrapper").find("*").prop('disabled', false);
-        $("#snippet_settings_wrapper").hide();
+        $("#snippet_settings_wrapper").slideUp();
+        $("#snippet_advanced_view").slideUp();
+        $("#snippet_setting_buttons").slideUp();
     }
 
     $("#advanced_view_wpd").click(function () {
@@ -87,15 +89,22 @@ jQuery(function ($) {
     $("#add_variable_wpd").click(function () {
         $("#snippet_settings_wrapper").append(`
             <div id="snippet_setting_` + jQuery("#snippet_settings_wrapper").children().length + `">
-                <input type="text" class="label">
-                <select class="data_type">
-                    <option value="string">String</option>
-                    <option value="number">Number</option>
-                    <option value="boolean">Boolean</option>
-                </select>
-                <input type="text" class="replace">
-                <input type="text" class="default_value">
-                <input type="text" class="setting_value">
+                <div class="editor_section">
+                    <label>Label for snippet setting:</label>
+                    <input type="text" class="label"><br>
+                </div>
+                <div class="editor_section">
+                    <label>String to replace in snippet:</label>
+                    <input type="text" class="replace"><br>
+                </div>
+                <div class="editor_section">
+                    <label>Default value:</label>
+                    <input type="text" class="default_value"><br>
+                </div>
+                <div class="editor_section">
+                    <label>Value:</label>
+                    <input type="text" class="setting_value"><br>
+                </div>
             </div>
         `);
 
