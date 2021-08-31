@@ -45,9 +45,12 @@ class Code_Snippets_Upgrade {
 	 * Perform upgrades for the current site
 	 */
 	private function do_site_upgrades() {
+	    global $wpdb;
 		$table_name = $this->db->table;
 		$prev_version = get_option( 'code_snippets_version' );
-
+        if(empty($wpdb->get_results(  "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{$table_name}' AND column_name = 'remote'"))){
+            $this->db->create_table( $table_name );
+        }
 		/* Do nothing if the plugin has not been updated or installed */
 		if ( ! version_compare( $prev_version, $this->current_version, '<' ) ) {
 			return;
