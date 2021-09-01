@@ -127,8 +127,8 @@ class Code_Snippets_Admin_Menu {
 		/* Create the snippet tables if they don't exist */
 		$db = code_snippets()->db;
 		$db->create_missing_table( $db->ms_table );
-        $db->create_missing_table( $db->table );
-        $db->create_missing_template_table( $db->templates_table );
+		$db->create_missing_table( $db->table );
+		$db->create_missing_template_table( $db->templates_table );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}

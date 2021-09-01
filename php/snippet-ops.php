@@ -90,61 +90,61 @@ function get_snippets( array $ids = array(), $multisite = null, array $args = ar
 }
 
 
-function get_snippet_templates(array $ids = array(), $multisite = null, array $args = array() ){
-    /** @var wpdb $wpdb */
-    global $wpdb;
+function get_snippet_templates( array $ids = array(), $multisite = null, array $args = array() ) {
+	/** @var wpdb $wpdb */
+	global $wpdb;
 
-    $args = wp_parse_args( $args, array(
-        'limit'       => 0,
-        'orderby'     => '',
-        'order'       => 'desc',
-    ) );
+	$args = wp_parse_args( $args, array(
+		'limit'   => 0,
+		'orderby' => '',
+		'order'   => 'desc',
+	) );
 
-    $db        = code_snippets()->db;
-    $multisite = $db->validate_network_param( $multisite );
-    $table     = $db->templates_table;
+	$db        = code_snippets()->db;
+	$multisite = $db->validate_network_param( $multisite );
+	$table     = $db->templates_table;
 
-    $ids_count = count( $ids );
+	$ids_count = count( $ids );
 
-    /* If only one ID has been passed in, defer to the get_snippet() function */
-    if ( 1 === $ids_count ) {
-        return array( get_snippet_template( $ids[0] ) );
-    }
+	/* If only one ID has been passed in, defer to the get_snippet() function */
+	if ( 1 === $ids_count ) {
+		return array( get_snippet_template( $ids[0] ) );
+	}
 
-    $where = $order = $limit = '';
+	$where = $order = $limit = '';
 
-    /* Build a query containing the specified IDs if there are any */
-    if ( $ids_count > 1 ) {
-        $where = $wpdb->prepare( sprintf(
-            ' AND id IN (%s)',
-            implode( ',', array_fill( 0, $ids_count, '%d' ) )
-        ), $ids );
-    }
+	/* Build a query containing the specified IDs if there are any */
+	if ( $ids_count > 1 ) {
+		$where = $wpdb->prepare( sprintf(
+			' AND id IN (%s)',
+			implode( ',', array_fill( 0, $ids_count, '%d' ) )
+		), $ids );
+	}
 
-    /* Restrict the active status of retrieved snippets if requested */
+	/* Restrict the active status of retrieved snippets if requested */
 
-    /* Apply custom ordering if requested */
-    if ( $args['orderby'] ) {
-        $order_dir = 'ASC' === strtoupper( $args['order'] ) ? 'ASC' : 'DESC';
-        $order     = $wpdb->prepare( ' ORDER BY %s %s', $args['orderby'], $order_dir );
-    }
+	/* Apply custom ordering if requested */
+	if ( $args['orderby'] ) {
+		$order_dir = 'ASC' === strtoupper( $args['order'] ) ? 'ASC' : 'DESC';
+		$order     = $wpdb->prepare( ' ORDER BY %s %s', $args['orderby'], $order_dir );
+	}
 
-    /* Limit the number of retrieved snippets if requested */
-    if ( intval( $args['limit'] ) > 0 ) {
-        $limit = sprintf( ' LIMIT %d', intval( $args['limit'] ) );
-    }
+	/* Limit the number of retrieved snippets if requested */
+	if ( intval( $args['limit'] ) > 0 ) {
+		$limit = sprintf( ' LIMIT %d', intval( $args['limit'] ) );
+	}
 
-    /* Retrieve the results from the database */
-    $sql      = "SELECT * FROM $table WHERE 1=1 $where $order $limit;";
-    $snippets = $wpdb->get_results( $sql, ARRAY_A );
+	/* Retrieve the results from the database */
+	$sql      = "SELECT * FROM $table WHERE 1=1 $where $order $limit;";
+	$snippets = $wpdb->get_results( $sql, ARRAY_A );
 
-    /* Convert snippets to snippet objects */
-    foreach ( $snippets as $index => $snippet ) {
-        $snippet['network'] = $multisite;
-        $snippets[ $index ] = new Code_Snippet( $snippet );
-    }
+	/* Convert snippets to snippet objects */
+	foreach ( $snippets as $index => $snippet ) {
+		$snippet['network'] = $multisite;
+		$snippets[ $index ] = new Code_Snippet( $snippet );
+	}
 
-    return apply_filters( 'code_snippets/get_snippet_templates', $snippets, $multisite );
+	return apply_filters( 'code_snippets/get_snippet_templates', $snippets, $multisite );
 }
 
 /**
@@ -237,29 +237,29 @@ function get_snippet( $id = 0, $multisite = null ) {
 }
 
 function get_snippet_template( $id = 0, $multisite = null ) {
-    /** @var wpdb $wpdb */
-    global $wpdb;
+	/** @var wpdb $wpdb */
+	global $wpdb;
 
-    $id    = absint( $id );
-    $table = code_snippets()->db->templates_table;
+	$id    = absint( $id );
+	$table = code_snippets()->db->templates_table;
 
-    if ( 0 !== $id ) {
+	if ( 0 !== $id ) {
 
-        /* Retrieve the snippet from the database */
-        $snippet = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE id = %d", $id ) );
+		/* Retrieve the snippet from the database */
+		$snippet = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE id = %d", $id ) );
 
-        /* Unescape the snippet data, ready for use */
-        $snippet = new Code_Snippet( $snippet );
+		/* Unescape the snippet data, ready for use */
+		$snippet = new Code_Snippet( $snippet );
 
-    } else {
+	} else {
 
-        /* Get an empty snippet object */
-        $snippet = new Code_Snippet();
-    }
-    $snippet->is_template = true;
-    $snippet->network = $multisite;
+		/* Get an empty snippet object */
+		$snippet = new Code_Snippet();
+	}
+	$snippet->is_template = true;
+	$snippet->network     = $multisite;
 
-    return apply_filters( 'code_snippets/get_snippet_template', $snippet, $id, $multisite );
+	return apply_filters( 'code_snippets/get_snippet_template', $snippet, $id, $multisite );
 }
 
 
@@ -427,16 +427,16 @@ function delete_snippet( $id, $multisite = null ) {
 }
 
 function delete_snippet_template( $id, $multisite = null ) {
-    /** @var wpdb $wpdb */
-    global $wpdb;
+	/** @var wpdb $wpdb */
+	global $wpdb;
 
-    $wpdb->delete(
-        code_snippets()->db->templates_table,
-        array( 'id' => $id ),
-        array( '%d' )
-    );
+	$wpdb->delete(
+		code_snippets()->db->templates_table,
+		array( 'id' => $id ),
+		array( '%d' )
+	);
 
-    do_action( 'code_snippets/delete_snippet_template', $id, $multisite );
+	do_action( 'code_snippets/delete_snippet_template', $id, $multisite );
 }
 
 /**
@@ -460,26 +460,24 @@ function save_snippet( Code_Snippet $snippet ) {
 
 	/* Build array of data to insert */
 	$data = array(
-		'name'        => $snippet->name,
-		'description' => $snippet->desc,
-		'code'        => $snippet->code,
-		'tags'        => $snippet->tags_list,
-		'scope'       => $snippet->scope,
-		'priority'    => $snippet->priority,
-
-		'modified'    => $snippet->modified,
-		'snippet_settings'    => serialize($snippet->snippet_settings),
-		'snippet_values'    => serialize($snippet->snippet_values),
-		'remote' => $snippet->remote,
-		'remote_id' => $snippet->remote_id,
-		//'is_template' => $snippet->is_template,
+		'name'             => $snippet->name,
+		'description'      => $snippet->desc,
+		'code'             => $snippet->code,
+		'tags'             => $snippet->tags_list,
+		'scope'            => $snippet->scope,
+		'priority'         => $snippet->priority,
+		'modified'         => $snippet->modified,
+		'snippet_settings' => serialize( $snippet->snippet_settings ),
+		'snippet_values'   => serialize( $snippet->snippet_values ),
+		'remote'           => $snippet->remote,
+		'remote_id'        => $snippet->remote_id,
 	);
-    if($snippet->is_template){
-        $table = code_snippets()->db->templates_table;
-    } else {
-        $data['active'] = intval( $snippet->active );
-    }
-    //unset($data[array_search('is_template', array_values($data))]);
+	if ( $snippet->is_template ) {
+		$table = code_snippets()->db->templates_table;
+	} else {
+		$data['active'] = intval( $snippet->active );
+	}
+
 	/* Create a new snippet if the ID is not set */
 	if ( 0 === $snippet->id ) {
 		$wpdb->insert( $table, $data, '%s' );
@@ -530,12 +528,17 @@ function update_snippet_fields( $snippet_id, $fields, $network = null ) {
 }
 
 
-function filter_snippet($code, $settings, $values){
-	if($settings == null) return;
-	if(count($settings) == 0) return;
-	foreach($settings as $setting){
-		$code = str_replace($setting['replace'], $values[$setting['replace']], $code);
+function filter_snippet( $code, $settings, $values ) {
+	if ( $settings == null ) {
+		return;
 	}
+	if ( count( $settings ) == 0 ) {
+		return;
+	}
+	foreach ( $settings as $setting ) {
+		$code = str_replace( $setting['replace'], $values[ $setting['replace'] ], $code );
+	}
+
 	return $code;
 }
 
@@ -652,134 +655,10 @@ function execute_active_snippets() {
 			}
 
 			if ( apply_filters( 'code_snippets/allow_execute_snippet', true, $snippet_id, $table_name ) ) {
-				execute_snippet( filter_snippet($code, unserialize($snippet['snippet_settings']), unserialize($snippet['snippet_values'])), $snippet_id );
+				execute_snippet( filter_snippet( $code, unserialize( $snippet['snippet_settings'] ), unserialize( $snippet['snippet_values'] ) ), $snippet_id );
 			}
 		}
 	}
 
 	return true;
 }
-
-
-/**
- * Pushes a snippet to the database
- *
- * @param int $id The ID of the snippet to push
- *
- */
-
-// Snippet popup - work in progress
-function prepare_snippet_to_push( $id ){
-
-    $snippet_id = $id;
-
-    echo "
-    <div onclick=this.style.display='none';document.getElementById('push-popup').style.display='none'; style='z-index: 999;position: fixed;left: 0;top: 0;width: 100%;height: 100%;background: rgba(0,0,0,.5);'></div>
-    <div style='z-index:1000;position: fixed;left: 50%;top: 50%;width:400px;padding: 2px;background: white;border-radius: 2px;transform: translate(-50%, -50%);' id='push-popup'>
-        <div style='width: calc(100% - 20px);height: 50px;padding-left:20px;color:white;font-size:20px;line-height:50px;background: #2271b1;border-radius: 2px 2px 0 0'>Push snippet</div>
-        <form method='post' style='padding: 20px'>
-            <label style='width: 40%;float: left;font-size: 16px;font-weight: 600'>Description:</label>
-            <textarea placeholder='Snippet description' type='text' name='desc' style='float:left;width: calc(60% - 2px);' rows='4'></textarea>
-            <div style='float:right;display:block;width:100%;margin:10px 0 20px 0'>
-                <button type='submit' style='cursor: pointer;float: right;width: 25%;height:30px;border: none;background: #2c3338;color: white' name='push-snippet-final' value='" . $snippet_id . "'>Push</button>
-            </div>
-        </form>
-    </div>
-    ";
-
-
-}
-
-function push_snippet( $id ){
-
-    $site_url = get_home_url();
-
-    $snippet = get_snippet( $id );
-
-    $snippet_url = preg_replace('/[[:space:]]+/', '-', strtolower($snippet->name));
-
-    if(isset($_POST['desc'])){
-        $snippet_desc = $_POST['desc'];
-    }else{
-        $snippet_desc = "";
-    }
-
-    $username = 'pavel';
-    $password = '2OOj$^o8RsDCNXSZz)F@b!XU';
-    $rest_api_url_create = 'https://wpdistro.com/wp-json/wp/v2/posts';
-
-    $data_string = json_encode([
-        'title'             => $snippet->name,
-        'content'           => $snippet_desc . '
-                <br>
-                | This snippet was pushed from <strong>' . $site_url . '</strong>
-            ',
-        'status'            => 'publish',
-        'featured_media'    => '499',
-    ]);
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $rest_api_url_create);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/json',
-        'Content-Length: ' . strlen($data_string),
-        'Authorization: Basic ' . base64_encode($username . ':' . $password),
-    ]);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $result = curl_exec($ch);
-    $response = json_decode($result, true);
-
-    if (curl_errno($ch)) {
-        $error_msg = curl_error($ch);
-        var_dump($error_msg);
-    }
-
-    curl_close($ch);
-
-    $rest_api_url_edit = 'https://wpdistro.com/wp-json/acf/v3/posts/'. $response["id"]. '/code';
-    $code = json_encode([
-        'fields' => [
-            'code' => $snippet->code
-        ]
-    ]);
-
-    $ch2 = curl_init();
-    curl_setopt($ch2, CURLOPT_URL, $rest_api_url_edit);
-    curl_setopt($ch2, CURLOPT_PUT, 0);
-    curl_setopt($ch2, CURLOPT_POSTFIELDS, $code);
-
-    curl_setopt($ch2, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/json',
-        'Content-Length: ' . strlen($code),
-        'Authorization: Basic ' . base64_encode($username . ':' . $password),
-    ]);
-
-    curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-    if (curl_errno($ch2)) {
-        $error_msg = curl_error($ch2);
-        var_dump($error_msg);
-    }
-    $result = curl_exec($ch2);
-    curl_close($ch2);
-
-
-    // Set remote_id in the database
-
-    global $wpdb;
-    $table = "wp_snippets";
-
-    $remote_id = $response["id"];
-
-    $wpdb->update( $table, array( 'remote' => '1' ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
-    $wpdb->update( $table, array( 'remote_id' => $remote_id ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
-
-}
-
-
-

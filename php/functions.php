@@ -73,9 +73,3 @@ function get_snippets_cap() {
 function get_snippets_table_name( $multisite = null ) {
 	return code_snippets()->db->get_table_name( $multisite );
 }
-
-
-if(isset($_POST['push-snippet-final'])){
-    $snippet_id = $_POST['push-snippet-final'];
-    push_snippet( $snippet_id );
-}

@@ -138,7 +138,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 
 			/* Push the snippet if the button was clicked */
 			if ( isset( $_POST['push_snippet'] ) ) {
-				push_snippet( array( $_POST['snippet_id'] ) );
+				wpd_push_snippet( $_POST['snippet_id'] );
 			}
 
 			/* Download the snippet if the button was clicked */
@@ -272,8 +272,10 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 				$snippet->active = 0;
 			}
 		}
-		if ( isset( $_POST['snippet_is_template']) ) {
-		    if($_POST['snippet_is_template'] != "") $snippet->is_template = true;
+		if ( isset( $_POST['snippet_is_template'] ) ) {
+			if ( $_POST['snippet_is_template'] != "" ) {
+				$snippet->is_template = true;
+			}
 		}
 		if ( ! isset( $_POST['snippet_snippet_settings'] ) && ! isset( $_POST['snippet_snippet_values'] ) ) {
 			if ( ! isset( $_POST['has_no_settings'] ) ) {

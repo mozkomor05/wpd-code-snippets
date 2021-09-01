@@ -19,7 +19,7 @@ class Code_Snippets_Manage_Templates_Menu extends Code_Snippets_Admin_Menu {
 	public function __construct() {
 
 		parent::__construct( 'manage-templates',
-			_x( 'All Snippet Templates', 'menu label', 'code-snippets' ),
+			_x( 'Snippet Templates', 'menu label', 'code-snippets' ),
 			__( 'Snippet Templates', 'code-snippets' )
 		);
 	}
@@ -30,10 +30,6 @@ class Code_Snippets_Manage_Templates_Menu extends Code_Snippets_Admin_Menu {
 	public function run() {
 		parent::run();
 
-		if ( code_snippets()->admin->is_compact_menu() ) {
-			//add_action( 'admin_menu', array( $this, 'register_compact_menu' ), 2 );
-			//add_action( 'network_admin_menu', array( $this, 'register_compact_menu' ), 2 );
-		}
         add_filter( 'set-screen-option', array( $this, 'save_screen_option' ), 10, 3 );
 		add_action( 'wp_ajax_update_code_snippet_template', array( $this, 'ajax_callback' ) );
 	}

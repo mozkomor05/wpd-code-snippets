@@ -5,234 +5,290 @@
 $active-color: #2196f3;
 $inactive-color: #ccc;
 
+#push-snippet-form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#push-snippet-form .push-notice {
+  border-top: 1px solid grey;
+}
+
+#push-snippet-form .push-buttons {
+  margin-top: 10px;
+  float: right;
+}
+
+#push-snippet-form .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#push-snippet-form .form-row label {
+  flex: 0 0 16.666667%;
+  max-width: 16.666667%;
+  font-weight: bold;
+}
+
+#push-snippet-form .form-row .input {
+  flex: 0 0 83.333333%;
+  max-width: 83.333333%;
+}
+
+#push-snippet-form .form-row .input * {
+  width: 100%;
+}
+
+.remote-badge {
+  text-transform: uppercase;
+  vertical-align: middle;
+  line-height: 1;
+  font-size: 9px;
+  background: #579;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.remote-badge .dashicons {
+  vertical-align: middle;
+  font-size: 13px;
+  height: auto;
+}
+
 .column-name {
 
-	.dashicons {
-		font-size: 16px;
-		width: 16px;
-		height: 16px;
-	}
+  .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
 
-	.dashicons-clock {
-		vertical-align: middle;
-	}
+  .dashicons-clock {
+    vertical-align: middle;
+  }
 
-	.active-snippet & > a {
-		font-weight: 600;
-	}
+  .active-snippet & > a {
+    font-weight: 600;
+  }
 }
 
 .column-priority input {
-	appearance: none;
-	background: none;
-	border: none;
-	box-shadow: none;
-	width: 4em;
-	text-align: center;
+  appearance: none;
+  background: none;
+  border: none;
+  box-shadow: none;
+  width: 4em;
+  text-align: center;
 
-	&:disabled {
-		color: inherit;
-	}
+  &:disabled {
+    color: inherit;
+  }
 }
 
 .snippets .row-actions, .snippets .snippet-name {
-	margin-left: 40px;
+  margin-left: 40px;
 }
 
 .snippets .row-actions {
-	position: relative;
-	left: 0;
+  position: relative;
+  left: 0;
 }
 
 .snippet-execution-button,
 .snippet-activation-switch {
-	position: absolute;
-	display: inline-block;
+  position: absolute;
+  display: inline-block;
 }
 
 .snippet-activation-switch {
-	margin-top: 5px;
-	width: 30px;
-	height: 17px;
-	border-radius: 34px;
-	background-color: #ccc;
+  margin-top: 5px;
+  width: 30px;
+  height: 17px;
+  border-radius: 34px;
+  background-color: #ccc;
 
-	&::before {
-		transition: all .4s;
-		content: "";
-		height: 13px;
-		width: 13px;
-		display: inline-block;
-		margin: 2px;
-		background-color: white;
-		border-radius: 50%;
-	}
+  &::before {
+    transition: all .4s;
+    content: "";
+    height: 13px;
+    width: 13px;
+    display: inline-block;
+    margin: 2px;
+    background-color: white;
+    border-radius: 50%;
+  }
 
-	&:hover::before {
-		transform: translateX(40%);
-	}
+  &:hover::before {
+    transform: translateX(40%);
+  }
 
-	.snippets .active-snippet & {
-		background-color: $active-color;
+  .snippets .active-snippet & {
+    background-color: $active-color;
 
-		&::before {
-			transform: translateX(100%);
-		}
+    &::before {
+      transform: translateX(100%);
+    }
 
-		&:hover::before {
-			transform: translateX(60%);
-		}
-	}
+    &:hover::before {
+      transform: translateX(60%);
+    }
+  }
 
-	.snippets .erroneous-snippet &::before {
-		content: '!';
-		transform: translateX(50%);
-		text-align: center;
-		font-weight: bold;
-		line-height: 1;
-		color: #bbb;
-	}
+  .snippets .erroneous-snippet &::before {
+    content: '!';
+    transform: translateX(50%);
+    text-align: center;
+    font-weight: bold;
+    line-height: 1;
+    color: #bbb;
+  }
 }
 
 .snippet-execution-button {
-	margin-left: 10px;
-	margin-top: 9px;
-	width: 0;
-	height: 0;
-	border-top: 9px solid transparent;
-	border-bottom: 9px solid transparent;
-	border-left: 10px solid $inactive-color;
-	transition: all 0.3s;
+  margin-left: 10px;
+  margin-top: 9px;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 10px solid $inactive-color;
+  transition: all 0.3s;
 
-	&::before {
-		content: '';
-		position: absolute;
-		top: -14px;
-		left: -21px;
-		bottom: -14px;
-		right: -8px;
-		border-radius: 50%;
-		border: 1.8px solid $inactive-color;
-		z-index: 2;
-		transition: all .3s;
-	}
+  &::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: -21px;
+    bottom: -14px;
+    right: -8px;
+    border-radius: 50%;
+    border: 1.8px solid $inactive-color;
+    z-index: 2;
+    transition: all .3s;
+  }
 
-	&:hover, &:focus {
-		border-left-color: #579;
+  &:hover, &:focus {
+    border-left-color: #579;
 
-		&::before {
-			transform: scale(1.1);
-			border-color: #579;
-		}
-	}
+    &::before {
+      transform: scale(1.1);
+      border-color: #579;
+    }
+  }
 }
 
 .clear-filters {
-	vertical-align: baseline !important;
+  vertical-align: baseline !important;
 }
 
 .snippets .badge {
-	margin-left: 4px;
-	padding: 3px 6px;
-	text-decoration: none;
-	border: medium none;
-	border-radius: 2px;
-	background: #e0e0e0;
-	font-size: smaller;
-	line-height: 1.2;
+  margin-left: 4px;
+  padding: 3px 6px;
+  text-decoration: none;
+  border: medium none;
+  border-radius: 2px;
+  background: #e0e0e0;
+  font-size: smaller;
+  line-height: 1.2;
 
-	/* rtl:ignore */
-	.rtl & {
-		float: left;
-	}
+  /* rtl:ignore */
+  .rtl & {
+    float: left;
+  }
 }
 
 .snippets {
 
-	tr {
-		background: #fff;
-	}
+  tr {
+    background: #fff;
+  }
 
-	ol, ul {
-		margin: 0 0 1.5em 1.5em;
-	}
+  ol, ul {
+    margin: 0 0 1.5em 1.5em;
+  }
 
-	ul {
-		list-style: disc;
-	}
+  ul {
+    list-style: disc;
+  }
 
-	.row-actions {
-		color: #ddd;
-	}
+  .row-actions {
+    color: #ddd;
+  }
 
-	.clear-filters {
-		vertical-align: middle;
-	}
+  .clear-filters {
+    vertical-align: middle;
+  }
 
-	tfoot th {
-		border-top: none !important;
+  tfoot th {
+    border-top: none !important;
 
-		&.check-column {
-			padding: 13px 0 0 3px;
-		}
-	}
+    &.check-column {
+      padding: 13px 0 0 3px;
+    }
+  }
 
-	thead th.check-column,
-	tfoot th.check-column,
-	.inactive-snippet th.check-column {
-		padding-left: 5px;
-	}
+  thead th.check-column,
+  tfoot th.check-column,
+  .inactive-snippet th.check-column {
+    padding-left: 5px;
+  }
 
-	td.column-description {
-		max-width: 700px;
-	}
+  td.column-description {
+    max-width: 700px;
+  }
 
-	.inactive-snippet a {
-		color: #579;
-	}
+  .inactive-snippet a {
+    color: #579;
+  }
 
-	.active-snippet, .inactive-snippet {
-		td, th {
-			padding: 10px 9px;
-			border: none;
-			box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-		}
-	}
+  .active-snippet, .inactive-snippet {
+    td, th {
+      padding: 10px 9px;
+      border: none;
+      box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    }
+  }
 
-	.active-snippet {
+  .active-snippet {
 
-		td, th {
-			background-color: rgba(120, 200, 230, 0.06);
-		}
+    td, th {
+      background-color: rgba(120, 200, 230, 0.06);
+    }
 
-		th.check-column {
-			border-left: 2px solid #2ea2cc;
-		}
-	}
+    th.check-column {
+      border-left: 2px solid #2ea2cc;
+    }
+  }
 
-	tr.active-snippet + tr.inactive-snippet th,
-	tr.active-snippet + tr.inactive-snippet td {
-		border-top: 1px solid rgba(0, 0, 0, 0.03);
-		box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.02), inset 0 -1px 0 #e1e1e1;
-	}
+  tr.active-snippet + tr.inactive-snippet th,
+  tr.active-snippet + tr.inactive-snippet td {
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.02), inset 0 -1px 0 #e1e1e1;
+  }
 
-	&, #all-snippets-table, #search-snippets-table {
-		a.delete:hover {
-			border-bottom: 1px solid #f00;
-			color: #f00;
-		}
-	}
+  &, #all-snippets-table, #search-snippets-table {
+    a.delete:hover {
+      border-bottom: 1px solid #f00;
+      color: #f00;
+    }
+  }
 
-	#wpbody-content & .column-name {
-		white-space: nowrap; /* prevents wrapping of snippet title */
-	}
+  #wpbody-content & .column-name {
+    white-space: nowrap; /* prevents wrapping of snippet title */
+  }
 }
 
 @media screen and (max-width: 782px) {
-	p.search-box {
-		float: left;
-		position: initial;
-		margin: 0;
-		height: auto;
-	}
+  p.search-box {
+    float: left;
+    position: initial;
+    margin: 0;
+    height: auto;
+  }
 }

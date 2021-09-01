@@ -25,10 +25,58 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="gulp fixed &amp; scripts cleared">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="gulp bug fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gulpfile.babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.babel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/manage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/manage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/manage.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/manage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-bel.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-bel.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-cs_CZ.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-cs_CZ.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-de_DE.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-de_DE.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-fr_CA.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-fr_CA.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-fr_FR.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-fr_FR.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-id_ID.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-id_ID.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-it_IT.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-it_IT.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-ja_JP.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-ja_JP.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-nl_NL.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-nl_NL.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-pt_BR.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-pt_BR.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-ru_RU.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-ru_RU.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-sk_SK.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-sk_SK.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-sr_RS.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-sr_RS.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-zh_CN.mo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets-zh_CN.po" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/code-snippets.pot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/wp-console.pot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/languages/wpd-code-snippets.pot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-admin-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-admin-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-template-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-edit-template-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-manage-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-manage-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-manage-templates-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-manage-templates-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-code-snippets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-list-table-templates.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table-templates.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-list-table.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-snippet.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-snippet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/snippet-ops.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/snippet-ops.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/views/manage.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/views/manage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/wpd-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/wpd-api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,9 +174,9 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="dumpAutoload C:/Users/mozko/OneDrive/Documents/Programming and projects/WPDistro/wpd-code-snippets/composer.json" value="--no-interaction --ansi --verbose --optimize" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dist" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -240,7 +288,12 @@
       <workItem from="1628448426834" duration="85000" />
       <workItem from="1628499065385" duration="16000" />
       <workItem from="1628580619955" duration="5735000" />
-      <workItem from="1628954744676" duration="847000" />
+      <workItem from="1628954744676" duration="931000" />
+      <workItem from="1629047920180" duration="10000" />
+      <workItem from="1630419803845" duration="106000" />
+      <workItem from="1630420796552" duration="15024000" />
+      <workItem from="1630487727017" duration="16617000" />
+      <workItem from="1630515740098" duration="45000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -270,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628954786929</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="gulp bug fixed">
+      <created>1628955762951</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1628955762951</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,7 +353,8 @@
     <MESSAGE value="Optimized, ajax installing" />
     <MESSAGE value="code format &amp; small bugs" />
     <MESSAGE value="gulp fixed &amp; scripts cleared" />
-    <option name="LAST_COMMIT_MESSAGE" value="gulp fixed &amp; scripts cleared" />
+    <MESSAGE value="gulp bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="gulp bug fixed" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>

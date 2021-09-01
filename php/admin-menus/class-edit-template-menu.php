@@ -138,7 +138,7 @@ class Code_Snippets_Edit_Template_Menu extends Code_Snippets_Admin_Menu {
 
             /* Push the snippet if the button was clicked */
             if ( isset( $_POST['push_snippet'] ) ) {
-                push_snippet( array( $_POST['snippet_id'] ) );
+                wpd_push_snippet( $_POST['snippet_id'] );
             }
 
 			/* Download the snippet if the button was clicked */

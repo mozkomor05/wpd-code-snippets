@@ -1,4 +1,4 @@
-/* global ajaxurl, pagenow */
+/* global ajaxurl, pagenow, tb_show */
 'use strict';
 (function () {
     const nonce = document.getElementById('code_snippets_ajax_nonce').value;
@@ -119,8 +119,64 @@
         });
     }
 
+    function open_push_thickbox(e) {
+        e.preventDefault();
+        const snippetID = parseInt(this.closest('tr').querySelector('.column-id').textContent);
+        document.getElementById('push-snippet-id').value = snippetID;
+
+        const query_string = 'action=get_snippet_fields&_ajax_nonce=' + nonce + '&id=' + snippetID;
+        const request = new XMLHttpRequest();
+
+        request.responseType = 'json';
+        request.open('POST', ajaxurl, true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+        request.onload = () => {
+            if (request.status < 200 || request.status >= 400) {
+                return;
+            }
+
+            document.getElementById('push-snippet-name').value = request.response.data.name;
+            document.getElementById('push-snippet-desc').value = request.response.data.desc;
+
+            tb_show(this.title, "#TB_inline?&width=600&height=550&inlineId=push-snippet-thickbox", false);
+        };
+
+        request.send(query_string);
+    }
+
+    function push_snippet(e) {
+        const form = document.getElementById('push-snippet-form');
+        let snippetRow = null;
+
+        const snippet = {};
+        const formData = new FormData(form);
+
+        for (const [key, val] of formData) {
+            if (key === 'id') {
+                snippetRow = Array.from(document.querySelectorAll('#the-list > tr')).find(el =>
+                    el.querySelector('.column-id').textContent === val
+                );
+            } else {
+                snippet[key] = val;
+            }
+        }
+
+        update_snippet('all', snippetRow, snippet, (response) => {
+            if (response.success) {
+                window.location.href = snippetRow.querySelector('.snippet-push-action').href;
+            }
+        });
+    }
+
     foreach(document.getElementsByClassName('snippet-activation-switch'), (link, i) => {
         link.addEventListener('click', toggle_snippet_active);
     });
+
+    foreach(document.getElementsByClassName('snippet-push-action'), (link, i) => {
+        link.addEventListener('click', open_push_thickbox);
+    })
+
+    document.getElementById('push-snippet-btn').addEventListener('click', push_snippet);
 
 })();

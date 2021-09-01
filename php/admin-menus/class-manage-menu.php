@@ -2,6 +2,7 @@
 
 /**
  * This class handles the manage snippets menu
+ *
  * @since   2.4.0
  * @package Code_Snippets
  */
@@ -9,6 +10,7 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 
 	/**
 	 * Holds the list table class
+	 *
 	 * @var Code_Snippets_List_Table
 	 */
 	public $list_table;
@@ -36,7 +38,8 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 		}
 
 		add_filter( 'set-screen-option', array( $this, 'save_screen_option' ), 10, 3 );
-		add_action( 'wp_ajax_update_code_snippet', array( $this, 'ajax_callback' ) );
+		add_action( 'wp_ajax_update_code_snippet', array( $this, 'ajax_update_code_snippet' ) );
+		add_action( 'wp_ajax_get_snippet_fields', array( $this, 'ajax_get_snippet_fields' ) );
 	}
 
 	/**
@@ -72,8 +75,8 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 
 		$classmap = array(
 			'snippets'             => 'manage',
-            'add-snippet'          => 'edit',
-            'edit-template'        => 'edit-template',
+			'add-snippet'          => 'edit',
+			'edit-template'        => 'edit-template',
 			'edit-snippet'         => 'edit',
 			'import-code-snippets' => 'import',
 			'snippets-settings'    => 'settings',
@@ -120,7 +123,7 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 	 */
 	public function enqueue_assets() {
 		$plugin = code_snippets();
-		$rtl = is_rtl() ? '-rtl' : '';
+		$rtl    = is_rtl() ? '-rtl' : '';
 
 		wp_enqueue_style(
 			'code-snippets-manage',
@@ -190,9 +193,9 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 	}
 
 	/**
-	 * Handle AJAX requests
+	 * Handle update AJAX requests
 	 */
-	public function ajax_callback() {
+	public function ajax_update_code_snippet() {
 		check_ajax_referer( 'code_snippets_manage_ajax' );
 
 		if ( ! isset( $_POST['field'], $_POST['snippet'] ) ) {
@@ -205,66 +208,92 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 		$snippet_data = json_decode( stripslashes( $_POST['snippet'] ), true );
 
 		$snippet = new Code_Snippet( $snippet_data );
-		$field = $_POST['field'];
+		$field   = $_POST['field'];
 
-		switch ($field) {
-            case 'priority': {
-                if ( ! isset( $snippet_data['priority'] ) || ! is_numeric( $snippet_data['priority'] ) ) {
-                    wp_send_json_error( array(
-                        'type'    => 'param_error',
-                        'message' => 'missing snippet priority data',
-                    ) );
-                }
+		switch ( $field ) {
+			case 'priority':
+			{
+				if ( ! isset( $snippet_data['priority'] ) || ! is_numeric( $snippet_data['priority'] ) ) {
+					wp_send_json_error( array(
+						'type'    => 'param_error',
+						'message' => 'missing snippet priority data',
+					) );
+				}
 
-                global $wpdb;
+				global $wpdb;
 
-                $wpdb->update(
-                    code_snippets()->db->get_table_name( $snippet->network ),
-                    array( 'priority' => $snippet->priority ),
-                    array( 'id' => $snippet->id ),
-                    array( '%d' ),
-                    array( '%d' )
-                );
-                break;
-            }
-            case 'active': {
+				$wpdb->update(
+					code_snippets()->db->get_table_name( $snippet->network ),
+					array( 'priority' => $snippet->priority ),
+					array( 'id' => $snippet->id ),
+					array( '%d' ),
+					array( '%d' )
+				);
+				break;
+			}
+			case 'active':
+			{
 
-                if ( ! isset( $snippet_data['active'] ) ) {
-                    wp_send_json_error( array(
-                        'type'    => 'param_error',
-                        'message' => 'missing snippet active data',
-                    ) );
-                }
+				if ( ! isset( $snippet_data['active'] ) ) {
+					wp_send_json_error( array(
+						'type'    => 'param_error',
+						'message' => 'missing snippet active data',
+					) );
+				}
 
-                if ( $snippet->shared_network ) {
-                    $active_shared_snippets = get_option( 'active_shared_network_snippets', array() );
+				if ( $snippet->shared_network ) {
+					$active_shared_snippets = get_option( 'active_shared_network_snippets', array() );
 
-                    if ( in_array( $snippet->id, $active_shared_snippets, true ) !== $snippet->active ) {
+					if ( in_array( $snippet->id, $active_shared_snippets, true ) !== $snippet->active ) {
 
-                        $active_shared_snippets = $snippet->active ?
-                            array_merge( $active_shared_snippets, array( $snippet->id ) ) :
-                            array_diff( $active_shared_snippets, array( $snippet->id ) );
+						$active_shared_snippets = $snippet->active ?
+							array_merge( $active_shared_snippets, array( $snippet->id ) ) :
+							array_diff( $active_shared_snippets, array( $snippet->id ) );
 
-                        update_option( 'active_shared_network_snippets', $active_shared_snippets );
-                    }
-                } else {
+						update_option( 'active_shared_network_snippets', $active_shared_snippets );
+					}
+				} else {
 
-                    if ( $snippet->active ) {
-                        $result = activate_snippet( $snippet->id, $snippet->network );
-                        if ( ! $result ) {
-                            wp_send_json_error( array(
-                                'type'    => 'action_error',
-                                'message' => 'error activating snippet',
-                            ) );
-                        }
-                    } else {
-                        deactivate_snippet( $snippet->id, $snippet->network );
-                    }
-                }
-                break;
-            }
-        }
+					if ( $snippet->active ) {
+						$result = activate_snippet( $snippet->id, $snippet->network );
+						if ( ! $result ) {
+							wp_send_json_error( array(
+								'type'    => 'action_error',
+								'message' => 'error activating snippet',
+							) );
+						}
+					} else {
+						deactivate_snippet( $snippet->id, $snippet->network );
+					}
+				}
+				break;
+			}
+			case 'all':
+			{
+				$snippet_to_save = get_snippet( $snippet->id );
+				$snippet_to_save->set_fields( $snippet_data );
+				save_snippet( $snippet_to_save );
+				break;
+			}
+		}
 
 		wp_send_json_success();
+	}
+
+	/**
+	 * Handle get fields AJAX requests
+	 */
+	public function ajax_get_snippet_fields() {
+		check_ajax_referer( 'code_snippets_manage_ajax' );
+
+		if ( ! isset( $_POST['id'] ) ) {
+			wp_send_json_error( array(
+				'type'    => 'param_error',
+				'message' => 'incomplete request',
+			) );
+		}
+
+		$snippet = get_snippet( $_POST['id'] );
+		wp_send_json_success( $snippet->get_fields() );
 	}
 }

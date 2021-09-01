@@ -5,16 +5,14 @@ use \Psy\Configuration;
 class Code_Snippets_Console {
 
 	function __construct() {
-		add_action( 'wp_ajax_nopriv_evaluatewpd', array( $this, 'evaluate_wpd_console' ) );
 		add_action( 'wp_ajax_evaluatewpd', array( $this, 'evaluate_wpd_console' ) );
-		add_action( 'wp_ajax_nopriv_getsnippetcontent', array( $this, 'get_snippet_content' ) );
 		add_action( 'wp_ajax_getsnippetcontent', array( $this, 'get_snippet_content' ) );
 	}
 
 	function get_snippet_content() {
 		$id      = $_POST['id'];
 		$snippet = get_snippet_template( $id );
-		wp_send_json( array('id' => $id, 'code' => $snippet->code ) );
+		wp_send_json( array( 'id' => $id, 'code' => $snippet->code ) );
 	}
 
 	function register_wpd_endpoints() {
@@ -27,7 +25,7 @@ class Code_Snippets_Console {
 
 	public function evaluate_wpd_console() {
 		$timer = microtime( true );
-		$input = rawurldecode(base64_decode( $_POST['input'] ));
+		$input = rawurldecode( base64_decode( $_POST['input'] ) );
 
 
 		$config = new Configuration( array(
@@ -44,7 +42,7 @@ class Code_Snippets_Console {
 
 
 		try {
-            $psysh->addCode( $input );
+			$psysh->addCode( $input );
 			extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
 			ob_start( array( $psysh, 'writeStdout' ), 1 );
 			set_error_handler( array( $psysh, 'handleError' ) );
@@ -57,12 +55,12 @@ class Code_Snippets_Console {
 			$psysh->writeReturnValue( $_ );
 
 			ob_end_flush();
-            $output_text = $output->outputMessage;
+			$output_text = $output->outputMessage;
 			if ( $output->exception ) {
-			    if(E_ERROR == $output->exception->getCode()){
-                    $output_text = $output->exception->getMessage() . " at " . $output->exception->getLine();
-                }
-                //echo "";
+				if ( E_ERROR == $output->exception->getCode() ) {
+					$output_text = $output->exception->getMessage() . " at " . $output->exception->getLine();
+				}
+				//echo "";
 			}
 
 			$execution_time = microtime( true ) - $timer;
@@ -76,10 +74,10 @@ class Code_Snippets_Console {
 		} catch ( Throwable $e ) {
 			ob_end_flush();
 			wp_send_json_error( array(
-				'output'  => "<span style='color:red'>" .$e->getMessage() . "\n" . $e->getTraceAsString() . "</span>",
-				'input'   => $input,
-				'status'  => 422,
-				'trace'   => $e->getTraceAsString(),
+				'output' => "<span style='color:red'>" . $e->getMessage() . "\n" . $e->getTraceAsString() . "</span>",
+				'input'  => $input,
+				'status' => 422,
+				'trace'  => $e->getTraceAsString(),
 			) );
 			wp_die();
 		}

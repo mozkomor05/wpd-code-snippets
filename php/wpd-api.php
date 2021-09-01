@@ -3,6 +3,7 @@
 if ( ! class_exists( 'WPD_Snippet' ) ) {
 	require_once dirname( __FILE__ ) . '/wpd_snippet.php';
 }
+
 use WPConsole\Core\Console\Psy\Output\ShellOutput;
 use WPConsole\Core\Console\Psy\Shell;
 
@@ -91,72 +92,100 @@ function wpd_install_remote_snippet( string $endpoint ): bool {
 	return true;
 }
 
-/*add_action( 'rest_api_init', 'register_wpd_endpoints' );
-function register_endpoints() {
-    register_rest_route( 'wpd', '/evaluate', array(
-      'methods' => WP_REST_Server::CREATABLE,
-      'callback' => 'evaluate_wpd_console' ),
-    );
-}
+/**
+ * Pushes snippet to remote DB
+ *
+ * @param $id int Snippet ID
+ *
+ * @return bool
+ */
+function wpd_push_snippet( $id ) {
 
+	$site_url = get_home_url();
 
-function evaluate_wpd_console(WP_REST_Request $request){
-	try {
-		$timer = microtime( true );
-		$input = $request['input'];
+	$snippet = get_snippet( $id );
 
-		$config = new \Psy\Configuration( [
-			'configDir' => WP_CONTENT_DIR,
-		] );
+	$snippet_url = preg_replace( '/[[:space:]]+/', '-', strtolower( $snippet->name ) );
 
-		$output = new ShellOutput( ShellOutput::VERBOSITY_NORMAL, true );
-
-		$config->setOutput( $output );
-		$config->setColorMode( \Psy\Configuration::COLOR_MODE_DISABLED );
-
-		$psysh = new Shell( $config );
-
-		$psysh->setOutput( $output );
-
-		$psysh->addCode( $input );
-
-		extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
-
-		ob_start( [ $psysh, 'writeStdout' ], 1 );
-
-		set_error_handler( [ $psysh, 'handleError' ] );
-
-		$_ = eval( $psysh->onExecute( $psysh->flushCode() ?: \Psy\ExecutionClosure::NOOP_INPUT ) );
-
-		restore_error_handler();
-
-		$psysh->setScopeVariables( get_defined_vars() );
-		$psysh->writeReturnValue( $_ );
-
-		ob_end_flush();
-
-		if ( $output->exception ) {
-			throw $output->exception;
-		}
-
-		$execution_time = microtime( true ) - $timer;
-
-		$data = [
-			'output'         => $output->outputMessage,
-			'dump'           => $wp_console_dump,
-			'execution_time' => number_format( $execution_time, 3, '.', '' ),
-		];
-
-		return rest_ensure_response( $data );
-
-	} catch ( Throwable $e ) {
-		ob_end_flush();
-
-		return new WP_Error( 'wp_console_rest_error', $e->getMessage(), [
-			'input'  => $request['input'],
-			'status' => 422,
-			'trace'  => $e->getTraceAsString(),
-		] );
+	if ( isset( $_POST['desc'] ) ) {
+		$snippet_desc = $_POST['desc'];
+	} else {
+		$snippet_desc = "";
 	}
-}*/
 
+	$username            = 'username';
+	$password            = 'pass';
+	$rest_api_url_create = 'https://wpdistro.com/wp-json/wp/v2/posts';
+
+	$data_string = wp_json_encode( [
+		'title'          => $snippet->name,
+		'content'        => $snippet_desc . '
+                <br>
+                | This snippet was pushed from <strong>' . $site_url . '</strong>
+            ',
+		'status'         => 'publish',
+		'featured_media' => '499',
+	] );
+
+	$ch = curl_init();
+	curl_setopt( $ch, CURLOPT_URL, $rest_api_url_create );
+	curl_setopt( $ch, CURLOPT_POST, 1 );
+	curl_setopt( $ch, CURLOPT_POSTFIELDS, $data_string );
+
+	curl_setopt( $ch, CURLOPT_HTTPHEADER, [
+		'Content-Type: application/json',
+		'Content-Length: ' . strlen( $data_string ),
+		'Authorization: Basic ' . base64_encode( $username . ':' . $password ),
+	] );
+	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+
+	$result   = curl_exec( $ch );
+	$response = json_decode( $result, true );
+
+	if ( curl_errno( $ch ) ) {
+		$error_msg = curl_error( $ch );
+		var_dump( $error_msg );
+	}
+
+	curl_close( $ch );
+
+	$rest_api_url_edit = 'https://wpdistro.com/wp-json/acf/v3/posts/' . $response["id"] . '/code';
+	$code              = json_encode( [
+		'fields' => [
+			'code' => $snippet->code
+		]
+	] );
+
+	$ch2 = curl_init();
+	curl_setopt( $ch2, CURLOPT_URL, $rest_api_url_edit );
+	curl_setopt( $ch2, CURLOPT_PUT, 0 );
+	curl_setopt( $ch2, CURLOPT_POSTFIELDS, $code );
+
+	curl_setopt( $ch2, CURLOPT_HTTPHEADER, [
+		'Content-Type: application/json',
+		'Content-Length: ' . strlen( $code ),
+		'Authorization: Basic ' . base64_encode( $username . ':' . $password ),
+	] );
+
+	curl_setopt( $ch2, CURLOPT_SSL_VERIFYPEER, false );
+	curl_setopt( $ch2, CURLOPT_RETURNTRANSFER, true );
+	if ( curl_errno( $ch2 ) ) {
+		$error_msg = curl_error( $ch2 );
+		var_dump( $error_msg );
+	}
+	$result = curl_exec( $ch2 );
+	curl_close( $ch2 );
+
+
+	// Set remote_id in the database
+
+	global $wpdb;
+	$table = "wp_snippets";
+
+	$remote_id = $response["id"];
+
+	$wpdb->update( $table, array( 'remote' => '1' ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
+	$wpdb->update( $table, array( 'remote_id' => $remote_id ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
+
+}
