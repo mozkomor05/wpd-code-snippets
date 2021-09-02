@@ -105,6 +105,9 @@ function wpd_push_snippet( $id ) {
 
 	$snippet = get_snippet( $id );
 
+	if (!$snippet->remote)
+		return;
+
 	$snippet_url = preg_replace( '/[[:space:]]+/', '-', strtolower( $snippet->name ) );
 
 	if ( isset( $_POST['desc'] ) ) {

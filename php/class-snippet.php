@@ -13,7 +13,7 @@
  * @property array $tags               An array of the tags
  * @property string $scope              The scope name
  * @property int $priority           Execution priority
- * @property bool $is_remote             The active status
+ * @property bool $remote             Whether is snippet remote
  * @property int $remote_id             The active status
  * @property bool $active             The active status
  * @property bool $network            true if is multisite-wide snippet, false if site-wide

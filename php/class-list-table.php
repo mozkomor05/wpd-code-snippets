@@ -683,7 +683,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 				add_action( 'admin_notices', function () {
 					?>
                     <div class="notice notice-success is-dismissible">
-                        <p><?php esc_html_e( '<b>Snippet pushed successfully.</b> Thank you for contributing to the WPDistro.com database!', 'wpd-code-snippets' ); ?></p>
+                        <p><?php esc_html_e( 'Snippet pushed successfully. Thank you for contributing to the WPDistro.com database!', 'wpd-code-snippets' ); ?></p>
                     </div>
 					<?php
 				} );
