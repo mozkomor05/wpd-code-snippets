@@ -1,6 +1,8 @@
 <?php
 
+use Psy\Output\OutputPager;
 use Psy\Output\PassthruPager;
+use Psy\Output\ProcOutputPager;
 use Psy\Output\ShellOutput as PsyShellOutput;
 use Symfony\Component\Console\Formatter\OutputFormatterInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -39,7 +41,16 @@ class Code_Snippets_ShellOutput extends PsyShellOutput {
 	 */
 	public function __construct( $verbosity = self::VERBOSITY_NORMAL, $decorated = null, OutputFormatterInterface $formatter = null, $pager = null ) {
 		ConsoleOutput::__construct( $verbosity, $decorated, $formatter );
-		$this->pager = new PassthruPager( $this );
+
+		if ( $pager === null ) {
+			$this->pager = new PassthruPager( $this );
+		} elseif ( \is_string( $pager ) ) {
+			$this->pager = new ProcOutputPager( $this, $pager );
+		} elseif ( $pager instanceof OutputPager ) {
+			$this->pager = $pager;
+		} else {
+			throw new \InvalidArgumentException( 'Unexpected pager parameter: ' . $pager );
+		}
 	}
 
 	/**

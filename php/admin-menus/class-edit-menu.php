@@ -26,14 +26,6 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	}
 
 	/**
-	 * Register action and filter hooks
-	 */
-	public function run() {
-		parent::run();
-		$this->remove_debug_bar_codemirror();
-	}
-
-	/**
 	 * Register the admin menu
 	 */
 	public function register() {
@@ -78,19 +70,10 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 		$contextual_help->load();
 
 		/* Register action hooks */
-		if ( code_snippets_get_setting( 'general', 'enable_description' ) ) {
-			add_action( 'code_snippets/admin/single', array( $this, 'render_description_editor' ), 9 );
-		}
-
-		if ( code_snippets_get_setting( 'general', 'enable_tags' ) ) {
-			add_action( 'code_snippets/admin/single', array( $this, 'render_tags_editor' ) );
-		}
-
-		add_action( 'code_snippets/admin/single', array( $this, 'render_priority_setting' ), 0 );
-
-		if ( code_snippets_get_setting( 'general', 'snippet_scope_enabled' ) ) {
-			add_action( 'code_snippets/admin/single', array( $this, 'render_scope_setting' ), 1 );
-		}
+		add_action( 'code_snippets/admin/single', array( $this, 'render_debug_console' ), 10 );
+		add_action( 'code_snippets/admin/single', array( $this, 'render_snippet_settings' ), 11 );
+		add_action( 'code_snippets/admin/single', array( $this, 'render_description_editor' ), 12 );
+		add_action( 'code_snippets/admin/single', array( $this, 'render_tags_editor' ), 13 );
 
 		if ( is_network_admin() ) {
 			add_action( 'code_snippets/admin/single', array( $this, 'render_multisite_sharing_setting' ), 1 );
@@ -273,7 +256,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 			}
 		}
 		if ( isset( $_POST['snippet_is_template'] ) ) {
-			if ( $_POST['snippet_is_template'] != "" ) {
+			if ( $_POST['snippet_is_template'] != '' ) {
 				$snippet->is_template = true;
 			}
 		}
@@ -281,21 +264,21 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 			if ( ! isset( $_POST['has_no_settings'] ) ) {
 				$code_error = true;
 			} else {
-				$snippet->snippet_settings = json_encode( array() );
-				$snippet->snippet_values   = json_encode( array() );
+				$snippet->snippet_settings = wp_json_encode( array() );
+				$snippet->snippet_values   = wp_json_encode( array() );
 			}
 		}
 		if ( ! isset( $_POST['snippet_snippet_settings'] ) && isset( $_POST['snippet_snippet_values'] ) ) {
 			$db = code_snippets()->db;
 			global $wpdb;
 			$original_snippet          = new Code_Snippet( $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$db->table} WHERE id = (%s)", $_POST['snippet_id'] ), ARRAY_A ) );
-			$snippet->snippet_settings = json_encode( unserialize( $original_snippet->snippet_settings ) );
+			$snippet->snippet_settings = wp_json_encode( unserialize( $original_snippet->snippet_settings ) );
 		}
 		if ( isset( $_POST['snippet_snippet_settings'] ) && ! isset( $_POST['snippet_snippet_values'] ) ) {
 			$db = code_snippets()->db;
 			global $wpdb;
 			$original_snippet        = new Code_Snippet( $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$db->table} WHERE id = (%s)", $_POST['snippet_id'] ), ARRAY_A ) );
-			$snippet->snippet_values = json_encode( unserialize( $original_snippet->snippet_values ) );
+			$snippet->snippet_values = wp_json_encode( unserialize( $original_snippet->snippet_values ) );
 		}
 		$snippet->snippet_settings = json_decode( $snippet->snippet_settings, true );
 		$snippet->snippet_values   = json_decode( $snippet->snippet_values, true );
@@ -327,23 +310,19 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 
 		/* Display message if a parse error occurred */
 		if ( isset( $code_error ) && $code_error ) {
-			wp_redirect( add_query_arg(
-				array( 'id' => $snippet_id, 'result' => 'code-error' ),
-				code_snippets()->get_menu_url( 'edit' )
-			) );
-			exit;
-		}
+			$result = 'code-error';
+		} else {
+			/* Set the result depending on if the snippet was just added */
+			$result = isset( $_POST['snippet_id'] ) ? 'updated' : 'added';
 
-		/* Set the result depending on if the snippet was just added */
-		$result = isset( $_POST['snippet_id'] ) ? 'updated' : 'added';
-
-		/* Append a suffix if the snippet was activated or deactivated */
-		if ( isset( $_POST['save_snippet_activate'] ) ) {
-			$result .= '-and-activated';
-		} elseif ( isset( $_POST['save_snippet_deactivate'] ) ) {
-			$result .= '-and-deactivated';
-		} elseif ( isset( $_POST['save_snippet_execute'] ) ) {
-			$result .= '-and-executed';
+			/* Append a suffix if the snippet was activated or deactivated */
+			if ( isset( $_POST['save_snippet_activate'] ) ) {
+				$result .= '-and-activated';
+			} elseif ( isset( $_POST['save_snippet_deactivate'] ) ) {
+				$result .= '-and-deactivated';
+			} elseif ( isset( $_POST['save_snippet_execute'] ) ) {
+				$result .= '-and-executed';
+			}
 		}
 
 		/* Redirect to edit snippet page */
@@ -408,12 +387,95 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	}
 
 	/**
-	 * Render the snippet priority setting
+	 * Render debug console for snippet code execution
 	 *
 	 * @param Code_Snippet $snippet the snippet currently being edited
 	 */
-	public function render_priority_setting( Code_Snippet $snippet ) {
+	public function render_debug_console( Code_Snippet $snippet ) {
 		?>
+        <div id="snippet_execute_div" class="editor_section">
+            <h2>Debug / Execution</h2>
+            <div class="collapsible">
+                <div class="button_wrapper">
+                    <label for="snippet_output">Output</label>
+                    <div class="snippet_execute_buttons">
+                        <div class="switch-wrapper">
+                            <label class="round-switch">
+                                <input type="checkbox" id="wpd_execute_render_html">
+                                <span class="slider"></span>
+                            </label>
+							<?php esc_html_e( 'Render HTML', 'code-snippets' ); ?>
+                        </div>
+                        <button type="button" id="wpd_execute" class="button button-primary">Run code</button>
+                        <button type="button" id="wpd_execute_clear" class="button button-default">Clear</button>
+                    </div>
+                </div>
+                <div id="snippet_output" contenteditable="true" oncut="return false"
+                     onpaste="return false"
+                     onkeydown="return !!event.metaKey; "></div>
+            </div>
+        </div>
+		<?php
+	}
+
+	/**
+	 * Render the snippet scope setting
+	 *
+	 * @param Code_Snippet $snippet the snippet currently being edited.
+	 */
+	public function render_snippet_settings( Code_Snippet $snippet ) {
+		?>
+        <div id="snippet_values_wrapper">
+			<?php
+			if ( empty( $snippet->snippet_settings ) ) {
+				$snip_settings = array();
+				$snip_values   = array();
+			} else {
+				$snip_settings = unserialize( $snippet->snippet_settings );
+				$snip_values   = unserialize( $snippet->snippet_values );
+			}
+			foreach ( $snip_settings as $key => $setting ) :
+				?>
+                <div id="snippet_setting_<?= $key ?>">
+                    <label class="label" assignedTo="<?= $setting['replace'] ?>"><?= $setting['label'] ?></label>
+                    <input type="text" class="setting_value" value="<?= $snip_values[ $setting['replace'] ] ?>">
+                </div>
+			<?php endforeach; ?>
+        </div>
+        <div id="snippet_setting_div" class="editor_section">
+            <h2>Settings</h2>
+            <div class="collapsible">
+                <div id="snippet_settings_wrapper">
+					<?php foreach ( $snip_settings as $key => $setting ) :
+						?>
+                        <div id="snippet_setting_<?= $key ?>">
+                            <div>
+                                <label>Label for snippet setting:</label>
+                                <input type="text" class="label" value="<?= $setting['label'] ?>"><br>
+                            </div>
+                            <div>
+                                <label>String to replace in snippet:</label>
+                                <input type="text" class="replace" value="<?= $setting['replace'] ?>"><br>
+                            </div>
+                            <div>
+                                <label>Default value:</label>
+                                <input type="text" class="default_value" value="<?= $setting['default_value'] ?>"><br>
+                            </div>
+                            <div>
+                                <label>Value:</label>
+                                <input type="text" class="setting_value"
+                                       value="<?= $snip_values[ $setting['replace'] ] ?>"><br>
+                            </div>
+                        </div>
+					<?php endforeach; ?>
+                </div>
+                <div id="snippet_setting_buttons">
+                    <button type="button" id="add_variable_wpd" class="button button-primary">Add variable</button>
+                    <button type="button" id="remove_variable_wpd" class="button button-primary">Remove variable
+                    </button>
+                </div>
+            </div>
+        </div>
         <p class="snippet-priority"
            title="<?php esc_attr_e( 'Snippets with a lower priority number will run before those with a higher number.', 'code-snippets' ); ?>">
             <label for="snippet_priority"><?php esc_html_e( 'Priority', 'code-snippets' ); ?></label>
@@ -422,14 +484,6 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
                    value="<?php echo intval( $snippet->priority ); ?>">
         </p>
 		<?php
-	}
-
-	/**
-	 * Render the snippet scope setting
-	 *
-	 * @param Code_Snippet $snippet the snippet currently being edited
-	 */
-	function render_scope_setting( Code_Snippet $snippet ) {
 
 		$icons = Code_Snippet::get_scope_icons();
 
@@ -584,64 +638,37 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 			array(), $plugin->version, true
 		);
 
-		wp_enqueue_script(
-			'code-snippets-console-menu',
-			plugins_url( 'js/min/console.js', $plugin->file ),
-			array(), $plugin->version, true
-		);
-
 		$atts          = code_snippets_get_editor_atts( array(), true );
 		$inline_script = 'var code_snippets_editor_atts = ' . $atts . ';';
 
 		wp_add_inline_script( 'code-snippets-edit-menu', $inline_script, 'before' );
 
-		if ( code_snippets_get_setting( 'general', 'enable_tags' ) ) {
+		wp_enqueue_script(
+			'code-snippets-edit-menu-tags',
+			plugins_url( 'js/min/edit-tags.js', $plugin->file ),
+			array(
+				'jquery',
+				'jquery-ui-core',
+				'jquery-ui-widget',
+				'jquery-ui-position',
+				'jquery-ui-autocomplete',
+				'jquery-effects-blind',
+				'jquery-effects-highlight',
+			),
+			$plugin->version, true
+		);
 
-			wp_enqueue_script(
-				'code-snippets-edit-menu-tags',
-				plugins_url( 'js/min/edit-tags.js', $plugin->file ),
-				array(
-					'jquery',
-					'jquery-ui-core',
-					'jquery-ui-widget',
-					'jquery-ui-position',
-					'jquery-ui-autocomplete',
-					'jquery-effects-blind',
-					'jquery-effects-highlight',
-				),
-				$plugin->version, true
-			);
+		$snippet_tags  = wp_json_encode( get_all_snippet_tags() );
+		$inline_script = 'var code_snippets_all_tags = ' . $snippet_tags . ';';
 
-			$snippet_tags  = wp_json_encode( get_all_snippet_tags() );
-			$inline_script = 'var code_snippets_all_tags = ' . $snippet_tags . ';';
-
-			wp_add_inline_script( 'code-snippets-edit-menu-tags', $inline_script, 'before' );
-		}
-	}
-
-	/**
-	 * Remove the old CodeMirror version used by the Debug Bar Console plugin
-	 * that is messing up the snippet editor
-	 */
-	function remove_debug_bar_codemirror() {
-
-		/* Try to discern if we are on the single snippet page as best as we can at this early time */
-		if ( ! is_admin() || 'admin.php' !== $GLOBALS['pagenow'] ) {
-			return;
-		}
-
-		if ( ! isset( $_GET['page'] ) || code_snippets()->get_menu_slug( 'edit' ) !== $_GET['page'] && code_snippets()->get_menu_slug( 'settings' ) !== $_GET['page'] ) {
-			return;
-		}
-
-		remove_action( 'debug_bar_enqueue_scripts', 'debug_bar_console_scripts' );
+		wp_add_inline_script( 'code-snippets-edit-menu-tags', $inline_script, 'before' );
 	}
 
 	/**
 	 * Retrieve a list of submit actions for a given snippet
 	 *
 	 * @param Code_Snippet $snippet
-	 * @param bool $extra_actions
+	 * @param bool         $extra_actions
 	 *
 	 * @return array
 	 */
@@ -686,8 +713,8 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 * Render the submit buttons for a code snippet
 	 *
 	 * @param Code_Snippet $snippet
-	 * @param string $size
-	 * @param bool $extra_actions
+	 * @param string       $size
+	 * @param bool         $extra_actions
 	 */
 	public function render_submit_buttons( $snippet, $size = '', $extra_actions = true ) {
 

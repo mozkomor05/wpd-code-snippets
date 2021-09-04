@@ -6,159 +6,269 @@
  */
 
 .form-table th {
-	width: auto;
+  width: auto;
 }
 
 h2 {
-	/* Provide some decent space between the fields and titles */
-	margin: 25px 0 15px 0;
+  /* Provide some decent space between the fields and titles */
+  margin: 25px 0 15px 0;
 
-	&:first-of-type {
-		margin-top: 20px;
-	}
+  &:first-of-type {
+    margin-top: 20px;
+  }
 
-	label {
-		cursor: auto;
-	}
+  label {
+    cursor: auto;
+  }
 }
 
 .inactive-snippet, .active-snippet {
-	#title {
-		border-left-width: 4px;
-	}
+  #title {
+    border-left-width: 4px;
+  }
 }
 
 .active-snippet #title {
-	border-left-color: #46b450;
+  border-left-color: #46b450;
 }
 
 .inactive-snippet #title {
-	border-left-color: #bbb;
+  border-left-color: #bbb;
 }
 
 .erroneous-snippet #title {
-	border-left-color: #dc3232;
+  border-left-color: #dc3232;
 }
 
 /* Position the description heading on the same level as the editor buttons */
 label[for='snippet_description'] h3 div {
-	position: absolute;
+  position: absolute;
 }
 
 ul.tagit {
-	background-color: #fff !important;
+  background-color: #fff !important;
 }
 
 /* Add spacing in between the action buttons */
 .button + .button {
-	margin-left: .5em;
+  margin-left: .5em;
 }
 
 .submit-inline {
-	float: right;
+  float: right;
 }
 
 .snippet-scope {
-	margin-top: 15px;
+  margin-top: 15px;
 
-	label {
-		margin-right: 1.5em;
-		display: inline-block;
-	}
+  label {
+    margin-right: 1.5em;
+    display: inline-block;
+  }
 }
 
 .snippet-priority {
-	float: right;
+  float: right;
 
-	label {
-		font-weight: bold;
-		cursor: help;
-		font-size: 1.1em;
-		padding-right: 0.5em;
-	}
+  label {
+    font-weight: bold;
+    cursor: help;
+    font-size: 1.1em;
+    padding-right: 0.5em;
+  }
 
-	input {
-		width: 4em;
-	}
+  input {
+    width: 4em;
+  }
 }
 
 .snippet-editor {
-	position: relative;
+  position: relative;
 }
 
 .editor-help-tooltip {
-	cursor: help;
-	padding: 0.3em 0.3em 0;
-	display: inline-block;
-	font-size: 10px;
-	background: transparent !important;
+  cursor: help;
+  padding: 0.3em 0.3em 0;
+  display: inline-block;
+  font-size: 10px;
+  background: transparent !important;
 }
 
 .snippet-editor-help {
-	position: absolute;
-	right: 5px;
-	top: 5px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 
-	&:hover .editor-help-text {
-		visibility: visible;
-		opacity: 1;
-	}
+  &:hover .editor-help-text {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .editor-help-text {
-	visibility: hidden;
-	background-color: #555;
-	color: #fff;
-	padding: 5px;
-	border-radius: 6px;
-	position: absolute;
-	z-index: 99;
-	top: 125%;
-	right: 0;
-	margin-right: -10px;
-	opacity: 0;
-	transition: opacity 0.3s;
-	white-space: nowrap;
-	font-size: small;
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  padding: 5px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 99;
+  top: 125%;
+  right: 0;
+  margin-right: -10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+  font-size: small;
 
-	&::after {
-		content: "";
-		position: absolute;
-		bottom: 100%;
-		right: 0;
-		margin-right: 10px;
-		border: 5px solid transparent;
-		border-bottom-color: #555;
-	}
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-right: 10px;
+    border: 5px solid transparent;
+    border-bottom-color: #555;
+  }
 
-	td:first-child {
-		padding-right: 0.5em;
-	}
+  td:first-child {
+    padding-right: 0.5em;
+  }
 
-	.mac-key {
-		display: none;
-	}
+  .mac-key {
+    display: none;
+  }
 
-	&.platform-mac {
-		.mac-key {
-			display: inline;
-		}
+  &.platform-mac {
+    .mac-key {
+      display: inline;
+    }
 
-		.pc-key {
-			display: none;
-		}
-	}
-}
-
-.CodeMirror {
-	width: 100%;
-}
-
-.CodeMirror-sizer {
-	min-height: 300px !important;
+    .pc-key {
+      display: none;
+    }
+  }
 }
 
 ul.tagit {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+.editor_section {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#snippet_output {
+  width: 100%;
+  min-height: 200px;
+  resize: vertical;
+  margin-top: 10px;
+  font-family: monospace;
+  border: none;
+  padding: 10px 20px;
+  box-shadow: none;
+  background: #fff;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+#snippet_execute_div .button_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  box-sizing: border-box;
+  padding: 0 5px;
+}
+
+#snippet_execute_div .round-switch {
+  position: relative;
+  width: 30px;
+  height: 17px;
+  border-radius: 34px;
+  background-color: #ccc;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#snippet_execute_div .round-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#snippet_execute_div .round-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+#snippet_execute_div .round-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+#snippet_execute_div .round-switch input:checked + .slider {
+  background-color: #2196f3;
+}
+
+#snippet_execute_div .round-switch input:checked + .slider:before {
+  transform: translateX(100%);
+}
+
+#snippet_execute_div .snippet_execute_buttons {
+  display: flex;
+}
+
+#snippet_execute_div .switch-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.editor_section h2 {
+  position: relative;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.editor_section h2:before {
+  content: ' ';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+  position: absolute;
+  top: 50%;
+  left: -5px;
+  transform: rotate(-90deg);
+  transition: .3s;
+}
+
+.editor_section h2.collapsed:before {
+  transform: rotate(0);
+}
+
+.editor_section .collapsible {
+  display: none;
 }

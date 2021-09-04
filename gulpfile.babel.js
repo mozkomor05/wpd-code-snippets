@@ -106,11 +106,10 @@ function bundlejs(file, babel_config) {
 }
 
 gulp.task('js', gulp.series('test-js', gulp.parallel(
-    () => bundlejs('js/editor.js'),
     () => bundlejs('js/manage.js'),
     () => bundlejs('js/browse.js'),
     () => bundlejs('js/edit.js'),
-    () => bundlejs('js/console.js'),
+    () => bundlejs('js/editor.js'),
     () => bundlejs('js/edit-tags.js'),
     () => bundlejs('js/settings.js'),
     () => bundlejs('js/front-end.js', {

@@ -388,14 +388,6 @@ class Code_Snippets_List_Table extends WP_List_Table {
 			'priority'    => __( 'Priority', 'code-snippets' ),
 		);
 
-		if ( ! code_snippets_get_setting( 'general', 'enable_description' ) ) {
-			unset( $columns['description'] );
-		}
-
-		if ( ! code_snippets_get_setting( 'general', 'enable_tags' ) ) {
-			unset( $columns['tags'] );
-		}
-
 		return apply_filters( 'code_snippets/list_table/columns', $columns );
 	}
 
@@ -917,12 +909,10 @@ class Code_Snippets_List_Table extends WP_List_Table {
 		}
 
 		/* Add scope tags */
-		if ( code_snippets_get_setting( 'general', 'snippet_scope_enabled' ) ) {
-			foreach ( $snippets['all'] as $snippet ) {
+		foreach ( $snippets['all'] as $snippet ) {
 
-				if ( 'global' !== $snippet->scope ) {
-					$snippet->tags = array_merge( $snippet->tags, array( $snippet->scope ) );
-				}
+			if ( 'global' !== $snippet->scope ) {
+				$snippet->tags = array_merge( $snippet->tags, array( $snippet->scope ) );
 			}
 		}
 
@@ -1206,9 +1196,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 	public function single_row( $snippet ) {
 		$row_class = ( $snippet->active ? 'active-snippet' : 'inactive-snippet' );
 
-		if ( code_snippets_get_setting( 'general', 'snippet_scope_enabled' ) ) {
-			$row_class .= sprintf( ' %s-scope', $snippet->scope );
-		}
+		$row_class .= sprintf( ' %s-scope', $snippet->scope );
 
 		if ( $snippet->shared_network ) {
 			$row_class .= ' shared-network-snippet';

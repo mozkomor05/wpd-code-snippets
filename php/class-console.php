@@ -4,30 +4,38 @@ use \Psy\Configuration;
 
 class Code_Snippets_Console {
 
-	function __construct() {
-		add_action( 'wp_ajax_evaluatewpd', array( $this, 'evaluate_wpd_console' ) );
+	public function __construct() {
+		add_action( 'wp_ajax_wpd_evaluate_code', array( $this, 'evaluate_wpd_console' ) );
 		add_action( 'wp_ajax_getsnippetcontent', array( $this, 'get_snippet_content' ) );
 	}
 
-	function get_snippet_content() {
+	public function get_snippet_content() {
 		$id      = $_POST['id'];
 		$snippet = get_snippet_template( $id );
 		wp_send_json( array( 'id' => $id, 'code' => $snippet->code ) );
 	}
 
-	function register_wpd_endpoints() {
-		register_rest_route( 'wpd', '/evaluate', array(
-			'methods'  => WP_REST_Server::READABLE,
-			'callback' => array( $this, 'evaluate_wpd_console' ),
-		) );
+
+	/**
+	 * Generates output array with both - original html and encoded text
+	 *
+	 * @param string $msg Output message.
+	 *
+	 * @return array
+	 */
+	protected function output_array( $msg ) {
+		return array(
+			'html' => $msg,
+			'text' => htmlspecialchars( $msg ),
+		);
 	}
 
-
-	public function evaluate_wpd_console() {
-		$timer = microtime( true );
-		$input = rawurldecode( base64_decode( $_POST['input'] ) );
-
-
+	/**
+	 * Evaluates PHP code
+	 *
+	 * @param string $input PHP code input.
+	 */
+	public function evaluate_code( $input ) {
 		$config = new Configuration( array(
 			'configDir' => WP_CONTENT_DIR,
 		) );
@@ -40,9 +48,10 @@ class Code_Snippets_Console {
 		$psysh = new Code_Snippets_Shell( $config );
 		$psysh->setOutput( $output );
 
-
 		try {
 			$psysh->addCode( $input );
+			$timer = microtime( true );
+
 			extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
 			ob_start( array( $psysh, 'writeStdout' ), 1 );
 			set_error_handler( array( $psysh, 'handleError' ) );
@@ -55,31 +64,46 @@ class Code_Snippets_Console {
 			$psysh->writeReturnValue( $_ );
 
 			ob_end_flush();
-			$output_text = $output->outputMessage;
+
 			if ( $output->exception ) {
-				if ( E_ERROR == $output->exception->getCode() ) {
-					$output_text = $output->exception->getMessage() . " at " . $output->exception->getLine();
-				}
-				//echo "";
+				throw $output->exception;
 			}
 
 			$execution_time = microtime( true ) - $timer;
 
-			$data = array(
-				'output'         => $output_text,
+			return ( array(
+				'output'         => $this->output_array( $output->outputMessage ),
 				'execution_time' => number_format( $execution_time, 3, '.', '' ),
-			);
-			wp_send_json( $data );
-			wp_die();
+			) );
 		} catch ( Throwable $e ) {
 			ob_end_flush();
-			wp_send_json_error( array(
-				'output' => "<span style='color:red'>" . $e->getMessage() . "\n" . $e->getTraceAsString() . "</span>",
-				'input'  => $input,
-				'status' => 422,
-				'trace'  => $e->getTraceAsString(),
-			) );
-			wp_die();
+
+			return array(
+				'output' => $this->output_array( $output->outputMessage ),
+				'error'  => array(
+					'message' => $e->getMessage(),
+					'code'    => $e->getCode(),
+					'file'    => $e->getFile(),
+					'trace'   => $e->getTraceAsString(),
+				),
+			);
+		}
+	}
+
+	/**
+	 * AJAX - Evaluates console
+	 */
+	public function evaluate_wpd_console() {
+		ini_set( 'display_errors', 1 );
+		error_reporting( E_ALL );
+		$input  = stripslashes( $_POST['input'] );
+		$output = $this->evaluate_code( $input );
+
+		if ( ! isset( $output['error'] ) ) {
+			wp_send_json_success( $output );
+		} else {
+			$output['status'] = 422;
+			wp_send_json_error( $output );
 		}
 	}
 }

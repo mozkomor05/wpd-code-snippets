@@ -25,11 +25,449 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="A LOT of fixes, cleaned up mess, pushing mechanism made better">
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Cannot push remote snippet anymore, bug fixes">
+      <change afterPath="$PROJECT_DIR$/js/ace/ace.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-beautify.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-code_lens.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-elastic_tabstops_lite.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-emmet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-error_marker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-keybinding_menu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-language_tools.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-linking.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-modelist.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-options.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-prompt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-rtl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-searchbox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-settings_menu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-spellcheck.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-split.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-static_highlight.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-statusbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-textarea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-themelist.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/ext-whitespace.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/keybinding-emacs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/keybinding-sublime.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/keybinding-vim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/keybinding-vscode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-abap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-abc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-actionscript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-ada.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-alda.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-apache_conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-apex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-applescript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-aql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-asciidoc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-asl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-assembly_x86.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-autohotkey.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-batchfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-c9search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-c_cpp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-cirru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-clojure.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-cobol.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-coffee.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-coldfusion.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-crystal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-csharp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-csound_document.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-csound_orchestra.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-csound_score.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-csp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-css.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-curly.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-dart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-diff.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-django.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-dockerfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-dot.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-drools.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-edifact.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-eiffel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-ejs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-elixir.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-elm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-erlang.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-forth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-fortran.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-fsharp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-fsl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-ftl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-gcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-gherkin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-gitignore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-glsl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-gobstones.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-golang.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-graphqlschema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-groovy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-haml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-handlebars.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-haskell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-haskell_cabal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-haxe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-hjson.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-html.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-html_elixir.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-html_ruby.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-ini.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-io.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-jack.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-jade.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-java.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-javascript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-json.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-json5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-jsoniq.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-jsp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-jssm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-jsx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-julia.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-kotlin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-latex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-less.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-liquid.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-lisp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-livescript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-logiql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-logtalk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-lsl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-lua.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-luapage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-lucene.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-makefile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-markdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-mask.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-matlab.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-maze.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-mediawiki.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-mel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-mixal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-mushcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-mysql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-nginx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-nim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-nix.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-nsis.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-nunjucks.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-objectivec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-ocaml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-pascal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-perl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-perl6.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-pgsql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-php.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-php_laravel_blade.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-pig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-plain_text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-powershell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-praat.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-prisma.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-prolog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-properties.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-protobuf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-puppet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-python.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-qml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-r.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-razor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-rdoc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-red.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-redshift.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-rhtml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-rst.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-ruby.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-rust.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-sass.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-scad.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-scala.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-scheme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-scss.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-sh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-sjs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-slim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-smarty.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-snippets.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-soy_template.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-space.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-sparql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-sql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-sqlserver.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-stylus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-svg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-swift.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-tcl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-terraform.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-tex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-textile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-toml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-tsx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-turtle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-twig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-typescript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-vala.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-vbscript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-velocity.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-verilog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-vhdl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-visualforce.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-wollok.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-xml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-xquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-yaml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/mode-zeek.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/abap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/abc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/actionscript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/ada.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/alda.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/apache_conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/apex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/applescript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/aql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/asciidoc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/asl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/assembly_x86.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/autohotkey.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/batchfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/c9search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/c_cpp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/cirru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/clojure.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/cobol.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/coffee.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/coldfusion.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/crystal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/csharp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/csound_document.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/csound_orchestra.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/csound_score.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/csp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/css.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/curly.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/dart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/diff.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/django.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/dockerfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/dot.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/drools.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/edifact.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/eiffel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/ejs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/elixir.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/elm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/erlang.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/forth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/fortran.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/fsharp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/fsl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/ftl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/gcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/gherkin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/gitignore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/glsl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/gobstones.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/golang.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/graphqlschema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/groovy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/haml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/handlebars.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/haskell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/haskell_cabal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/haxe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/hjson.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/html.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/html_elixir.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/html_ruby.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/ini.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/io.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/jack.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/jade.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/java.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/javascript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/json.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/json5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/jsoniq.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/jsp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/jssm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/jsx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/julia.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/kotlin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/latex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/less.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/liquid.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/lisp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/livescript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/logiql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/logtalk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/lsl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/lua.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/luapage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/lucene.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/makefile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/markdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/mask.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/matlab.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/maze.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/mediawiki.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/mel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/mixal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/mushcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/mysql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/nginx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/nim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/nix.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/nsis.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/nunjucks.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/objectivec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/ocaml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/pascal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/perl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/perl6.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/pgsql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/php.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/php_laravel_blade.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/pig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/plain_text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/powershell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/praat.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/prisma.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/prolog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/properties.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/protobuf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/puppet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/python.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/qml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/r.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/razor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/rdoc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/red.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/redshift.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/rhtml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/rst.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/ruby.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/rust.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/sass.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/scad.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/scala.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/scheme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/scss.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/sh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/sjs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/slim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/smarty.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/snippets.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/soy_template.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/space.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/sparql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/sql.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/sqlserver.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/stylus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/svg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/swift.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/tcl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/terraform.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/tex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/textile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/toml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/tsx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/turtle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/twig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/typescript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/vala.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/vbscript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/velocity.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/verilog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/vhdl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/visualforce.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/wollok.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/xml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/xquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/yaml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/snippets/zeek.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-ambiance.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-chaos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-chrome.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-clouds.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-clouds_midnight.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-cobalt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-crimson_editor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-dawn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-dracula.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-dreamweaver.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-eclipse.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-github.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-gob.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-gruvbox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-idle_fingers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-iplastic.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-katzenmilch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-kr_theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-kuroir.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-merbivore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-merbivore_soft.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-mono_industrial.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-monokai.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-nord_dark.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-pastel_on_dark.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-solarized_dark.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-solarized_light.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-sqlserver.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-terminal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-textmate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-tomorrow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-tomorrow_night.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-tomorrow_night_blue.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-tomorrow_night_bright.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-tomorrow_night_eighties.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-twilight.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-vibrant_ink.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/theme-xcode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-base.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-coffee.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-css.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-html.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-javascript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-json.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-lua.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-php.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-xml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/ace/worker-xquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/autocompletions/misc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/autocompletions/mode-php.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/autocompletions/php-constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/autocompletions/php-functions.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/autocompletions/wp-functions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/edit.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/edit.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/editor.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/editor.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gulpfile.babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.babel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/console.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/console.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/php-lint.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-template-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-edit-template-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-list-table-templates.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table-templates.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/class-list-table.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-snippet.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-snippet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/wpd-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/wpd-api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-shell.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-shell.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-shelloutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-shelloutput.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/editor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/settings/settings-fields.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/settings/settings-fields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/views/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/views/edit.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,11 +548,15 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1l2xdZ3BVFCijY7gdkdcuVdeDcR" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -248,7 +690,10 @@
       <workItem from="1630487727017" duration="16617000" />
       <workItem from="1630515740098" duration="96000" />
       <workItem from="1630525333990" duration="906000" />
-      <workItem from="1630587201986" duration="1515000" />
+      <workItem from="1630587201986" duration="20091000" />
+      <workItem from="1630683221361" duration="4438000" />
+      <workItem from="1630741414682" duration="7000" />
+      <workItem from="1630751498473" duration="13204000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -292,7 +737,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630515821282</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Cannot push remote snippet anymore, bug fixes">
+      <created>1630589485734</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1630589485734</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,13 +763,15 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initial commit of WPDistro Code Snippets - fork of Code Snippets." />
     <MESSAGE value="Optimized, ajax installing" />
     <MESSAGE value="code format &amp; small bugs" />
     <MESSAGE value="gulp fixed &amp; scripts cleared" />
     <MESSAGE value="gulp bug fixed" />
     <MESSAGE value="A LOT of fixes, cleaned up mess, pushing mechanism made better" />
-    <option name="LAST_COMMIT_MESSAGE" value="A LOT of fixes, cleaned up mess, pushing mechanism made better" />
+    <MESSAGE value="Cannot push remote snippet anymore, bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cannot push remote snippet anymore, bug fixes" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>

@@ -45,27 +45,6 @@ function code_snippets_get_settings_fields() {
 			'default' => true,
 		),
 
-		'snippet_scope_enabled' => array(
-			'name'    => __( 'Enable Scope Selector', 'code-snippets' ),
-			'type'    => 'checkbox',
-			'label'   => __( 'Enable the scope selector when editing a snippet', 'code-snippets' ),
-			'default' => true,
-		),
-
-		'enable_tags' => array(
-			'name'    => __( 'Enable Snippet Tags', 'code-snippets' ),
-			'type'    => 'checkbox',
-			'label'   => __( 'Show snippet tags on admin pages', 'code-snippets' ),
-			'default' => true,
-		),
-
-		'enable_description' => array(
-			'name'    => __( 'Enable Snippet Descriptions', 'code-snippets' ),
-			'type'    => 'checkbox',
-			'label'   => __( 'Show snippet descriptions on admin pages', 'code-snippets' ),
-			'default' => true,
-		),
-
 		'disable_prism' => array(
 			'name'    => __( 'Disable Shortcode Syntax Highlighter', 'code-snippets' ),
 			'type'    => 'checkbox',
