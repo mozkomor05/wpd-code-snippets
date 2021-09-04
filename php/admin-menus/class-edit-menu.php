@@ -190,21 +190,15 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 *
 	 * @return bool true if code produces errors
 	 */
-	private function test_code( Code_Snippet $snippet ) {
+	private function test_code( Code_Snippet $snippet ): bool {
 
 		if ( empty( $snippet->code ) ) {
 			return false;
 		}
 
-		ob_start( array( $this, 'code_error_callback' ) );
+		$result = code_snippets()->console->evaluate_code($snippet->code);
 
-		$result = eval( $snippet->code );
-
-		ob_end_clean();
-
-		do_action( 'code_snippets/after_execute_snippet', $snippet->id, $snippet->code, $result );
-
-		return false === $result;
+		return isset($result['error']);
 	}
 
 	/**

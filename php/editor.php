@@ -67,7 +67,7 @@ function code_snippets_enqueue_editor() {
 	wp_enqueue_style( 'code-snippets-editor', $url . 'css/min/editor.css', array(), $plugin_version );
 	wp_enqueue_script( 'code-snippets-editor-ace', $url . 'js/ace/ace.js', array(), $plugin_version, true );
 	wp_enqueue_script( 'code-snippets-editor-ace-lang', $url . 'js/ace/ext-language_tools.js', array( 'code-snippets-editor-ace' ), $plugin_version, true );
-	wp_enqueue_script( 'code-snippets-editor', $url . 'js/min/editor.js', array( 'code-snippets-editor-ace-lang' ), $plugin_version, true );
+	wp_enqueue_script( 'code-snippets-editor-ace-beautify', $url . 'js/ace/ext-beautify.js', array( 'code-snippets-editor-ace' ), $plugin_version, true );
 
 	/* CodeMirror Theme */
 	$theme = code_snippets_get_setting( 'editor', 'theme' );

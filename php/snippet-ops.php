@@ -529,11 +529,8 @@ function update_snippet_fields( $snippet_id, $fields, $network = null ) {
 
 
 function filter_snippet( $code, $settings, $values ) {
-	if ( $settings == null ) {
-		return;
-	}
-	if ( count( $settings ) == 0 ) {
-		return;
+	if ( empty( $setting ) || count( $settings ) === 0 ) {
+		return $code;
 	}
 	foreach ( $settings as $setting ) {
 		$code = str_replace( $setting['replace'], $values[ $setting['replace'] ], $code );
@@ -558,7 +555,6 @@ function filter_snippet( $code, $settings, $values ) {
  *
  */
 function execute_snippet( $code, $id = 0, $catch_output = true ) {
-
 	if ( empty( $code ) || defined( 'CODE_SNIPPETS_SAFE_MODE' ) && CODE_SNIPPETS_SAFE_MODE ) {
 		return false;
 	}

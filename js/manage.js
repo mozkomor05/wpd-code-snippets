@@ -44,7 +44,6 @@
             if (request.status < 200 || request.status >= 400) {
                 return;
             }
-            console.log(request.responseText);
 
             if (success_callback !== undefined) {
                 success_callback(JSON.parse(request.responseText));

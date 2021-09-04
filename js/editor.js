@@ -49,18 +49,26 @@ window.code_snippets_editor = (function (editor_atts) {
 
         if (!value.startsWith('<?php')) {
             prependPhp(value);
-        }
-
-        if ( editor.session.getLength() === 1 ) {
+        } else if (editor.session.getLength() === 1) {
             let value = '';
-            if ( ! editor.session.getValue() ) {
+            if (!editor.session.getValue()) {
                 value = `<?php\n`;
             }
 
-            editor.session.setValue( value );
+            editor.session.setValue(value);
         }
 
         textarea.value = value;
+    });
+
+    editor.session.selection.on('changeSelection', function (e)
+    {
+        const range = editor.session.selection.getRange();
+
+        if (range.start.row === 0) {
+            range.start.row = 1;
+            editor.session.selection.setSelectionRange(range);
+        }
     });
 
     textarea.value = editor.session.getValue();
