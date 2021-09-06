@@ -17,12 +17,19 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 * Constructor
 	 */
 	public function __construct() {
-
 		parent::__construct(
 			'edit',
 			_x( 'Edit Snippet', 'menu label', 'code-snippets' ),
 			__( 'Edit Snippet', 'code-snippets' )
 		);
+	}
+
+	public function run() {
+		parent::run();
+
+		if ( isset( $_REQUEST['result'] ) && $_REQUEST['result'] === 'code-error' ) {
+			session_start();
+		}
 	}
 
 	/**
@@ -188,17 +195,25 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 *
 	 * @param Code_Snippet $snippet
 	 *
-	 * @return bool true if code produces errors
+	 * @return array true if code produces errors
 	 */
-	private function test_code( Code_Snippet $snippet ): bool {
+	private function test_code( Code_Snippet $snippet ): array {
 
 		if ( empty( $snippet->code ) ) {
-			return false;
+			return array();
 		}
 
-		$result = code_snippets()->console->evaluate_code($snippet->code);
+		$code   = process_snippet_macros( $snippet->code, $snippet->macros );
+		$result = code_snippets()->console->evaluate_code( $code, true );
 
-		return isset($result['error']);
+		if ( ! isset( $result['error'] ) ) {
+			return array();
+		}
+
+		return array(
+			'line'    => $result['error']['line'],
+			'message' => $result['error']['message'],
+		);
 	}
 
 	/**
@@ -207,7 +222,11 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	private function save_posted_snippet() {
 
 		/* Build snippet object from fields with 'snippet_' prefix */
-		$snippet = new Code_Snippet();
+		if ( isset( $_POST['snippet_id'] ) ) {
+			$snippet = get_snippet( $_POST['snippet_id'] );
+		} else {
+			$snippet = new Code_Snippet();
+		}
 
 		foreach ( $_POST as $field => $value ) {
 			if ( 'snippet_' === substr( $field, 0, 8 ) ) {
@@ -238,45 +257,13 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 
 		/* Deactivate snippet if code contains errors */
 		if ( $snippet->active && 'single-use' !== $snippet->scope ) {
-			$validator  = new Code_Snippets_Validator( $snippet->code );
-			$code_error = $validator->validate();
+			$code_error = $this->test_code( $snippet );
 
-			if ( ! $code_error ) {
-				$code_error = $this->test_code( $snippet );
-			}
-
-			if ( $code_error ) {
+			if ( ! empty( $code_error ) ) {
 				$snippet->active = 0;
 			}
 		}
-		if ( isset( $_POST['snippet_is_template'] ) ) {
-			if ( $_POST['snippet_is_template'] != '' ) {
-				$snippet->is_template = true;
-			}
-		}
-		if ( ! isset( $_POST['snippet_snippet_settings'] ) && ! isset( $_POST['snippet_snippet_values'] ) ) {
-			if ( ! isset( $_POST['has_no_settings'] ) ) {
-				$code_error = true;
-			} else {
-				$snippet->snippet_settings = wp_json_encode( array() );
-				$snippet->snippet_values   = wp_json_encode( array() );
-			}
-		}
-		if ( ! isset( $_POST['snippet_snippet_settings'] ) && isset( $_POST['snippet_snippet_values'] ) ) {
-			$db = code_snippets()->db;
-			global $wpdb;
-			$original_snippet          = new Code_Snippet( $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$db->table} WHERE id = (%s)", $_POST['snippet_id'] ), ARRAY_A ) );
-			$snippet->snippet_settings = wp_json_encode( unserialize( $original_snippet->snippet_settings ) );
-		}
-		if ( isset( $_POST['snippet_snippet_settings'] ) && ! isset( $_POST['snippet_snippet_values'] ) ) {
-			$db = code_snippets()->db;
-			global $wpdb;
-			$original_snippet        = new Code_Snippet( $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$db->table} WHERE id = (%s)", $_POST['snippet_id'] ), ARRAY_A ) );
-			$snippet->snippet_values = wp_json_encode( unserialize( $original_snippet->snippet_values ) );
-		}
-		$snippet->snippet_settings = json_decode( $snippet->snippet_settings, true );
-		$snippet->snippet_values   = json_decode( $snippet->snippet_values, true );
-		/* Save the snippet to the database */
+
 		$snippet_id = save_snippet( $snippet );
 
 		/* Update the shared network snippets if necessary */
@@ -303,8 +290,10 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 		}
 
 		/* Display message if a parse error occurred */
-		if ( isset( $code_error ) && $code_error ) {
-			$result = 'code-error';
+		if ( isset( $code_error ) && ! empty( $code_error ) ) {
+			$code_error['code']             = $snippet->code;
+			$_SESSION['last_snippet_error'] = $code_error;
+			$result                         = 'code-error';
 		} else {
 			/* Set the result depending on if the snippet was just added */
 			$result = isset( $_POST['snippet_id'] ) ? 'updated' : 'added';
@@ -388,7 +377,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	public function render_debug_console( Code_Snippet $snippet ) {
 		?>
         <div id="snippet_execute_div" class="editor_section">
-            <h2>Debug / Execution</h2>
+            <h2><?php esc_html_e( 'Debug / Execution' ); ?></h2>
             <div class="collapsible">
                 <div class="button_wrapper">
                     <label for="snippet_output">Output</label>
@@ -400,8 +389,10 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
                             </label>
 							<?php esc_html_e( 'Render HTML', 'code-snippets' ); ?>
                         </div>
-                        <button type="button" id="wpd_execute" class="button button-primary">Run code</button>
-                        <button type="button" id="wpd_execute_clear" class="button button-default">Clear</button>
+                        <button type="button" id="wpd_execute"
+                                class="button button-primary"><?php esc_html_e( 'Run Code' ); ?></button>
+                        <button type="button" id="wpd_execute_clear"
+                                class="button button-default"><?php esc_html_e( 'Clear' ); ?></button>
                     </div>
                 </div>
                 <div id="snippet_output" contenteditable="true" oncut="return false"
@@ -419,84 +410,53 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 */
 	public function render_snippet_settings( Code_Snippet $snippet ) {
 		?>
-        <div id="snippet_values_wrapper">
-			<?php
-			if ( empty( $snippet->snippet_settings ) ) {
-				$snip_settings = array();
-				$snip_values   = array();
-			} else {
-				$snip_settings = unserialize( $snippet->snippet_settings );
-				$snip_values   = unserialize( $snippet->snippet_values );
-			}
-			foreach ( $snip_settings as $key => $setting ) :
-				?>
-                <div id="snippet_setting_<?= $key ?>">
-                    <label class="label" assignedTo="<?= $setting['replace'] ?>"><?= $setting['label'] ?></label>
-                    <input type="text" class="setting_value" value="<?= $snip_values[ $setting['replace'] ] ?>">
-                </div>
-			<?php endforeach; ?>
-        </div>
         <div id="snippet_setting_div" class="editor_section">
-            <h2>Settings</h2>
+            <h2><?php esc_html_e( 'Settings and Macros' ); ?></h2>
             <div class="collapsible">
-                <div id="snippet_settings_wrapper">
-					<?php foreach ( $snip_settings as $key => $setting ) :
-						?>
-                        <div id="snippet_setting_<?= $key ?>">
-                            <div>
-                                <label>Label for snippet setting:</label>
-                                <input type="text" class="label" value="<?= $setting['label'] ?>"><br>
-                            </div>
-                            <div>
-                                <label>String to replace in snippet:</label>
-                                <input type="text" class="replace" value="<?= $setting['replace'] ?>"><br>
-                            </div>
-                            <div>
-                                <label>Default value:</label>
-                                <input type="text" class="default_value" value="<?= $setting['default_value'] ?>"><br>
-                            </div>
-                            <div>
-                                <label>Value:</label>
-                                <input type="text" class="setting_value"
-                                       value="<?= $snip_values[ $setting['replace'] ] ?>"><br>
-                            </div>
-                        </div>
-					<?php endforeach; ?>
-                </div>
-                <div id="snippet_setting_buttons">
-                    <button type="button" id="add_variable_wpd" class="button button-primary">Add variable</button>
-                    <button type="button" id="remove_variable_wpd" class="button button-primary">Remove variable
-                    </button>
-                </div>
+                <strong><?php esc_html_e( 'Macros' ); ?></strong>
+                <p><?php _e( 'Macros are predefined strings that will be placed into the code before execution. Macros are identified by <code>${{<i>&lt;value&gt;</i>>}}</code> syntax, where <i>&lt;value&gt;</i> is a unique identifier of your macro. You can use macros the same way you use variables. All available macros will be listed below. ' ); ?></p>
+                <table id="snippet_macros" class="widefat fixed">
+                    <thead>
+                    <tr>
+                        <th scope="col"><?php esc_html_e( 'Macro Name' ); ?></th>
+                        <th scope="col"><?php esc_html_e( 'Data Type' ); ?></th>
+                        <th scope="col"><?php esc_html_e( 'Value' ); ?></th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <input name="snippet_macros" id="snippet_macros_input" type="hidden"
+                       value="<?= esc_attr( wp_json_encode( $snippet->macros ) ); ?>">
+                <p class="snippet-priority"
+                   title="<?php esc_attr_e( 'Snippets with a lower priority number will run before those with a higher number.', 'code-snippets' ); ?>">
+                    <label for="snippet_priority"><?php esc_html_e( 'Priority', 'code-snippets' ); ?></label>
+
+                    <input name="snippet_priority" type="number" id="snippet_priority"
+                           value="<?php echo intval( $snippet->priority ); ?>">
+                </p>
+				<?php
+				$icons = Code_Snippet::get_scope_icons();
+
+				$labels = array(
+					'global'     => __( 'Run snippet everywhere', 'code-snippets' ),
+					'admin'      => __( 'Only run in administration area', 'code-snippets' ),
+					'front-end'  => __( 'Only run on site front-end', 'code-snippets' ),
+					'single-use' => __( 'Only run once', 'code-snippets' ),
+				);
+
+				echo '<h2 class="screen-reader-text">' . esc_html__( 'Scope', 'code-snippets' ) . '</h2><p class="snippet-scope">';
+
+				foreach ( Code_Snippet::get_all_scopes() as $scope ) {
+					printf( '<label><input type="radio" name="snippet_scope" value="%s"', $scope );
+					checked( $scope, $snippet->scope );
+					printf( '> <span class="dashicons dashicons-%s"></span> %s</label>', $icons[ $scope ], esc_html( $labels[ $scope ] ) );
+				}
+
+				echo '</p>';
+				?>
             </div>
         </div>
-        <p class="snippet-priority"
-           title="<?php esc_attr_e( 'Snippets with a lower priority number will run before those with a higher number.', 'code-snippets' ); ?>">
-            <label for="snippet_priority"><?php esc_html_e( 'Priority', 'code-snippets' ); ?></label>
-
-            <input name="snippet_priority" type="number" id="snippet_priority"
-                   value="<?php echo intval( $snippet->priority ); ?>">
-        </p>
 		<?php
-
-		$icons = Code_Snippet::get_scope_icons();
-
-		$labels = array(
-			'global'     => __( 'Run snippet everywhere', 'code-snippets' ),
-			'admin'      => __( 'Only run in administration area', 'code-snippets' ),
-			'front-end'  => __( 'Only run on site front-end', 'code-snippets' ),
-			'single-use' => __( 'Only run once', 'code-snippets' ),
-		);
-
-		echo '<h2 class="screen-reader-text">' . esc_html__( 'Scope', 'code-snippets' ) . '</h2><p class="snippet-scope">';
-
-		foreach ( Code_Snippet::get_all_scopes() as $scope ) {
-			printf( '<label><input type="radio" name="snippet_scope" value="%s"', $scope );
-			checked( $scope, $snippet->scope );
-			printf( '> <span class="dashicons dashicons-%s"></span> %s</label>', $icons[ $scope ], esc_html( $labels[ $scope ] ) );
-		}
-
-		echo '</p>';
 	}
 
 	/**
@@ -575,13 +535,14 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 
 		if ( 'code-error' === $result ) {
 
-			if ( isset( $_REQUEST['id'] ) && $error = $this->get_snippet_error( $_REQUEST['id'] ) ) {
+			if ( isset( $_REQUEST['id'] ) && isset( $_SESSION['last_snippet_error'] ) ) {
+				$last_snippet_error = $_SESSION['last_snippet_error'];
 
 				printf(
 					'<div id="message" class="error fade"><p>%s</p><p><strong>%s</strong></p></div>',
 					/* translators: %d: line of file where error originated */
-					sprintf( __( 'The snippet has been deactivated due to an error on line %d:', 'code-snippets' ), $error['line'] ),
-					$error['message']
+					sprintf( __( 'The snippet has been deactivated due to an error on line %d:', 'code-snippets' ), $last_snippet_error['line'] ),
+					$last_snippet_error['message']
 				);
 
 			} else {
@@ -662,7 +623,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 * Retrieve a list of submit actions for a given snippet
 	 *
 	 * @param Code_Snippet $snippet
-	 * @param bool         $extra_actions
+	 * @param bool $extra_actions
 	 *
 	 * @return array
 	 */
@@ -707,8 +668,8 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 * Render the submit buttons for a code snippet
 	 *
 	 * @param Code_Snippet $snippet
-	 * @param string       $size
-	 * @param bool         $extra_actions
+	 * @param string $size
+	 * @param bool $extra_actions
 	 */
 	public function render_submit_buttons( $snippet, $size = '', $extra_actions = true ) {
 

@@ -25,13 +25,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Whole bunch of changes including edit UI redesign, console rework etc">
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Snippets were better when they worked">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/code-snippets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/edit.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/edit.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/editor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/manage.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/manage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/editor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-db.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-list-table.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-snippet.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-snippet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-upgrade.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-upgrade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/import-export.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/import-export.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/snippet-ops.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/snippet-ops.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/views/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/views/edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/wpd-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/wpd-api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +268,10 @@
       <workItem from="1630683221361" duration="4438000" />
       <workItem from="1630741414682" duration="7000" />
       <workItem from="1630751498473" duration="15121000" />
-      <workItem from="1630771483503" duration="466000" />
+      <workItem from="1630771483503" duration="12185000" />
+      <workItem from="1630830137159" duration="594000" />
+      <workItem from="1630847359875" duration="13294000" />
+      <workItem from="1630944641449" duration="9328000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -316,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630767350909</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Snippets were better when they worked">
+      <created>1630771981984</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1630771981984</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,7 +364,8 @@
     <MESSAGE value="A LOT of fixes, cleaned up mess, pushing mechanism made better" />
     <MESSAGE value="Cannot push remote snippet anymore, bug fixes" />
     <MESSAGE value="Whole bunch of changes including edit UI redesign, console rework etc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Whole bunch of changes including edit UI redesign, console rework etc" />
+    <MESSAGE value="Snippets were better when they worked" />
+    <option name="LAST_COMMIT_MESSAGE" value="Snippets were better when they worked" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>

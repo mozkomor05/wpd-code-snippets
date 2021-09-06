@@ -13,7 +13,7 @@
  * @param bool|null $multisite Retrieve multisite-wide or site-wide snippets?
  *
  * @param array $args {
- *                               Optional. Arguments to specify which sorts of snippets to retrieve.
+ *                                   Optional. Arguments to specify which sorts of snippets to retrieve.
  *
  * @type bool $active_only Whether to only fetch active snippets. Default false (will fetch both active and inactive snippets).
  * @type int $limit Limit the number of retrieved snippets. Default 0, which will not impose a limit on the results.
@@ -149,6 +149,7 @@ function get_snippet_templates( array $ids = array(), $multisite = null, array $
 
 /**
  * Gets all of the used tags from the database
+ *
  * @since 2.0
  */
 function get_all_snippet_tags() {
@@ -371,7 +372,6 @@ function activate_snippets( array $ids, $multisite = null ) {
  *
  * @since 2.0
  * @uses  $wpdb to set the snippets' active status
- *
  */
 function deactivate_snippet( $id, $multisite = null ) {
 	/** @var wpdb $wpdb */
@@ -460,17 +460,16 @@ function save_snippet( Code_Snippet $snippet ) {
 
 	/* Build array of data to insert */
 	$data = array(
-		'name'             => $snippet->name,
-		'description'      => $snippet->desc,
-		'code'             => $snippet->code,
-		'tags'             => $snippet->tags_list,
-		'scope'            => $snippet->scope,
-		'priority'         => $snippet->priority,
-		'modified'         => $snippet->modified,
-		'snippet_settings' => serialize( $snippet->snippet_settings ),
-		'snippet_values'   => serialize( $snippet->snippet_values ),
-		'remote'           => $snippet->remote,
-		'remote_id'        => $snippet->remote_id,
+		'name'          => $snippet->name,
+		'description'   => $snippet->desc,
+		'code'          => $snippet->code,
+		'tags'          => $snippet->tags_list,
+		'scope'         => $snippet->scope,
+		'priority'      => $snippet->priority,
+		'modified'      => $snippet->modified,
+		'macros'        => wp_json_encode( $snippet->macros ),
+		'remote_status' => $snippet->remote_status,
+		'remote_id'     => $snippet->remote_id,
 	);
 	if ( $snippet->is_template ) {
 		$table = code_snippets()->db->templates_table;
@@ -528,12 +527,15 @@ function update_snippet_fields( $snippet_id, $fields, $network = null ) {
 }
 
 
-function filter_snippet( $code, $settings, $values ) {
-	if ( empty( $setting ) || count( $settings ) === 0 ) {
-		return $code;
-	}
-	foreach ( $settings as $setting ) {
-		$code = str_replace( $setting['replace'], $values[ $setting['replace'] ], $code );
+/**
+ * @param string $code Snippet code.
+ * @param array $macros Array of snippet macros to replace.
+ *
+ * @return string Code with replaced macros.
+ */
+function process_snippet_macros( $code, $macros ) {
+	foreach ( $macros as $find => $obj ) {
+		$code = str_replace( '${{' . $find . '}}', addslashes( $obj['value'] ), $code );
 	}
 
 	return $code;
@@ -552,7 +554,6 @@ function filter_snippet( $code, $settings, $values ) {
  *
  * @return mixed The result of the code execution
  * @since 2.0
- *
  */
 function execute_snippet( $code, $id = 0, $catch_output = true ) {
 	if ( empty( $code ) || defined( 'CODE_SNIPPETS_SAFE_MODE' ) && CODE_SNIPPETS_SAFE_MODE ) {
@@ -589,50 +590,12 @@ function execute_active_snippets() {
 
 	/** @var wpdb $wpdb */
 	global $wpdb;
-	$db = code_snippets()->db;
 
-	$current_scope = is_admin() ? 'admin' : 'front-end';
-	$queries       = array();
+	$db     = code_snippets()->db;
+	$scopes = array( 'global', 'single-use', is_admin() ? 'admin' : 'front-end' );
+	$data   = $db->fetch_active_snippets( $scopes, 'id, code, scope, macros' );
 
-	$sql_format = "SELECT id, code, scope, snippet_settings, snippet_values FROM %s WHERE scope IN ('global', 'single-use', %%s) ";
-	$order      = 'ORDER BY priority ASC, id ASC';
-
-	/* Fetch snippets from site table */
-	if ( $wpdb->get_var( "SHOW TABLES LIKE '$db->table'" ) === $db->table ) {
-		$queries[ $db->table ] = $wpdb->prepare( sprintf( $sql_format, $db->table ) . 'AND active=1 ' . $order, $current_scope );
-	}
-
-	/* Fetch snippets from the network table */
-	if ( is_multisite() && $wpdb->get_var( "SHOW TABLES LIKE '$db->ms_table'" ) === $db->ms_table ) {
-		$active_shared_ids = get_option( 'active_shared_network_snippets', array() );
-
-		/* If there are active shared snippets, include them in the query */
-		if ( is_array( $active_shared_ids ) && count( $active_shared_ids ) ) {
-
-			/* Build a list of "%d, %d, %d ..." for every active network shared snippet we have */
-			$active_shared_ids_format = implode( ',', array_fill( 0, count( $active_shared_ids ), '%d' ) );
-
-			/* Include them in the query */
-			$sql = sprintf( $sql_format, $db->ms_table ) . " AND (active=1 OR id IN ($active_shared_ids_format)) $order";
-
-			/* Add the scope number to the IDs array, so that it is the first variable in the query */
-			array_unshift( $active_shared_ids, $current_scope );
-			$queries[ $db->ms_table ] = $wpdb->prepare( $sql, $active_shared_ids );
-			array_shift( $active_shared_ids ); // remove it afterwards as we need this variable later
-
-		} else {
-			$sql                      = sprintf( $sql_format, $db->ms_table ) . 'AND active=1 ' . $order;
-			$queries[ $db->ms_table ] = $wpdb->prepare( $sql, $current_scope );
-		}
-	}
-
-	foreach ( $queries as $table_name => $query ) {
-		$active_snippets = $wpdb->get_results( $query, 'ARRAY_A' );
-
-		if ( ! is_array( $active_snippets ) ) {
-			continue;
-		}
-
+	foreach ( $data as $table_name => $active_snippets ) {
 		/* Loop through the returned snippets and execute the PHP code */
 		foreach ( $active_snippets as $snippet ) {
 			$snippet_id = intval( $snippet['id'] );
@@ -651,7 +614,8 @@ function execute_active_snippets() {
 			}
 
 			if ( apply_filters( 'code_snippets/allow_execute_snippet', true, $snippet_id, $table_name ) ) {
-				execute_snippet( filter_snippet( $code, unserialize( $snippet['snippet_settings'] ), unserialize( $snippet['snippet_values'] ) ), $snippet_id );
+				$code = process_snippet_macros( $code, json_decode( $snippet['macros'], true ) );
+				execute_snippet( $code, $snippet_id );
 			}
 		}
 	}

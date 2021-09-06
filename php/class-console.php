@@ -35,7 +35,7 @@ class Code_Snippets_Console {
 	 *
 	 * @param string $input PHP code input.
 	 */
-	public function evaluate_code( $input ) {
+	public function evaluate_code( $input, $strict = false ) {
 		$config = new Configuration( array(
 			'configDir' => WP_CONTENT_DIR,
 		) );
@@ -56,7 +56,13 @@ class Code_Snippets_Console {
 			ob_start( array( $psysh, 'writeStdout' ), 1 );
 			set_error_handler( array( $psysh, 'handleError' ) );
 
-			$_ = eval( $psysh->onExecute( $psysh->flushCode() ?: \Psy\ExecutionClosure::NOOP_INPUT ) );
+			if ( ! $strict ) {
+				$code = $psysh->onExecute( $psysh->flushCode() ?: $input );
+			} else {
+				$code = $input;
+			}
+
+			$_ = eval( $code );
 
 			restore_error_handler();
 
@@ -85,6 +91,7 @@ class Code_Snippets_Console {
 					'code'    => $e->getCode(),
 					'file'    => $e->getFile(),
 					'trace'   => $e->getTraceAsString(),
+					'line'    => $e->getLine(),
 				),
 			);
 		}

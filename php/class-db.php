@@ -17,10 +17,10 @@ class Code_Snippets_DB {
 	 */
 	const MS_TABLE_NAME = 'ms_snippets';
 
-    const SNIPPET_TEMPLATES_NAME = 'snippet_templates';
+	const SNIPPET_TEMPLATES_NAME = 'snippet_templates';
 
 
-    /**
+	/**
 	 * Side-wide table name
 	 *
 	 * @var string
@@ -34,7 +34,7 @@ class Code_Snippets_DB {
 	 */
 	public $ms_table;
 
-    public $templates_table;
+	public $templates_table;
 
 	/**
 	 * Class constructor
@@ -52,17 +52,17 @@ class Code_Snippets_DB {
 	function set_table_vars() {
 		global $wpdb;
 
-		$this->table = $wpdb->prefix . self::TABLE_NAME;
-        $this->ms_table = $wpdb->base_prefix . self::MS_TABLE_NAME;
-        $this->templates_table = $wpdb->base_prefix . self::SNIPPET_TEMPLATES_NAME;
+		$this->table           = $wpdb->prefix . self::TABLE_NAME;
+		$this->ms_table        = $wpdb->base_prefix . self::MS_TABLE_NAME;
+		$this->templates_table = $wpdb->base_prefix . self::SNIPPET_TEMPLATES_NAME;
 
 		/* Register the snippet table names with WordPress */
-		$wpdb->snippets = $this->table;
-        $wpdb->ms_snippets = $this->ms_table;
-        $wpdb->snippet_templates = $this->templates_table;
+		$wpdb->snippets          = $this->table;
+		$wpdb->ms_snippets       = $this->ms_table;
+		$wpdb->snippet_templates = $this->templates_table;
 
-        $wpdb->tables[] = self::TABLE_NAME;
-        $wpdb->tables[] = self::SNIPPET_TEMPLATES_NAME;
+		$wpdb->tables[]           = self::TABLE_NAME;
+		$wpdb->tables[]           = self::SNIPPET_TEMPLATES_NAME;
 		$wpdb->ms_global_tables[] = self::MS_TABLE_NAME;
 	}
 
@@ -113,24 +113,35 @@ class Code_Snippets_DB {
 	}
 
 	/**
+	 * Determine whether a database table exists
+	 *
+	 * @param string $table_name Name of database table to check.
+	 *
+	 * @return bool Whether the database table exists.
+	 *
+	 * @phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching
+	 */
+	public static function table_exists( $table_name ) {
+		/** @var wpdb $wpdb */
+		global $wpdb;
+
+		return $wpdb->get_var( sprintf( "SHOW TABLES LIKE '%s'", $table_name ) ) === $table_name;
+	}
+
+	/**
 	 * Create the snippet tables if they do not already exist
 	 */
 	public function create_missing_tables() {
-		global $wpdb;
 
 		/* Create the network snippets table if it doesn't exist */
-		if ( is_multisite() && $wpdb->get_var( "SHOW TABLES LIKE '$this->ms_table'" ) !== $this->ms_table ) {
+		if ( is_multisite() && ! self::table_exists( $this->ms_table ) ) {
 			$this->create_table( $this->ms_table );
 		}
 
 		/* Create the table if it doesn't exist */
-		if ( $wpdb->get_var( "SHOW TABLES LIKE '$this->table'" ) !== $this->table ) {
+		if ( ! self::table_exists( $this->table ) ) {
 			$this->create_table( $this->table );
 		}
-
-        if ( $wpdb->get_var( "SHOW TABLES LIKE '$this->templates_table'" ) !== $this->templates_table ) {
-            $this->create_template_table( $this->templates_table );
-        }
 	}
 
 	/**
@@ -142,33 +153,32 @@ class Code_Snippets_DB {
 		}
 
 		$this->create_table( $this->table );
-        $this->create_template_table( $this->templates_table );
+		$this->create_template_table( $this->templates_table );
 	}
 
 	/**
 	 * Create a snippet table if it does not already exist
 	 *
-	 * @param $table_name
+	 * @param string $table_name Name of database table.
 	 */
 	public static function create_missing_table( $table_name ) {
-		global $wpdb;
 
-		if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) === $table_name ) {
+		if ( self::table_exists( $table_name ) ) {
 			return;
 		}
 
 		self::create_table( $table_name );
 	}
 
-    public static function create_missing_template_table( $table_name ) {
-        global $wpdb;
+	public static function create_missing_template_table( $table_name ) {
+		global $wpdb;
 
-        if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) === $table_name ) {
-            return;
-        }
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) === $table_name ) {
+			return;
+		}
 
-        self::create_template_table( $table_name );
-    }
+		self::create_template_table( $table_name );
+	}
 
 	/**
 	 * Create a single snippet table
@@ -185,20 +195,18 @@ class Code_Snippets_DB {
 
 		/* Create the database table */
 		$sql = "CREATE TABLE $table_name (
-				id          BIGINT(20)  NOT NULL AUTO_INCREMENT,
-				name        TINYTEXT    NOT NULL DEFAULT '',
-				description TEXT        NOT NULL DEFAULT '',
-				code        LONGTEXT    NOT NULL DEFAULT '',
-				tags        LONGTEXT    NOT NULL DEFAULT '',
-				scope       VARCHAR(15) NOT NULL DEFAULT 'global',
-				priority    SMALLINT    NOT NULL DEFAULT 10,
-				active      TINYINT(1)  NOT NULL DEFAULT 0,
-				modified    DATETIME    NOT NULL DEFAULT '0000-00-00 00:00:00',
-                remote      BOOLEAN     NOT NULL DEFAULT false,
-				remote_id   BIGINT(20)  NOT NULL DEFAULT 0,
-				snippet_settings    LONGTEXT    NOT NULL DEFAULT '',
-				snippet_values      LONGTEXT    NOT NULL DEFAULT '',
-				is_template         BOOLEAN     NOT NULL DEFAULT false,
+				id          	BIGINT(20)  NOT NULL AUTO_INCREMENT,
+				name        	TINYTEXT    NOT NULL DEFAULT '',
+				description 	TEXT        NOT NULL DEFAULT '',
+				code        	LONGTEXT    NOT NULL DEFAULT '',
+				tags        	LONGTEXT    NOT NULL DEFAULT '',
+				scope       	VARCHAR(15) NOT NULL DEFAULT 'global',
+				priority    	SMALLINT    NOT NULL DEFAULT 10,
+				active      	TINYINT(1)  NOT NULL DEFAULT 0,
+				modified    	DATETIME    NOT NULL DEFAULT '0000-00-00 00:00:00',
+                remote_status   VARCHAR(15) NOT NULL DEFAULT false,
+				remote_id  		BIGINT(20)  NOT NULL DEFAULT 0,
+				macros			LONGTEXT    NOT NULL DEFAULT '',
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
@@ -214,37 +222,98 @@ class Code_Snippets_DB {
 		return $success;
 	}
 
-    public static function create_template_table( $table_name ) {
-        global $wpdb;
-        $charset_collate = $wpdb->get_charset_collate();
+	public static function create_template_table( $table_name ) {
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
 
-        /* Create the database table */
-        $sql = "CREATE TABLE $table_name (
-				id          BIGINT(20)  NOT NULL AUTO_INCREMENT,
-				name        TINYTEXT    NOT NULL DEFAULT '',
-				description TEXT        NOT NULL DEFAULT '',
-				code        LONGTEXT    NOT NULL DEFAULT '',
-				tags        LONGTEXT    NOT NULL DEFAULT '',
-				scope       VARCHAR(15) NOT NULL DEFAULT 'global',
-				priority    SMALLINT    NOT NULL DEFAULT 10,
-				modified    DATETIME    NOT NULL DEFAULT '0000-00-00 00:00:00',
-                remote      BOOLEAN     NOT NULL DEFAULT false,
-				remote_id   BIGINT(20)  NOT NULL DEFAULT 0,
-				snippet_settings    LONGTEXT    NOT NULL DEFAULT '',
-				snippet_values      LONGTEXT    NOT NULL DEFAULT '',
+		/* Create the database table */
+		$sql = "CREATE TABLE $table_name (
+				id         		BIGINT(20)  NOT NULL AUTO_INCREMENT,
+				name       		TINYTEXT    NOT NULL DEFAULT '',
+				description		TEXT        NOT NULL DEFAULT '',
+				code       		LONGTEXT    NOT NULL DEFAULT '',
+				tags       		LONGTEXT    NOT NULL DEFAULT '',
+				macros			LONGTEXT    NOT NULL DEFAULT '',
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
-        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-        dbDelta( $sql );
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		dbDelta( $sql );
 
-        $success = empty( $wpdb->last_error );
+		$success = empty( $wpdb->last_error );
 
-        if ( $success ) {
-            do_action( 'code_snippets/create_template_table', $table_name );
-        }
+		if ( $success ) {
+			do_action( 'code_snippets/create_template_table', $table_name );
+		}
 
-        return $success;
-    }
+		return $success;
+	}
+
+	/**
+	 * Build a list of formatting placeholders for an array of data.
+	 *
+	 * @param int $count Length of data.
+	 * @param string $placeholder Placeholder to use. Defaults to string placeholder.
+	 *
+	 * @return string List of placeholders, ready for inclusion in query.
+	 */
+	private static function build_format_list( $count, $placeholder = '%s' ) {
+		return implode( ',', array_fill( 0, $count, $placeholder ) );
+	}
+
+	/**
+	 * Generate the SQL for fetching active snippets from the database
+	 *
+	 * @param array|string $scopes List of scopes to retrieve in.
+	 * @param string $select_list List of table columns in SQL format.
+	 *
+	 * @return array List of SQL queries
+	 */
+	public function fetch_active_snippets( $scopes, $select_list = 'id, code, scope' ) {
+		/** @var wpdb $wpdb */
+		global $wpdb;
+		$db = code_snippets()->db;
+
+		$queries = array();
+
+		if ( ! is_array( $scopes ) ) {
+			$scopes = array( $scopes );
+		}
+
+		$scopes_format = self::build_format_list( count( $scopes ) );
+		$select        = "SELECT $select_list FROM";
+		$where         = "WHERE scope IN ($scopes_format)";
+		$order         = 'ORDER BY priority ASC, id ASC';
+
+		/* Fetch snippets from site table */
+		if ( self::table_exists( $db->table ) ) {
+			$queries[ $db->table ] = $wpdb->prepare( "$select {$db->table} $where AND active=1 $order", $scopes );
+		}
+
+		/* Fetch snippets from the network table */
+		if ( is_multisite() && self::table_exists( $db->ms_table ) ) {
+			$active_shared_ids = get_option( 'active_shared_network_snippets', array() );
+
+			/* If there are active shared snippets, include them in the query */
+			if ( is_array( $active_shared_ids ) && count( $active_shared_ids ) ) {
+				$ids_format = self::build_format_list( count( $active_shared_ids ), '%d' );
+				$sql        = "$select $db->ms_table $where AND (active=1 OR id IN ($ids_format)) $order";
+
+				$queries[ $db->ms_table ] = $wpdb->prepare( $sql, array_merge( $scopes, $active_shared_ids ) );
+
+			} else {
+				$queries[ $db->ms_table ] = $wpdb->prepare( "$select $db->ms_table $where AND active=1 $order", $scopes );
+			}
+		}
+
+		$active_snippets = array();
+
+		foreach ( $queries as $table => $query ) {
+			$results                   = $wpdb->get_results( $query, 'ARRAY_A' );
+			$active_snippets[ $table ] = is_array( $results ) ? $results : array();
+		}
+
+		return $active_snippets;
+	}
 
 }

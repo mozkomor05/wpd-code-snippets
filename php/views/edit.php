@@ -30,36 +30,36 @@ if ( ! $snippet->id ) {
     <h1><?php
 
 		if ( $snippet->id ) {
-		esc_html_e( 'Edit Snippet', 'code-snippets' );
-		printf( ' <a href="%1$s" class="page-title-action add-new-h2">%2$s</a>',
-		code_snippets()->get_menu_url( 'add' ),
-		esc_html_x( 'Add New', 'snippet', 'code-snippets' )
-	);
+			esc_html_e( 'Edit Snippet', 'code-snippets' );
+			printf( ' <a href="%1$s" class="page-title-action add-new-h2">%2$s</a>',
+				code_snippets()->get_menu_url( 'add' ),
+				esc_html_x( 'Add New', 'snippet', 'code-snippets' )
+			);
 		} else {
-		esc_html_e( 'Add New Snippet', 'code-snippets' );
+			esc_html_e( 'Add New Snippet', 'code-snippets' );
 		}
 
 		$admin = code_snippets()->admin;
 
 		if ( code_snippets()->admin->is_compact_menu() ) {
 
-		printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
-		esc_html_x( 'Manage', 'snippets', 'code-snippets' ),
-		code_snippets()->get_menu_url()
-	);
+			printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
+				esc_html_x( 'Manage', 'snippets', 'code-snippets' ),
+				code_snippets()->get_menu_url()
+			);
 
-	printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
-        esc_html_x( 'Import', 'snippets', 'code-snippets' ),
-        code_snippets()->get_menu_url( 'import' )
-	);
+			printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
+				esc_html_x( 'Import', 'snippets', 'code-snippets' ),
+				code_snippets()->get_menu_url( 'import' )
+			);
 
-	if ( isset( $admin->menus['settings'] ) ) {
+			if ( isset( $admin->menus['settings'] ) ) {
 
-		printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
-			esc_html_x( 'Settings', 'snippets', 'code-snippets' ),
-			code_snippets()->get_menu_url( 'settings' )
-		);
-	}
+				printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
+					esc_html_x( 'Settings', 'snippets', 'code-snippets' ),
+					code_snippets()->get_menu_url( 'settings' )
+				);
+			}
 		}
 
 		?></h1>
@@ -89,8 +89,6 @@ if ( ! $snippet->id ) {
             <p class="submit-inline">
 
 				<?php
-				// <button type="button" id="run_code_wpd" class="button button-primary">Run code</button>
-				// submit_button("Run code", "primary", 'submit', false, array("class" => "run_code_wpd"));
 				$actions['save_snippet'] = array(
 					__( 'Save Changes', 'code-snippets' ),
 					__( 'Save Snippet', 'code-snippets' ),
@@ -173,6 +171,15 @@ if ( ! $snippet->id ) {
                             </td>
                         </tr>
                         <tr>
+                            <td><?php esc_html_e( 'Beautify code', 'code-snippets' ); ?></td>
+                            <td>
+                                <kbd><?php echo $keys['Shift']; ?></kbd>&hyphen;<kbd
+                                        class="pc-key"><?php echo $keys['Alt']; ?></kbd><kbd
+                                        class="mac-key"><?php echo $keys['Option']; ?></kbd><span
+                                        class="mac-key">&hyphen;</span>&hyphen;<kbd><?php echo $keys['F']; ?></kbd>
+                            </td>
+                        </tr>
+                        <tr>
                             <td><?php esc_html_e( 'Begin searching', 'code-snippets' ); ?></td>
                             <td>
                                 <kbd class="pc-key"><?php echo $keys['Ctrl']; ?></kbd><kbd class="mac-key"><?php
@@ -225,7 +232,7 @@ if ( ! $snippet->id ) {
 
         <input type="hidden" id="snippet_is_template"
                name="snippet_is_template" <?php if ( $snippet->is_template ) :
-?> value="is_template" <?php endif; ?> >
+			?> value="is_template" <?php endif; ?> >
 
 		<?php $all_snippets = get_snippet_templates( array() );
 		foreach ( $all_snippets as $key => $snippet_from_db ) {
@@ -261,9 +268,6 @@ if ( ! $snippet->id ) {
                 </div>
             </div>
 		<?php endif; ?>
-        <br/>
-        <input type="hidden" id="snippet_snippet_settings" name="snippet_snippet_settings" value="">
-        <input type="hidden" id="snippet_snippet_values" name="snippet_snippet_values" value="">
 		<?php
 		/* Allow plugins to add fields and content to this page */
 		do_action( 'code_snippets/admin/single', $snippet );

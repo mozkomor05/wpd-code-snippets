@@ -94,7 +94,7 @@ function code_snippets() {
 	static $plugin;
 
 	if ( is_null( $plugin ) ) {
-		$plugin = new Code_Snippets( '2.14.0', __FILE__ );
+		$plugin = new Code_Snippets( '3.1.0', __FILE__ );
 	}
 
 	return $plugin;

@@ -174,7 +174,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 				$actions[ $action ] = sprintf( '<a href="%s">%s</a>', $this->get_action_link( $action, $snippet ), $label );
 			}
 
-			if ( ! $snippet->remote ) {
+			if ( $snippet->remote_status === 'local' ) {
 				$actions['push'] = sprintf(
 					'<a title="Push Snippet" class="snippet-push-action" href="%2$s">%1$s</a>',
 					esc_html__( 'Push', 'code-snippets' ),
@@ -269,7 +269,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 			$out .= ' <span class="badge">' . esc_html__( 'Shared on Network', 'code-snippets' ) . '</span>';
 		}
 
-		if ( $snippet->remote ) {
+		if ( $snippet->remote_status === 'remote' ) {
 			$out .= ' <span class="remote-badge"><span class="dashicons dashicons-admin-site-alt3"></span> Remote</span>';
 		}
 

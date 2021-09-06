@@ -6,24 +6,25 @@
  * @since   2.4.0
  * @package Code_Snippets
  *
- * @property int $id                 The database ID
- * @property string $name               The display name
- * @property string $desc               The formatted description
- * @property string $code               The executable code
- * @property array $tags               An array of the tags
- * @property string $scope              The scope name
- * @property int $priority           Execution priority
- * @property bool $remote             Whether is snippet remote
- * @property int $remote_id             The active status
- * @property bool $active             The active status
- * @property bool $network            true if is multisite-wide snippet, false if site-wide
- * @property bool $shared_network     Whether the snippet is a shared network snippet
- * @property string $modified           The date and time when the snippet data was most recently saved to the database.
+ * @property int $id                        The database ID
+ * @property string $name                   The display name
+ * @property string $desc                   The formatted description
+ * @property string $code                   The executable code
+ * @property array $tags                    An array of the tags
+ * @property string $scope                  The scope name
+ * @property int $priority                  Execution priority
+ * @property string $remote_status          Whether is snippet remote
+ * @property string $macros                 Snippet predefined macros
+ * @property int $remote_id                 The active status
+ * @property bool $active                   The active status
+ * @property bool $network                  true if is multisite-wide snippet, false if site-wide
+ * @property bool $shared_network           Whether the snippet is a shared network snippet
+ * @property string $modified               The date and time when the snippet data was most recently saved to the database.
  *
  * @property-read array $tags_list          The tags in string list format
- * @property-read string $scope_icon         The dashicon used to represent the current scope
- * @property-read int $modified_timestamp The last modification date in Unix timestamp format.
- * @property-read DateTime $modified_local     The last modification date in the local timezone.
+ * @property-read string $scope_icon        The dashicon used to represent the current scope
+ * @property-read int $modified_timestamp   The last modification date in Unix timestamp format.
+ * @property-read DateTime $modified_local  The last modification date in the local timezone.
  */
 class Code_Snippet {
 
@@ -43,24 +44,22 @@ class Code_Snippet {
 	 * @var array
 	 */
 	private $fields = array(
-		'id'               => 0,
-		'name'             => '',
-		'desc'             => '',
-		'code'             => '',
-		'tags'             => array(),
-		'scope'            => 'global',
-		'active'           => false,
-		'priority'         => 10,
-		'network'          => null,
-		'shared_network'   => null,
-		'created'          => null,
-		'modified'         => null,
-		'remote'           => false,
-		'remote_id'        => 0,
-		'remote_data'      => [],
-		'snippet_settings' => [],
-		'snippet_values'   => [],
-		'is_template'      => false,
+		'id'             => 0,
+		'name'           => '',
+		'desc'           => '',
+		'code'           => '',
+		'tags'           => array(),
+		'scope'          => 'global',
+		'active'         => false,
+		'priority'       => 10,
+		'network'        => null,
+		'shared_network' => null,
+		'created'        => null,
+		'modified'       => null,
+		'remote_status'  => 'local',
+		'remote_id'      => 0,
+		'macros'         => [],
+		'is_template'    => false,
 	);
 
 	/**
@@ -283,6 +282,17 @@ class Code_Snippet {
 	 */
 	private function prepare_tags( $tags ) {
 		return code_snippets_build_tags_array( $tags );
+	}
+
+	/**
+	 * Prepare the snippet macros
+	 *
+	 * @param string $macros The macros as provided
+	 *
+	 * @return array The macros as an array
+	 */
+	private function prepare_macros( $macros ) {
+		return json_decode( $macros, true );
 	}
 
 	/**

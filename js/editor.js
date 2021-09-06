@@ -1,12 +1,32 @@
 import './autocompletions/mode-php';
 
 window.code_snippets_editor = (function (editor_atts) {
+    let beautifying = false;
     const editor = ace.edit('snippet_code');
     const prependPhp = (value) => {
         value = value || editor.session.getValue();
         editor.session.setValue(`<?php\n` + value.replace(/^\s+/g, ''));
     };
     const textarea = document.getElementById('snippet_code_real');
+    const beautiful = ace.require("ace/ext/beautify");
+
+    editor.commands.addCommand({
+        name: "beautify",
+        bindKey: {win: "Shift-Alt-f", mac: "Shift-Alt-f"},
+        exec: function (editor) {
+            beautifying = true;
+            beautiful.beautify(editor.session);
+            beautifying = false;
+        }
+    });
+
+    editor.commands.addCommand({
+        name: "saveSnippet",
+        bindKey: {win: "Ctrl-s", mac: "Cmd-s"},
+        exec: function (editor) {
+            document.getElementById('save_snippet_extra').click();
+        }
+    });
 
     ace.require('ace/ext/language_tools');
     editor.setTheme('ace/theme/iplastic');
@@ -45,6 +65,9 @@ window.code_snippets_editor = (function (editor_atts) {
     });
 
     editor.session.on('change', () => {
+        if (beautifying)
+            return;
+
         let value = editor.session.getValue();
 
         if (!value.startsWith('<?php')) {
@@ -61,8 +84,7 @@ window.code_snippets_editor = (function (editor_atts) {
         textarea.value = value;
     });
 
-    editor.session.selection.on('changeSelection', function (e)
-    {
+    editor.session.selection.on('changeSelection', function (e) {
         const range = editor.session.selection.getRange();
 
         if (range.start.row === 0) {

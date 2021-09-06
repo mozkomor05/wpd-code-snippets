@@ -3,10 +3,13 @@
 import './editor';
 
 'use strict'
-jQuery(function ($) {
+jQuery(document).ready(function ($) {
     const outputTextarea = document.getElementById('snippet_output');
+    const macrosTbody = $('#snippet_macros tbody');
+    const snippetMacrosInput = $('#snippet_macros_input');
+    const macroList = snippetMacrosInput.val() ? JSON.parse(snippetMacrosInput.val()) : {};
 
-    document.getElementById('wpd_execute').addEventListener('click', function () {
+    $('#wpd_execute').on('click', function () {
         let codeToRun = code_snippets_editor.session.getValue();
         codeToRun = codeToRun.replace(/^\<\?php/, '//').trim();
 
@@ -37,135 +40,111 @@ jQuery(function ($) {
         });
     });
 
-    document.getElementById('wpd_execute_clear').addEventListener('click', function () {
+    $('#wpd_execute_clear').on('click', function () {
         outputTextarea.innerHTML = '';
     });
 
     $('.editor_section h2').on('click', function () {
         $(this).toggleClass('collapsed');
-        $(this).next('.collapsible').slideToggle();
+        $(this).next('.collapsible').stop().slideToggle();
     });
 
-    function insertTextAtCursor(editor, text) {
-        const doc = editor.getDoc();
-        const cursor = doc.getCursor();
-        doc.replaceRange(text, cursor);
-    }
-
-    $("#snippet_template").change(function () {
-        var id = $(this).children(":selected").val();
-        var settings = window.codeSnippetTemplateSettings[parseInt(id)];
-        settings.forEach(function (item, index) {
-            $("#snippet_template_settings_wrapper").append(`
-            <div id="snippet_template_setting_${index}"> 
-          <label class="label" assignedTo="${index}" >${item['label']}</label>
-          <input type="text" class="setting_value" value="${item['default_value']}">
-        </div>        
-`);
-        });
-        $("#snippet_template_settings").slideDown();
-
-
+    let macrosUpdateTimer = null;
+    window.code_snippets_editor.session.on('change', () => {
+        clearTimeout(macrosUpdateTimer);
+        macrosUpdateTimer = setTimeout(updateMacros, 2000);
     });
 
-    $("#execute_template").click(function () {
-        var id = $("#snippet_template").children(":selected").val();
-        $.ajax({
-            type: "post",
-            dataType: "json",
-            url: ajaxurl,
-            data: {"action": "getsnippetcontent", "id": id},
-            success: function (msg) {
-                $("#snippet_template_settings_wrapper").children().each(function (index) {
-                    msg.code = msg.code.replace(window.codeSnippetTemplateSettings[id][index]["replace"], $(this).find(".setting_value").val());
+    $(document.body).on('change', '#snippet_macros .type_select', function () {
+        const $this = $(this);
+        const value = $this.val();
+        const $tr = $this.closest('tr');
+        const macro = $tr.attr('data-macro');
+        const $valueTd = $tr.find('.value');
+
+        macroList[macro].type = value;
+
+        switch (value) {
+            case 'string':
+                const input = $('<input>', {
+                    type: 'text',
+                    value: macroList[macro].value
                 });
-                insertTextAtCursor(window.code_snippets_editor, msg.code);
-                $("#snippet_template").prop("selectedIndex", 0);
-                $("#snippet_template_settings_wrapper").html("");
-                $("#snippet_template_settings").hide();
+                $valueTd.append(input);
+                break;
+
+            default:
+                $valueTd.empty();
+        }
+    });
+
+    $(document.body).on('change', '#snippet_macros .value input', function () {
+        const $this = $(this);
+        const $tr = $this.closest('tr');
+        const macro = $tr.attr('data-macro');
+
+        macroList[macro].value = $this.val();
+    });
+
+    const updateMacros = function () {
+        const code = window.code_snippets_editor.session.getValue();
+        const matches = code.matchAll(/\${{([a-zA-Z_0-9]+)}}/gm);
+
+        for (const [key, val] of Object.entries(macroList)) {
+            if (val.type === 'unused') {
+                delete macroList[key];
             }
-        });
-    });
+        }
 
-    $("#add_variable_wpd").click(function () {
-        $("#snippet_settings_wrapper").append(`
-            <div id="snippet_setting_` + jQuery("#snippet_settings_wrapper").children().length + `">
-                <div class="editor_section">
-                    <label>Label for snippet setting:</label>
-                    <input type="text" class="label"><br>
-                </div>
-                <div class="editor_section">
-                    <label>String to replace in snippet:</label>
-                    <input type="text" class="replace"><br>
-                </div>
-                <div class="editor_section">
-                    <label>Default value:</label>
-                    <input type="text" class="default_value"><br>
-                </div>
-                <div class="editor_section">
-                    <label>Value:</label>
-                    <input type="text" class="setting_value"><br>
-                </div>
-            </div>
-        `);
+        macrosTbody.empty();
 
-        //jQuery("#snippet_setting_" + (jQuery("#snippet_settings_wrapper").children().length - 1))
-    });
-    const testikfunkce = function () {
-        const objekticek = [];
-        $("#snippet_settings_wrapper").children().each(function () {
-            if ($(this).is(":hidden"))
-                return;
+        for (const match of matches) {
+            const macro = match[1];
 
-            objekticek.push({
-                label: $(this).find(".label").val(),
-                data_type: $(this).find(".data_type").val(),
-                replace: $(this).find(".replace").val(),
-                default_value: $(this).find(".default_value").val(),
-            });
-        });
-        return JSON.stringify(objekticek);
+            if (!(macro in macroList)) {
+                macroList[macro] = {
+                    type: 'unused',
+                    value: ''
+                };
+            }
+
+            const macroType = macroList[macro].type;
+
+            const node = $(`
+                <tr data-macro="${macro}">
+                    <td class="name">${macro}</td>
+                    <td class="type">
+                        <select class="type_select">
+                            <option value="unused">Unused (ignored)</option>
+                            <option value="string">String</option>
+                        </select>
+                    </td>
+                    <td class="value"></td>
+                </tr>
+            `);
+
+            node.find('.type_select').val(macroType);
+
+            macrosTbody.prepend(node);
+        }
+
+        $('#snippet_macros .type_select').trigger('change');
     };
 
-    var returnforvalues = function () {
-        const objekticek = {};
-        $("#snippet_values_wrapper").children().each(function () {
-            if ($(this).find("input").is(":disabled")) return;
-            objekticek[$(this).find(".label").attr("assignedTo")] = $(this).find(".setting_value").val();
-        });
-        if (JSON.stringify(objekticek) === "{}") {
-            $("#snippet_settings_wrapper").children().each(function () {
-                objekticek[$(this).find(".replace").val()] = $(this).find(".setting_value").val();
-            });
-        }
-        return JSON.stringify(objekticek);
-    }
-    const snippetForm = $('#snippet-form');
+    const getMacrosArr = function () {
+        return Object.keys(macroList).reduce((newObj, macro) => {
+            if (macroList[macro].type !== 'unused' && $('#snippet_macros [data-macro="' + macro + '"]').length)
+                newObj[macro] = macroList[macro];
 
-    snippetForm.submit(function () {
-        const snippetSettings = $('#snippet_snippet_settings');
-        const snippetValues = jQuery('#snippet_snippet_values');
-        snippetSettings.val(testikfunkce());
+            return newObj;
+        }, {});
+    };
 
-        let empty = 0;
-        if (snippetSettings.val() === "[]") {
-            snippetSettings.prop('disabled', true);
-            empty++;
-        }
-
-        snippetValues.val(returnforvalues());
-        if (snippetValues.val() === "{}") {
-            snippetValues.prop('disabled', true);
-            empty++;
-        }
-        if (empty === 2) {
-            snippetForm.append('<input type="hidden" id="has_no_settings" name="has_no_settings" value="true">');
-        }
+    $('#snippet-form').submit(function () {
+        snippetMacrosInput.val(JSON.stringify(getMacrosArr()));
     });
 
-    $("#remove_variable_wpd").on('click', function () {
-        $('#snippet_settings_wrapper').children().last().remove();
-    });
+    updateMacros();
 });
 
 

@@ -20,11 +20,11 @@ class Code_Snippets_Upgrade {
 	/**
 	 * Class constructor
 	 *
-	 * @param string           $version Current plugin version
-	 * @param Code_Snippets_DB $db      Instance of database class
+	 * @param string $version Current plugin version
+	 * @param Code_Snippets_DB $db Instance of database class
 	 */
 	public function __construct( $version, Code_Snippets_DB $db ) {
-		$this->db = $db;
+		$this->db              = $db;
 		$this->current_version = $version;
 	}
 
@@ -45,18 +45,16 @@ class Code_Snippets_Upgrade {
 	 * Perform upgrades for the current site
 	 */
 	private function do_site_upgrades() {
-	    global $wpdb;
-		$table_name = $this->db->table;
+		global $wpdb;
+		$table_name   = $this->db->table;
 		$prev_version = get_option( 'code_snippets_version' );
-        if(empty($wpdb->get_results(  "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{$table_name}' AND column_name = 'remote'"))){
-            $this->db->create_table( $table_name );
-        }
+
 		/* Do nothing if the plugin has not been updated or installed */
 		if ( ! version_compare( $prev_version, $this->current_version, '<' ) ) {
 			return;
 		}
 
-        $sample_snippets = $this->get_sample_content();
+		$sample_snippets = $this->get_sample_content();
 
 
 		$this->db->create_table( $table_name );
@@ -75,10 +73,10 @@ class Code_Snippets_Upgrade {
 			$role->remove_cap( apply_filters( 'code_snippets_cap', 'manage_snippets' ) );
 		}
 
-        $sample_snippet_templates = $this->get_sample_templates_content();
-        foreach ( $sample_snippet_templates as $sample_snippet ) {
-            save_snippet( $sample_snippet );
-        }
+		$sample_snippet_templates = $this->get_sample_templates_content();
+		foreach ( $sample_snippet_templates as $sample_snippet ) {
+			save_snippet( $sample_snippet );
+		}
 
 		if ( false === $prev_version ) {
 			if ( apply_filters( 'code_snippets/create_sample_content', true ) ) {
@@ -97,7 +95,7 @@ class Code_Snippets_Upgrade {
 	 * Perform multisite-only upgrades
 	 */
 	private function do_multisite_upgrades() {
-		$table_name = $this->db->ms_table;
+		$table_name   = $this->db->ms_table;
 		$prev_version = get_site_option( 'code_snippets_version' );
 
 		/* Do nothing if the plugin has not been updated or installed */
@@ -219,22 +217,22 @@ class Code_Snippets_Upgrade {
 	}
 
 
-    private function get_sample_templates_content() {
-        $tag = "\n\n" . esc_html__( 'You can remove it, or edit it to add your own content.', 'code-snippets' );
+	private function get_sample_templates_content() {
+		$tag = "\n\n" . esc_html__( 'You can remove it, or edit it to add your own content.', 'code-snippets' );
 
-        $snippets_data = array();
+		$snippets_data = array();
 
-        foreach (glob(dirname( CODE_SNIPPETS_FILE ) . '\templates\*') as $filename) {
-            $snippets_data[basename($filename)] = json_decode(file_get_contents($filename), true);
-        }
-        $snippets = array();
+		foreach ( glob( dirname( CODE_SNIPPETS_FILE ) . '\templates\*' ) as $filename ) {
+			$snippets_data[ basename( $filename ) ] = json_decode( file_get_contents( $filename ), true );
+		}
+		$snippets = array();
 
-        foreach ( $snippets_data as $sample_name => $snippet_data ) {
-            $snippets[ $sample_name ] = new Code_Snippet( $snippet_data );
-            $snippets[ $sample_name ]->is_template = true;
-        }
+		foreach ( $snippets_data as $sample_name => $snippet_data ) {
+			$snippets[ $sample_name ]              = new Code_Snippet( $snippet_data );
+			$snippets[ $sample_name ]->is_template = true;
+		}
 
-        return $snippets;
-    }
+		return $snippets;
+	}
 
 }

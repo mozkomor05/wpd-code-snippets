@@ -77,14 +77,14 @@ function wpd_install_remote_snippet( string $endpoint ): bool {
 	}
 
 	$args = array(
-		'name'      => $snippet->name,
-		'desc'      => $snippet->description,
-		'tags'      => array_column( $snippet->request_tags(), 'name' ),
-		'code'      => $snippet->code,
-		'priority'  => 10,
-		'scope'     => 'global',
-		'remote'    => true,
-		'remote_id' => $snippet->id,
+		'name'          => $snippet->name,
+		'desc'          => $snippet->description,
+		'tags'          => array_column( $snippet->request_tags(), 'name' ),
+		'code'          => $snippet->code,
+		'priority'      => 10,
+		'scope'         => 'global',
+		'remote_status' => 'remote',
+		'remote_id'     => $snippet->id,
 	);
 
 	save_snippet( new Code_Snippet( $args ) );
@@ -105,8 +105,9 @@ function wpd_push_snippet( $id ) {
 
 	$snippet = get_snippet( $id );
 
-	if (!$snippet->remote)
+	if ( $snippet->remote_status !== 'local' ) {
 		return;
+	}
 
 	$snippet_url = preg_replace( '/[[:space:]]+/', '-', strtolower( $snippet->name ) );
 
@@ -188,7 +189,7 @@ function wpd_push_snippet( $id ) {
 
 	$remote_id = $response["id"];
 
-	$wpdb->update( $table, array( 'remote' => '1' ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
+	$wpdb->update( $table, array( 'remote' => 'remote' ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
 	$wpdb->update( $table, array( 'remote_id' => $remote_id ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
 
 }
