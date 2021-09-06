@@ -101,9 +101,13 @@ class Code_Snippets_Console {
 	 * AJAX - Evaluates console
 	 */
 	public function evaluate_wpd_console() {
-		ini_set( 'display_errors', 1 );
-		error_reporting( E_ALL );
 		$input  = stripslashes( $_POST['input'] );
+		$macros = $_POST['macros'] ?? null;
+
+		if (!empty($macros)) {
+			$input = process_snippet_macros($input, $macros);
+		}
+
 		$output = $this->evaluate_code( $input );
 
 		if ( ! isset( $output['error'] ) ) {

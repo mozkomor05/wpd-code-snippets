@@ -13,15 +13,15 @@ jQuery(document).ready(function ($) {
         let codeToRun = code_snippets_editor.session.getValue();
         codeToRun = codeToRun.replace(/^\<\?php/, '//').trim();
 
-        $("#snippet_settings_wrapper").children().each(function () {
-            codeToRun = codeToRun.replace($(this).find(".replace").val(), $(this).find(".setting_value").val());
-        });
-
         $.ajax({
             type: "post",
             dataType: "json",
             url: ajaxurl,
-            data: {action: "wpd_evaluate_code", input: codeToRun},
+            data: {
+                action: "wpd_evaluate_code",
+                input: codeToRun,
+                macros: getMacrosArr()
+            },
             success: function (res) {
                 const outputHtml = res.data.output.html || '';
                 const outputText = res.data.output.text || '';

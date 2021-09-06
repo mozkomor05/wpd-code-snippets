@@ -1,4 +1,5 @@
 <?php
+
 #use Psy;
 class Code_Snippets_API {
 	const WPD_URL = 'https://wpdistro.com/wp-json/wp/v2/';

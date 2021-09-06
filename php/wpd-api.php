@@ -53,7 +53,7 @@ function wpd_request( string $action, string $method = 'GET', $args = array() ) 
  * @return int|array
  */
 function wpd_list_posts( array $args, &$total ) {
-	$path = 'posts?' . http_build_query( $args );
+	$path = 'code_snippet?' . http_build_query( $args );
 	$res  = wpd_request( $path, 'GET', array(
 		'retrieve_body' => false,
 	) );
@@ -119,7 +119,7 @@ function wpd_push_snippet( $id ) {
 
 	$username            = 'username';
 	$password            = 'pass';
-	$rest_api_url_create = 'https://wpdistro.com/wp-json/wp/v2/posts';
+	$rest_api_url_create = 'https://wpdistro.com/wp-json/wp/v2/code_snippet';
 
 	$data_string = wp_json_encode( [
 		'title'          => $snippet->name,
