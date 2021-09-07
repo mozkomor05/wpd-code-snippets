@@ -8,9 +8,9 @@ use WPConsole\Core\Console\Psy\Output\ShellOutput;
 use WPConsole\Core\Console\Psy\Shell;
 
 /**
- * @param string $action Endpoint (or whole URL) to request
- * @param string $method Request method
- * @param array  $args Additional args
+ * @param string $action Endpoint (or whole URL) to request.
+ * @param string $method Request method.
+ * @param array  $args Additional args.
  *
  * @return false|array
  */

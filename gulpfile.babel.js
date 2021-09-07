@@ -169,6 +169,10 @@ gulp.task('package', gulp.series(
     () => gulp.src('js/min/**/*.js')
         .pipe(change((content) => content.replace(/\/\/# sourceMappingURL=[\w.-]+\.map\s+$/, '')))
         .pipe(gulp.dest(pkg.name + '/js/min')),
+    () => gulp.src('js/ace/*.js')
+        .pipe(gulp.dest(pkg.name + '/js/ace')),
+    () => gulp.src('js/autocompletions/*.js')
+        .pipe(gulp.dest(pkg.name + '/js/autocompletions')),
     () => gulp.src(pkg.name + '/**/*', {base: '.'})
         .pipe(archiver(`${pkg.name}.${pkg.version}.zip`))
         .pipe(gulp.dest('.')),
