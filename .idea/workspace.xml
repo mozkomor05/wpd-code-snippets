@@ -25,11 +25,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Snippet macros redesigned, templated do not work">
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Extended console support for macros, updated endpoint">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/class-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/wpd-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/wpd-api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -260,7 +258,8 @@
       <workItem from="1630771483503" duration="12185000" />
       <workItem from="1630830137159" duration="594000" />
       <workItem from="1630847359875" duration="13294000" />
-      <workItem from="1630944641449" duration="9938000" />
+      <workItem from="1630944641449" duration="11761000" />
+      <workItem from="1631024564526" duration="2281000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -332,7 +331,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630956105574</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Extended console support for macros, updated endpoint">
+      <created>1630956682737</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1630956682737</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,7 +368,8 @@
     <MESSAGE value="Whole bunch of changes including edit UI redesign, console rework etc" />
     <MESSAGE value="Snippets were better when they worked" />
     <MESSAGE value="Snippet macros redesigned, templated do not work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Snippet macros redesigned, templated do not work" />
+    <MESSAGE value="Extended console support for macros, updated endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="Extended console support for macros, updated endpoint" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>

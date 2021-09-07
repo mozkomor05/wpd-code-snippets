@@ -10,7 +10,7 @@ use WPConsole\Core\Console\Psy\Shell;
 /**
  * @param string $action Endpoint (or whole URL) to request
  * @param string $method Request method
- * @param array $args Additional args
+ * @param array  $args Additional args
  *
  * @return false|array
  */
@@ -100,96 +100,24 @@ function wpd_install_remote_snippet( string $endpoint ): bool {
  * @return bool
  */
 function wpd_push_snippet( $id ) {
-
-	$site_url = get_home_url();
-
 	$snippet = get_snippet( $id );
 
 	if ( $snippet->remote_status !== 'local' ) {
-		return;
+		return false;
 	}
 
-	$snippet_url = preg_replace( '/[[:space:]]+/', '-', strtolower( $snippet->name ) );
+	//$data = wp_json_encode();
 
-	if ( isset( $_POST['desc'] ) ) {
-		$snippet_desc = $_POST['desc'];
-	} else {
-		$snippet_desc = "";
-	}
+	$args = array(
+		'body'        => wp_json_encode( array(
+			'title'   => $snippet->name,
+			'content' => $snippet->desc,
+			'code'    => $snippet->code,
+		) ),
+		'data_format' => 'body',
+	);
 
-	$username            = 'username';
-	$password            = 'pass';
-	$rest_api_url_create = 'https://wpdistro.com/wp-json/wp/v2/code_snippet';
+	wpd_request( code_snippets()->api::PUSH_URL, 'POST', $args );
 
-	$data_string = wp_json_encode( [
-		'title'          => $snippet->name,
-		'content'        => $snippet_desc . '
-                <br>
-                | This snippet was pushed from <strong>' . $site_url . '</strong>
-            ',
-		'status'         => 'publish',
-		'featured_media' => '499',
-	] );
-
-	$ch = curl_init();
-	curl_setopt( $ch, CURLOPT_URL, $rest_api_url_create );
-	curl_setopt( $ch, CURLOPT_POST, 1 );
-	curl_setopt( $ch, CURLOPT_POSTFIELDS, $data_string );
-
-	curl_setopt( $ch, CURLOPT_HTTPHEADER, [
-		'Content-Type: application/json',
-		'Content-Length: ' . strlen( $data_string ),
-		'Authorization: Basic ' . base64_encode( $username . ':' . $password ),
-	] );
-	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-
-	$result   = curl_exec( $ch );
-	$response = json_decode( $result, true );
-
-	if ( curl_errno( $ch ) ) {
-		$error_msg = curl_error( $ch );
-		var_dump( $error_msg );
-	}
-
-	curl_close( $ch );
-
-	$rest_api_url_edit = 'https://wpdistro.com/wp-json/acf/v3/posts/' . $response["id"] . '/code';
-	$code              = json_encode( [
-		'fields' => [
-			'code' => $snippet->code
-		]
-	] );
-
-	$ch2 = curl_init();
-	curl_setopt( $ch2, CURLOPT_URL, $rest_api_url_edit );
-	curl_setopt( $ch2, CURLOPT_PUT, 0 );
-	curl_setopt( $ch2, CURLOPT_POSTFIELDS, $code );
-
-	curl_setopt( $ch2, CURLOPT_HTTPHEADER, [
-		'Content-Type: application/json',
-		'Content-Length: ' . strlen( $code ),
-		'Authorization: Basic ' . base64_encode( $username . ':' . $password ),
-	] );
-
-	curl_setopt( $ch2, CURLOPT_SSL_VERIFYPEER, false );
-	curl_setopt( $ch2, CURLOPT_RETURNTRANSFER, true );
-	if ( curl_errno( $ch2 ) ) {
-		$error_msg = curl_error( $ch2 );
-		var_dump( $error_msg );
-	}
-	$result = curl_exec( $ch2 );
-	curl_close( $ch2 );
-
-
-	// Set remote_id in the database
-
-	global $wpdb;
-	$table = "wp_snippets";
-
-	$remote_id = $response["id"];
-
-	$wpdb->update( $table, array( 'remote' => 'remote' ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
-	$wpdb->update( $table, array( 'remote_id' => $remote_id ), array( 'id' => $id ), array( '%d' ), array( '%d' ) );
-
+	return true;
 }

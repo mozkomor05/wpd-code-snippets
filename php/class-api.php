@@ -1,8 +1,8 @@
 <?php
 
-#use Psy;
 class Code_Snippets_API {
 	const WPD_URL = 'https://wpdistro.com/wp-json/wp/v2/';
+	const PUSH_URL = 'https://wpdistro.com/wp-json/wpdistro/push';
 
 
 	protected function get_http_args( $args ): array {
