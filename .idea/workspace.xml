@@ -25,186 +25,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Chnages for Nerakc">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Fixed gulp, removed unused modes">
       <change beforePath="$PROJECT_DIR$/gulpfile.babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.babel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/keybinding-emacs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/keybinding-sublime.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/keybinding-vim.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/keybinding-vscode.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-abap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-abc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-actionscript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-ada.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-alda.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-apache_conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-apex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-applescript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-aql.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-asciidoc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-asl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-assembly_x86.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-autohotkey.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-batchfile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-c9search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-c_cpp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-cirru.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-clojure.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-cobol.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-coffee.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-coldfusion.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-crystal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-csharp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-csound_document.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-csound_orchestra.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-csound_score.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-csp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-css.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-curly.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-d.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-dart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-diff.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-django.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-dockerfile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-dot.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-drools.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-edifact.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-eiffel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-ejs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-elixir.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-elm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-erlang.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-forth.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-fortran.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-fsharp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-fsl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-ftl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-gcode.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-gherkin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-gitignore.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-glsl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-gobstones.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-golang.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-graphqlschema.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-groovy.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-haml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-handlebars.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-haskell.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-haskell_cabal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-haxe.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-hjson.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-html.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-html_elixir.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-html_ruby.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-ini.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-io.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-jack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-jade.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-java.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-javascript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-json.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-json5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-jsoniq.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-jsp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-jssm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-jsx.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-julia.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-kotlin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-latex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-less.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-liquid.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-lisp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-livescript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-logiql.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-logtalk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-lsl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-lua.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-luapage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-lucene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-makefile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-markdown.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-mask.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-matlab.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-maze.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-mediawiki.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-mel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-mixal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-mushcode.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-mysql.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-nginx.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-nim.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-nix.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-nsis.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-nunjucks.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-objectivec.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-ocaml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-pascal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-perl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-perl6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-pgsql.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-php.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-php_laravel_blade.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-pig.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-plain_text.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-powershell.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-praat.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-prisma.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-prolog.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-properties.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-protobuf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-puppet.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-python.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-qml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-r.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-razor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-rdoc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-red.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-redshift.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-rhtml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-rst.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-ruby.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-rust.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-sass.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-scad.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-scala.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-scheme.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-scss.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-sh.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-sjs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-slim.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-smarty.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-snippets.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-soy_template.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-space.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-sparql.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-sql.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-sqlserver.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-stylus.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-svg.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-swift.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-tcl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-terraform.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-tex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-text.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-textile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-toml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-tsx.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-turtle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-twig.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-typescript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-vala.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-vbscript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-velocity.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-verilog.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-vhdl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-visualforce.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-wollok.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-xml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-xquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-yaml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ace/mode-zeek.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/wpd-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/wpd-api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,7 +258,7 @@
       <workItem from="1630847359875" duration="13294000" />
       <workItem from="1630944641449" duration="11761000" />
       <workItem from="1631024564526" duration="2281000" />
-      <workItem from="1631032987717" duration="1443000" />
+      <workItem from="1631032987717" duration="1664000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -522,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631033175241</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed gulp, removed unused modes">
+      <created>1631034484953</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1631034484953</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +383,8 @@
     <MESSAGE value="Snippet macros redesigned, templated do not work" />
     <MESSAGE value="Extended console support for macros, updated endpoint" />
     <MESSAGE value="Chnages for Nerakc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chnages for Nerakc" />
+    <MESSAGE value="Fixed gulp, removed unused modes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed gulp, removed unused modes" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>
