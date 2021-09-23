@@ -41,6 +41,7 @@ class Code_Snippet {
 	/**
 	 * The snippet metadata fields.
 	 * Initialized with default values.
+     *
 	 * @var array
 	 */
 	private $fields = array(
@@ -58,12 +59,12 @@ class Code_Snippet {
 		'modified'       => null,
 		'remote_status'  => 'local',
 		'remote_id'      => 0,
-		'macros'         => [],
-		'is_template'    => false,
+		'macros'         => array(),
 	);
 
 	/**
 	 * List of field aliases
+     *
 	 * @var array
 	 */
 	private static $field_aliases = array(
@@ -105,6 +106,7 @@ class Code_Snippet {
 
 	/**
 	 * Retrieve all snippet fields
+     *
 	 * @return array
 	 */
 	public function get_fields() {
@@ -162,7 +164,7 @@ class Code_Snippet {
 	 * Set the value of a field
 	 *
 	 * @param string $field The field name
-	 * @param mixed $value The field value
+	 * @param mixed  $value The field value
 	 */
 	public function __set( $field, $value ) {
 		$field = $this->validate_field_name( $field );
@@ -209,7 +211,7 @@ class Code_Snippet {
 	 * If the field name is invalid, false will be returned instead of an error thrown
 	 *
 	 * @param string $field The field name
-	 * @param mixed $value The field value
+	 * @param mixed  $value The field value
 	 *
 	 * @return bool true if the field was set successfully, false if the field name is invalid
 	 */
@@ -371,11 +373,12 @@ class Code_Snippet {
 	 * Update the last modification date to the current date and time.
 	 */
 	public function update_modified() {
-		$this->modified = gmdate( Code_Snippet::DATE_FORMAT );
+		$this->modified = gmdate( self::DATE_FORMAT );
 	}
 
 	/**
 	 * Retrieve the tags in list format
+     *
 	 * @return string The tags separated by a comma and a space
 	 */
 	private function get_tags_list() {
@@ -384,6 +387,7 @@ class Code_Snippet {
 
 	/**
 	 * Retrieve a list of all available scopes
+     *
 	 * @return array
 	 */
 	public static function get_all_scopes() {
@@ -392,6 +396,7 @@ class Code_Snippet {
 
 	/**
 	 * Retrieve a list of all scope icons
+     *
 	 * @return array
 	 */
 	public static function get_scope_icons() {
@@ -405,6 +410,7 @@ class Code_Snippet {
 
 	/**
 	 * Retrieve the string representation of the scope
+     *
 	 * @return string The name of the scope
 	 */
 	private function get_scope_name() {
@@ -413,6 +419,7 @@ class Code_Snippet {
 
 	/**
 	 * Retrieve the icon used for the current scope
+     *
 	 * @return string a dashicon name
 	 */
 	private function get_scope_icon() {
@@ -423,6 +430,7 @@ class Code_Snippet {
 
 	/**
 	 * Determine if the snippet is a shared network snippet
+     *
 	 * @return bool
 	 */
 	private function get_shared_network() {

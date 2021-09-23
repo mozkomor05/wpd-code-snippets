@@ -6,13 +6,6 @@ class Code_Snippets_Console {
 
 	public function __construct() {
 		add_action( 'wp_ajax_wpd_evaluate_code', array( $this, 'evaluate_wpd_console' ) );
-		add_action( 'wp_ajax_getsnippetcontent', array( $this, 'get_snippet_content' ) );
-	}
-
-	public function get_snippet_content() {
-		$id      = $_POST['id'];
-		$snippet = get_snippet_template( $id );
-		wp_send_json( array( 'id' => $id, 'code' => $snippet->code ) );
 	}
 
 
@@ -104,8 +97,8 @@ class Code_Snippets_Console {
 		$input  = stripslashes( $_POST['input'] );
 		$macros = $_POST['macros'] ?? null;
 
-		if (!empty($macros)) {
-			$input = process_snippet_macros($input, $macros);
+		if ( ! empty( $macros ) ) {
+			$input = process_snippet_macros( $input, $macros );
 		}
 
 		$output = $this->evaluate_code( $input );

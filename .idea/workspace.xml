@@ -25,8 +25,31 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Fixed gulp, removed unused modes">
-      <change beforePath="$PROJECT_DIR$/gulpfile.babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.babel.js" afterDir="false" />
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="fixed gulp">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/code-snippets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/browse.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/browse.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-admin-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-admin-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-edit-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-edit-template-menu.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-manage-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-manage-menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-manage-templates-menu.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-code-snippets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-db.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-list-table-browse.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table-browse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-list-table-templates.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-snippet.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-snippet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-upgrade.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-upgrade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/import-export.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/import-export.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/snippet-ops.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/snippet-ops.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/views/edit-template.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/views/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/views/edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/views/manage-templates.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/wpd-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/wpd-api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +143,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
@@ -258,7 +281,12 @@
       <workItem from="1630847359875" duration="13294000" />
       <workItem from="1630944641449" duration="11761000" />
       <workItem from="1631024564526" duration="2281000" />
-      <workItem from="1631032987717" duration="1664000" />
+      <workItem from="1631032987717" duration="7229000" />
+      <workItem from="1631118194970" duration="2840000" />
+      <workItem from="1631195821418" duration="2329000" />
+      <workItem from="1631547952051" duration="616000" />
+      <workItem from="1632323546610" duration="1250000" />
+      <workItem from="1632403964508" duration="4764000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -351,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631034484953</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="fixed gulp">
+      <created>1631034795873</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1631034795873</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,7 +419,8 @@
     <MESSAGE value="Extended console support for macros, updated endpoint" />
     <MESSAGE value="Chnages for Nerakc" />
     <MESSAGE value="Fixed gulp, removed unused modes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed gulp, removed unused modes" />
+    <MESSAGE value="fixed gulp" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed gulp" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>

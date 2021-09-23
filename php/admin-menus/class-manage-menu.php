@@ -76,7 +76,6 @@ class Code_Snippets_Manage_Menu extends Code_Snippets_Admin_Menu {
 		$classmap = array(
 			'snippets'             => 'manage',
 			'add-snippet'          => 'edit',
-			'edit-template'        => 'edit-template',
 			'edit-snippet'         => 'edit',
 			'import-code-snippets' => 'import',
 			'snippets-settings'    => 'settings',

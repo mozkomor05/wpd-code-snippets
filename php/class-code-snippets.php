@@ -128,12 +128,10 @@ class Code_Snippets {
 	public function get_menu_slug( $menu = '' ) {
 		$add           = array( 'single', 'add', 'add-new', 'add-snippet', 'new-snippet', 'add-new-snippet' );
 		$edit          = array( 'edit', 'edit-snippet' );
-		$add_template  = array( 'add-template' );
-		$edit_template = array( 'edit-template' );
 		$browse        = array( 'browse' );
 		$import        = array( 'import', 'import-snippets', 'import-code-snippets' );
 		$settings      = array( 'settings', 'snippets-settings' );
-		$templates     = array( 'manage-templates' );
+
 		if ( in_array( $menu, $edit, true ) ) {
 			return 'edit-snippet';
 		} elseif ( in_array( $menu, $add, true ) ) {
@@ -144,12 +142,6 @@ class Code_Snippets {
 			return 'snippets-settings';
 		} elseif ( in_array( $menu, $browse, true ) ) {
 			return 'browse-snippets';
-		} elseif ( in_array( $menu, $templates, true ) ) {
-			return 'manage-templates';
-		} elseif ( in_array( $menu, $edit_template, true ) ) {
-			return 'edit-template';
-		} elseif ( in_array( $menu, $add_template, true ) ) {
-			return 'add-template';
 		} else {
 			return 'snippets';
 		}
@@ -199,13 +191,6 @@ class Code_Snippets {
 		return add_query_arg(
 			'id', absint( $snippet_id ),
 			$this->get_menu_url( 'edit', $context )
-		);
-	}
-
-	public function get_snippet_template_edit_url( $snippet_id, $context = 'self' ) {
-		return add_query_arg(
-			'id', absint( $snippet_id ),
-			$this->get_menu_url( 'edit-template', $context )
 		);
 	}
 

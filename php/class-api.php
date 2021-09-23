@@ -53,7 +53,7 @@ class Code_Snippets_API {
 	 *
 	 * @return array|WP_Error
 	 */
-	public function post_request( $action, $body, $headers ) {
+	public function post_request( $action, $headers, $body ) {
 		$headers   = wp_parse_args( $headers, array(
 			'Content-Type' => 'application/json; charset=utf-8',
 		) );
@@ -61,6 +61,7 @@ class Code_Snippets_API {
 			'headers' => $headers,
 			'body'    => $body,
 		) );
+
 		$url       = $this->get_request_url( $action );
 		$request   = wp_remote_post( $url, $http_args );
 

@@ -291,6 +291,8 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 
 		/* Display message if a parse error occurred */
 		if ( isset( $code_error ) && ! empty( $code_error ) ) {
+			session_start();
+
 			$code_error['code']             = $snippet->code;
 			$_SESSION['last_snippet_error'] = $code_error;
 			$result                         = 'code-error';
@@ -414,7 +416,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
             <h2><?php esc_html_e( 'Settings and Macros' ); ?></h2>
             <div class="collapsible">
                 <strong><?php esc_html_e( 'Macros' ); ?></strong>
-                <p><?php _e( 'Macros are predefined strings that will be placed into the code before execution. Macros are identified by <code>${{<i>&lt;value&gt;</i>>}}</code> syntax, where <i>&lt;value&gt;</i> is a unique identifier of your macro. You can use macros the same way you use variables. All available macros will be listed below. ' ); ?></p>
+                <p><?php _e( 'Macros are predefined strings that will be placed into the code before execution. Macros are identified by <code>${{<i>&lt;value&gt;</i>}}</code> syntax, where <i>&lt;value&gt;</i> is a unique identifier of your macro. You can use macros the same way you use variables. All available macros will be listed below. ' ); ?></p>
                 <table id="snippet_macros" class="widefat fixed">
                     <thead>
                     <tr>

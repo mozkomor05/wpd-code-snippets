@@ -101,19 +101,17 @@ if ( ! $snippet->id ) {
 					);
 
 				} elseif ( ! $snippet->shared_network || ! is_network_admin() ) {
-					if ( ! $snippet->is_template ) {
-						if ( $snippet->active ) {
-							$actions['save_snippet_deactivate'] = array(
-								__( 'Deactivate', 'code-snippets' ),
-								__( 'Save Snippet and Deactivate', 'code-snippets' ),
-							);
+					if ( $snippet->active ) {
+						$actions['save_snippet_deactivate'] = array(
+							__( 'Deactivate', 'code-snippets' ),
+							__( 'Save Snippet and Deactivate', 'code-snippets' ),
+						);
 
-						} else {
-							$actions['save_snippet_activate'] = array(
-								__( 'Activate', 'code-snippets' ),
-								__( 'Save Snippet and Activate', 'code-snippets' ),
-							);
-						}
+					} else {
+						$actions['save_snippet_activate'] = array(
+							__( 'Activate', 'code-snippets' ),
+							__( 'Save Snippet and Activate', 'code-snippets' ),
+						);
 					}
 				}
 
@@ -229,45 +227,6 @@ if ( ! $snippet->id ) {
             </div>
         </div>
         <textarea id="snippet_code_real" name="snippet_code" style="display:none"></textarea>
-
-        <input type="hidden" id="snippet_is_template"
-               name="snippet_is_template" <?php if ( $snippet->is_template ) :
-			?> value="is_template" <?php endif; ?> >
-
-		<?php $all_snippets = get_snippet_templates( array() );
-		foreach ( $all_snippets as $key => $snippet_from_db ) {
-			if ( 0 !== $snippet->id ) {
-				if ( $snippet_from_db->id === $snippet->id ) {
-					array_splice( $all_snippets, $key, 1 );
-				}
-			}
-		}
-		if ( count( $all_snippets ) > 0 ) :
-			$json = array();
-			foreach ( $all_snippets as $snippet_from_db ) {
-				$json[ $snippet_from_db->id ] = unserialize( $snippet_from_db->snippet_settings );
-			}
-			echo '<script>var codeSnippetTemplateSettings = ' . wp_json_encode( $json ) . ';</script>';
-			?>
-            <div id="snippet_template_wrapper" class="editor_section">
-                <h1>Snippet templates</h1>
-                <label>Select snippet template:</label>
-                <select name="snippet_template" id="snippet_template" class="editor_section">
-                    <option disabled selected value> -- select an option --</option>
-					<?php foreach ( $all_snippets as $snippet_from_db ) : ?>
-                        <option value="<?= $snippet_from_db->id ?>"><?= $snippet_from_db->name ?></option>
-					<?php endforeach;
-					?>
-                </select>
-                <div id="snippet_template_settings" style="display: none; margin: 5px">
-                    <label>Template settings:</label><br/>
-                    <div id="snippet_template_settings_wrapper" class="editor_section"></div>
-                    <button type="button" id="execute_template" class="button button-primary editor_section">Execute
-                        template
-                    </button>
-                </div>
-            </div>
-		<?php endif; ?>
 		<?php
 		/* Allow plugins to add fields and content to this page */
 		do_action( 'code_snippets/admin/single', $snippet );

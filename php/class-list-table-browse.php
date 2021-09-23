@@ -214,8 +214,8 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 			$snippet = new WPD_Snippet( $wpd_snippet );
 
 			$title       = $snippet->name;
-			$description = strip_tags( $snippet->description );
-			$name        = strip_tags( $title );
+			$description = wp_strip_all_tags( $snippet->description );
+			$name        = wp_strip_all_tags( $title );
 			$author_info = $snippet->request_author();
 			$author_name = $author_info->name;
 			$author      = '';
@@ -223,10 +223,10 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 			if ( $author_info ) {
 				/* translators: %s: Plugin author. */
 				$author = ' <cite>' . __( 'By', 'code-snippets' ) . sprintf( ' <a href="%s" aria-label="%s" data-title="%s">%s</a>',
-                    esc_url( $author_info->link ),
-                    esc_attr( sprintf( __( 'Author of %s' ), $name ) ),
-                    esc_attr( $name ),
-                $author_name ) . '</cite>';
+						esc_url( $author_info->link ),
+						esc_attr( sprintf( __( 'Author of %s' ), $name ) ),
+						esc_attr( $name ),
+						$author_name ) . '</cite>';
 			}
 
 			$requires_php = $wpd_snippet['requires_php'] ?? null;
@@ -239,12 +239,13 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 			$num_ratings = empty( $wpd_snippet['rating_reviews_count'] ) ? 0 : $wpd_snippet['rating_reviews_count'];
 			$tags        = $snippet->request_tags();
 
-			//$status = install_plugin_install_status($plugin);
-			$status = array(
-				'status' => 'install',
-			);
+			$status = 'install';
 
-			switch ( $status['status'] ) {
+			if ( wpd_remote_snippet_exists( $snippet->id ) ) {
+				$status = 'installed';
+			}
+
+			switch ( $status ) {
 				case 'install':
 					if ( $compatible_php && $compatible_wp ) {
 						$action_links[] = sprintf(
@@ -255,6 +256,13 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 							__( 'Import Now', 'code-snippets' )
 						);
 					}
+					break;
+
+				case 'installed':
+					$action_links[] = sprintf(
+						'<a class="action-button button snippet-installed-button" href="#">%s</a>',
+						__( 'Installed!', 'code-snippets' )
+					);
 					break;
 			}
 
@@ -334,11 +342,11 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 								if ( ! empty( $plugin_icon_url ) ) :
 									?>
                                     <img src="<?php echo esc_attr( $plugin_icon_url ); ?>" class="plugin-icon" alt=""/>
-									<?php
+								<?php
 								else :
 									?>
                                     <div class="default-snippet-icon plugin-icon"></div>
-									<?php
+								<?php
 								endif;
 								?>
                             </a>
@@ -389,7 +397,6 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
             </div>
 			<?php
 		}
-		echo '</div></div>';
 	}
 
 	/**

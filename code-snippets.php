@@ -31,6 +31,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
 
+if ( in_array( 'code-snippets/code-snippets.php', (array) get_option( 'active_plugins', array() ), true ) ) {
+	die( 'In order for WPD Code Snippets to work, the original Code Snippets plugin must be deactivated.' );
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
@@ -50,32 +54,34 @@ define( 'CODE_SNIPPETS_FILE', __FILE__ );
  *
  * @param $class_name
  */
-function code_snippets_autoload( $class_name ) {
+if ( ! function_exists( 'code_snippets_autoload' ) ) {
+	function code_snippets_autoload( $class_name ) {
 
-	/* Only autoload classes from this plugin */
-	if ( 'Code_Snippet' !== $class_name && 'Code_Snippets' !== substr( $class_name, 0, 13 ) ) {
-		return;
+		/* Only autoload classes from this plugin */
+		if ( 'Code_Snippet' !== $class_name && 'Code_Snippets' !== substr( $class_name, 0, 13 ) ) {
+			return;
+		}
+
+		/* Remove namespace from class name */
+		$class_file = str_replace( 'Code_Snippets_', '', $class_name );
+
+		if ( 'Code_Snippet' === $class_name ) {
+			$class_file = 'Snippet';
+		}
+
+		/* Convert class name format to file name format */
+		$class_file = strtolower( $class_file );
+		$class_file = str_replace( '_', '-', $class_file );
+
+		$class_path = dirname( __FILE__ ) . '/php/';
+
+		if ( 'Menu' === substr( $class_name, - 4, 4 ) ) {
+			$class_path .= 'admin-menus/';
+		}
+
+		/* Load the class */
+		require_once $class_path . "class-{$class_file}.php";
 	}
-
-	/* Remove namespace from class name */
-	$class_file = str_replace( 'Code_Snippets_', '', $class_name );
-
-	if ( 'Code_Snippet' === $class_name ) {
-		$class_file = 'Snippet';
-	}
-
-	/* Convert class name format to file name format */
-	$class_file = strtolower( $class_file );
-	$class_file = str_replace( '_', '-', $class_file );
-
-	$class_path = dirname( __FILE__ ) . '/php/';
-
-	if ( 'Menu' === substr( $class_name, - 4, 4 ) ) {
-		$class_path .= 'admin-menus/';
-	}
-
-	/* Load the class */
-	require_once $class_path . "class-{$class_file}.php";
 }
 
 try {
@@ -90,14 +96,16 @@ try {
  * @return Code_Snippets
  * @since 2.6.0
  */
-function code_snippets() {
-	static $plugin;
+if ( ! function_exists( 'code_snippets' ) ) {
+	function code_snippets() {
+		static $plugin;
 
-	if ( is_null( $plugin ) ) {
-		$plugin = new Code_Snippets( '3.1.0', __FILE__ );
+		if ( is_null( $plugin ) ) {
+			$plugin = new Code_Snippets( '3.1.0', __FILE__ );
+		}
+
+		return $plugin;
 	}
-
-	return $plugin;
 }
 
 code_snippets()->load_plugin();

@@ -7,12 +7,14 @@ class Code_Snippets_Upgrade {
 
 	/**
 	 * Instance of database class
+	 *
 	 * @var Code_Snippets_DB
 	 */
 	private $db;
 
 	/**
 	 * The current plugin version number
+	 *
 	 * @var string
 	 */
 	private $current_version;
@@ -32,7 +34,6 @@ class Code_Snippets_Upgrade {
 	 * Run the upgrade functions
 	 */
 	public function run() {
-
 		/* Always run multisite upgrades, even if not on the main site, as subsites depend on the network snippet table */
 		if ( is_multisite() ) {
 			$this->do_multisite_upgrades();
@@ -48,19 +49,20 @@ class Code_Snippets_Upgrade {
 		global $wpdb;
 		$table_name   = $this->db->table;
 		$prev_version = get_option( 'code_snippets_version' );
+		$was_wpd      = get_option( 'wpd_code_snippets' );
 
 		/* Do nothing if the plugin has not been updated or installed */
-		if ( ! version_compare( $prev_version, $this->current_version, '<' ) ) {
+		if ( ! version_compare( $prev_version, $this->current_version, '<' ) && $was_wpd ) {
 			return;
 		}
 
 		$sample_snippets = $this->get_sample_content();
 
-
 		$this->db->create_table( $table_name );
 
 		/* Update the plugin version stored in the database */
 		update_option( 'code_snippets_version', $this->current_version );
+		update_option( 'wpd_code_snippets', true );
 
 		/* Update the scope column of the database */
 		if ( version_compare( $prev_version, '2.10.0', '<' ) ) {
@@ -71,11 +73,6 @@ class Code_Snippets_Upgrade {
 		if ( version_compare( $prev_version, '2.9.5', '<=' ) ) {
 			$role = get_role( apply_filters( 'code_snippets_role', 'administrator' ) );
 			$role->remove_cap( apply_filters( 'code_snippets_cap', 'manage_snippets' ) );
-		}
-
-		$sample_snippet_templates = $this->get_sample_templates_content();
-		foreach ( $sample_snippet_templates as $sample_snippet ) {
-			save_snippet( $sample_snippet );
 		}
 
 		if ( false === $prev_version ) {
@@ -215,24 +212,4 @@ class Code_Snippets_Upgrade {
 
 		return $snippets;
 	}
-
-
-	private function get_sample_templates_content() {
-		$tag = "\n\n" . esc_html__( 'You can remove it, or edit it to add your own content.', 'code-snippets' );
-
-		$snippets_data = array();
-
-		foreach ( glob( dirname( CODE_SNIPPETS_FILE ) . '\templates\*' ) as $filename ) {
-			$snippets_data[ basename( $filename ) ] = json_decode( file_get_contents( $filename ), true );
-		}
-		$snippets = array();
-
-		foreach ( $snippets_data as $sample_name => $snippet_data ) {
-			$snippets[ $sample_name ]              = new Code_Snippet( $snippet_data );
-			$snippets[ $sample_name ]->is_template = true;
-		}
-
-		return $snippets;
-	}
-
 }

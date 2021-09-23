@@ -10,7 +10,7 @@ use WPConsole\Core\Console\Psy\Shell;
 /**
  * @param string $action Endpoint (or whole URL) to request.
  * @param string $method Request method.
- * @param array  $args Additional args.
+ * @param array $args Additional args.
  *
  * @return false|array
  */
@@ -106,18 +106,26 @@ function wpd_push_snippet( $id ) {
 		return false;
 	}
 
-	//$data = wp_json_encode();
-
 	$args = array(
-		'body'        => wp_json_encode( array(
+		'body' => wp_json_encode( array(
 			'title'   => $snippet->name,
 			'content' => $snippet->desc,
 			'code'    => $snippet->code,
-		) ),
-		'data_format' => 'body',
+		) )
 	);
 
 	wpd_request( code_snippets()->api::PUSH_URL, 'POST', $args );
 
 	return true;
+}
+
+function wpd_remote_snippet_exists( $remote_id ) : bool {
+	/** @var wpdb $wpdb */
+	global $wpdb;
+
+	$db     = code_snippets()->db;
+	$table  = $db->get_table_name();
+	$result = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(1) FROM {$table} WHERE remote_id = %d", $remote_id ) );
+
+	return $result == 1;
 }
