@@ -145,6 +145,7 @@
     }
 
     function push_snippet(e) {
+        this.disabled = true;
         const form = document.getElementById('push-snippet-form');
         let snippetRow = null;
 

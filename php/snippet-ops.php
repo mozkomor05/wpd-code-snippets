@@ -432,8 +432,10 @@ function update_snippet_fields( $snippet_id, $fields, $network = null ) {
  * @return string Code with replaced macros.
  */
 function process_snippet_macros( $code, $macros ) {
-	foreach ( $macros as $find => $obj ) {
-		$code = str_replace( '${{' . $find . '}}', addslashes( $obj['value'] ), $code );
+	if ( is_array( $macros ) ) {
+		foreach ( $macros as $find => $obj ) {
+			$code = str_replace( '${{' . $find . '}}', addslashes( $obj['value'] ), $code );
+		}
 	}
 
 	return $code;

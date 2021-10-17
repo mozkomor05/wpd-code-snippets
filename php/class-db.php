@@ -187,7 +187,7 @@ class Code_Snippets_DB {
 				modified    	DATETIME    NOT NULL DEFAULT '0000-00-00 00:00:00',
                 remote_status   VARCHAR(15) NOT NULL DEFAULT 'local',
 				remote_id  		BIGINT(20)  NOT NULL DEFAULT 0,
-				macros			LONGTEXT    NOT NULL DEFAULT '',
+				macros			LONGTEXT    NOT NULL DEFAULT '[]',
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
