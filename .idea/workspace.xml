@@ -25,80 +25,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Templates removed, a lot of changes made">
-      <change afterPath="$PROJECT_DIR$/wpd-code-snippets.3.1.0.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Log spam fixed">
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MENTIONS.md" beforeDir="false" afterPath="$PROJECT_DIR$/MENTIONS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/code-snippets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/browse.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/browse.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/edit.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/edit.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/editor.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/editor.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/font/code-snippets.svg" beforeDir="false" afterPath="$PROJECT_DIR$/css/font/code-snippets.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/front-end.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/front-end.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/manage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/manage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/menu-icon.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/menu-icon.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/settings.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/settings.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/autocompletions/misc.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/autocompletions/misc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/autocompletions/mode-php.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/autocompletions/mode-php.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/autocompletions/php-constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/autocompletions/php-constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/autocompletions/php-functions.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/autocompletions/php-functions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/autocompletions/wp-functions.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/autocompletions/wp-functions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/browse.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/browse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/edit-tags.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit-tags.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/editor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/front-end.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/front-end.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/manage.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/manage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/license.txt" beforeDir="false" afterPath="$PROJECT_DIR$/license.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-admin-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-admin-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-browse-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-browse-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-import-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-import-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/admin-menus/class-settings-menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/admin-menus/class-settings-menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-api.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-code-snippets.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-code-snippets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-contextual-help.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-contextual-help.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-db.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-db.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-list-table-browse.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table-browse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-list-table.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-list-table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-shell.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-shell.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-shelloutput.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-shelloutput.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-shortcode.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-shortcode.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-validator.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-validator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/import-export.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/import-export.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/settings/editor-preview.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/settings/editor-preview.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/settings/render-fields.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/settings/render-fields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/settings/settings-fields.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/settings/settings-fields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/settings/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/settings/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/snippet-ops.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/snippet-ops.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/views/browse.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/views/browse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/views/import.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/views/import.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/views/manage.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/views/manage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/phpcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/bootstrap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/tests/install.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test-unit-tests.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-unit-tests.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uninstall.php" beforeDir="false" afterPath="$PROJECT_DIR$/uninstall.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wpd-code-snippets.3.1.0.zip" beforeDir="false" afterPath="$PROJECT_DIR$/wpd-code-snippets.3.1.0.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,13 +64,17 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/gulpfile.babel.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/php/snippet-ops.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/code-snippets.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/php/class-console.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/uninstall.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.0">
     <include_path>
-      <path value="$PROJECT_DIR$/../Wordpress" />
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
@@ -144,7 +83,6 @@
       <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
       <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
@@ -152,16 +90,11 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
       <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
       <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
       <path value="$PROJECT_DIR$/vendor/sebastian/version" />
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/wp-coding-standards/wpcs" />
       <path value="$PROJECT_DIR$/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
@@ -176,6 +109,8 @@
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit-mock-objects" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
     </include_path>
   </component>
   <component name="ProjectId" id="1l2xdZ3BVFCijY7gdkdcuVdeDcR" />
@@ -200,7 +135,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="dumpAutoload C:/Users/mozko/OneDrive/Documents/Programming and projects/WPDistro/wpd-code-snippets/composer.json" value="--no-interaction --ansi --verbose --optimize" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../leady-integration" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
@@ -339,7 +274,10 @@
       <workItem from="1632410191843" duration="1002000" />
       <workItem from="1633890340919" duration="328000" />
       <workItem from="1633957719516" duration="1909000" />
-      <workItem from="1634461357402" duration="415000" />
+      <workItem from="1634461357402" duration="4182000" />
+      <workItem from="1634738424280" duration="2072000" />
+      <workItem from="1634816355819" duration="2072000" />
+      <workItem from="1634835439427" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -446,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632410281972</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Log spam fixed">
+      <created>1634461839453</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1634461839454</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -481,7 +426,8 @@
     <MESSAGE value="Fixed gulp, removed unused modes" />
     <MESSAGE value="fixed gulp" />
     <MESSAGE value="Templates removed, a lot of changes made" />
-    <option name="LAST_COMMIT_MESSAGE" value="Templates removed, a lot of changes made" />
+    <MESSAGE value="Log spam fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Log spam fixed" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>

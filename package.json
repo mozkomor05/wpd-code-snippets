@@ -61,7 +61,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-wp-pot": "^2.4.3",
-    "gulp-zip": "^5.0.2",
+    "gulp-zip": "^5.1.0",
     "postcss-import": "^12.0.1",
     "precss": "^4.0.0",
     "vinyl-buffer": "^1.0.1",
