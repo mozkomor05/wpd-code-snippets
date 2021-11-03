@@ -4,6 +4,16 @@ import './editor';
 
 'use strict'
 jQuery(document).ready(function ($) {
+    window.onbeforeunload = function (e) {
+        e = e || window.event;
+
+        if (e) {
+            e.returnValue = 'Sure?';
+        }
+
+        return 'Sure?';
+    };
+
     const outputTextarea = document.getElementById('snippet_output');
     const macrosTbody = $('#snippet_macros tbody');
     const snippetMacrosInput = $('#snippet_macros_input');

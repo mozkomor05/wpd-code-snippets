@@ -25,15 +25,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="Log spam fixed">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="4959aca3-6e45-411f-b9d2-820d0435f70d" name="Default Changelist" comment="enabled Yolo">
+      <change afterPath="$PROJECT_DIR$/local_deploy.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wpd-code-snippets.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/class-console.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/class-console.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wpd-code-snippets.3.1.0.zip" beforeDir="false" afterPath="$PROJECT_DIR$/wpd-code-snippets.3.1.0.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wpd-code-snippets.3.1.0.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +274,11 @@
       <workItem from="1634461357402" duration="4182000" />
       <workItem from="1634738424280" duration="2072000" />
       <workItem from="1634816355819" duration="2072000" />
-      <workItem from="1634835439427" duration="7000" />
+      <workItem from="1634835439427" duration="530000" />
+      <workItem from="1634914706296" duration="70000" />
+      <workItem from="1634914787893" duration="1823000" />
+      <workItem from="1634992982040" duration="18000" />
+      <workItem from="1635968295990" duration="862000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of WPDistro Code Snippets - fork of Code Snippets.">
       <created>1608058770214</created>
@@ -391,7 +392,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634461839454</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="enabled Yolo">
+      <created>1634835470628</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1634835470628</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,7 +435,8 @@
     <MESSAGE value="fixed gulp" />
     <MESSAGE value="Templates removed, a lot of changes made" />
     <MESSAGE value="Log spam fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Log spam fixed" />
+    <MESSAGE value="enabled Yolo" />
+    <option name="LAST_COMMIT_MESSAGE" value="enabled Yolo" />
   </component>
   <component name="WordPressConfiguration" enabled="true">
     <wordpressPath>C:\Users\mozko\OneDrive\Documents\Programming and projects\WPDistro\Wordpress</wordpressPath>
