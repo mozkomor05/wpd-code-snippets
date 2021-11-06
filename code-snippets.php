@@ -101,7 +101,7 @@ if ( ! function_exists( 'code_snippets' ) ) {
 		static $plugin;
 
 		if ( is_null( $plugin ) ) {
-			$plugin = new Code_Snippets( '3.1.0', __FILE__ );
+			$plugin = new Code_Snippets( '0.0.1', __FILE__ );
 		}
 
 		return $plugin;

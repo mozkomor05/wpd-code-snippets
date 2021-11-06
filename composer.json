@@ -1,39 +1,29 @@
 {
-	"name": "sheabunge/code-snippets",
-	"description": "Manage code snippets running on a WordPress-powered site through a graphical interface",
-	"keywords": [
-		"wordpress",
-		"snippets",
-		"organization"
-	],
-	"type": "wordpress-plugin",
-	"homepage": "https://wordpress.org/plugins/code-snippets",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Shea Bunge",
-			"email": "bungeshea@gmail.com",
-			"homepage": "https://sheabunge.com"
-		}
-	],
-	"support": {
-		"issues": "https://github.com/sheabunge/code-snippets/issues",
-		"source": "https://github.com/sheabunge/code-snippets"
-	},
-	"autoload" : {
-		"psr-4": {
-			"WPConsole\\Core\\Console\\": "php/Console/"
-		}
-	  },
-	"require": {
-		"ext-dom": "*",
-		"ext-json": "*",
-		"php": ">=7.0",
-		"composer/installers": "^1.6",
-		"psy/psysh": "@stable"
-    },
-	"require-dev": {
-		"wp-coding-standards/wpcs": "dev-master",
-		"phpunit/phpunit": "<8.0"
-	}
+  "name": "mozkomor05/wpd-code-snippets",
+  "description": "Manage share and download code snippets snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your Wordpress.",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Mozkomor05\\WpdCodeSnippets\\": "src/"
+    }
+  },
+  "scripts": {
+    "phpcs": "phpcs --standard=phpcs.xml"
+  },
+  "authors": [
+    {
+      "name": "mozkomor05",
+      "email": "mozkomor05@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-dom": "*",
+    "ext-json": "*",
+    "php": ">=7.0",
+    "psy/psysh": "@stable"
+  },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^2.3",
+    "phpunit/phpunit": "^9.5"
+  }
 }

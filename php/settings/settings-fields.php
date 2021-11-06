@@ -45,7 +45,7 @@ function code_snippets_get_settings_fields() {
 			'default' => true,
 		),
 
-		'disable_prism' => array(
+		'y+disable_prism' => array(
 			'name'    => __( 'Disable Shortcode Syntax Highlighter', 'code-snippets' ),
 			'type'    => 'checkbox',
 			'label'   => __( 'Disable the syntax highlighting for the [code_snippet] shortcode on the front-end', 'code-snippets' ),
@@ -56,7 +56,7 @@ function code_snippets_get_settings_fields() {
 			'name'    => __( 'Complete Uninstall', 'code-snippets' ),
 			'type'    => 'checkbox',
 			'label'   => sprintf(
-				/* translators: %s: URL for Plugins admin menu */
+			/* translators: %s: URL for Plugins admin menu */
 				__( 'When the plugin is deleted from the <a href="%s">Plugins</a> menu, also delete all snippets and plugin settings.', 'code-snippets' ),
 				self_admin_url( 'plugins.php' )
 			),
@@ -98,69 +98,12 @@ function code_snippets_get_settings_fields() {
 
 	$fields['editor'] = array(
 		'theme' => array(
-			'name'       => __( 'Theme', 'code-snippets' ),
-			'type'       => 'codemirror_theme_select',
-			'default'    => 'default',
-			'codemirror' => 'theme',
+			'name'    => __( 'Theme', 'code-snippets' ),
+			'type'    => 'ace_theme_select',
+			'default' => 'iplastic',
+			'ace'     => 'theme',
 		),
 
-		'indent_with_tabs' => array(
-			'name'       => __( 'Indent With Tabs', 'code-snippets' ),
-			'type'       => 'checkbox',
-			'label'      => __( 'Use hard tabs (not spaces) for indentation.', 'code-snippets' ),
-			'default'    => true,
-			'codemirror' => 'indentWithTabs',
-		),
-
-		'tab_size' => array(
-			'name'       => __( 'Tab Size', 'code-snippets' ),
-			'type'       => 'number',
-			'desc'       => __( 'The width of a tab character.', 'code-snippets' ),
-			'default'    => 4,
-			'codemirror' => 'tabSize',
-			'min'        => 0,
-		),
-
-		'indent_unit' => array(
-			'name'       => __( 'Indent Unit', 'code-snippets' ),
-			'type'       => 'number',
-			'desc'       => __( 'How many spaces a block should be indented.', 'code-snippets' ),
-			'default'    => 4,
-			'codemirror' => 'indentUnit',
-			'min'        => 0,
-		),
-
-		'wrap_lines' => array(
-			'name'       => __( 'Wrap Lines', 'code-snippets' ),
-			'type'       => 'checkbox',
-			'label'      => __( 'Whether the editor should scroll or wrap for long lines.', 'code-snippets' ),
-			'default'    => true,
-			'codemirror' => 'lineWrapping',
-		),
-
-		'line_numbers' => array(
-			'name'       => __( 'Line Numbers', 'code-snippets' ),
-			'type'       => 'checkbox',
-			'label'      => __( 'Show line numbers to the left of the editor.', 'code-snippets' ),
-			'default'    => true,
-			'codemirror' => 'lineNumbers',
-		),
-
-		'auto_close_brackets' => array(
-			'name'       => __( 'Auto Close Brackets', 'code-snippets' ),
-			'type'       => 'checkbox',
-			'label'      => __( 'Auto-close brackets and quotes when typed.', 'code-snippets' ),
-			'default'    => true,
-			'codemirror' => 'autoCloseBrackets',
-		),
-
-		'highlight_selection_matches' => array(
-			'name'       => __( 'Highlight Selection Matches', 'code-snippets' ),
-			'label'      => __( 'Highlight all instances of a currently selected word.', 'code-snippets' ),
-			'type'       => 'checkbox',
-			'default'    => true,
-			'codemirror' => 'highlightSelectionMatches',
-		),
 	);
 
 	$fields = apply_filters( 'code_snippets_settings_fields', $fields );

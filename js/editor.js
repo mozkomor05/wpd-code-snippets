@@ -1,18 +1,19 @@
 import './autocompletions/mode-php';
 
-window.code_snippets_editor = (function (editor_atts) {
+'use strict'
+window.Code_Snippets_Ace = (function (editor_id, editor_atts, preview) {
     let beautifying = false;
-    const editor = ace.edit('snippet_code');
+    const editor = ace.edit(editor_id);
     const prependPhp = (value) => {
         value = value || editor.session.getValue();
         editor.session.setValue(`<?php\n` + value.replace(/^\s+/g, ''));
     };
-    const textarea = document.getElementById('snippet_code_real');
     const beautiful = ace.require("ace/ext/beautify");
+    const textarea = preview ? false : document.getElementById('snippet_code_real');
 
     editor.commands.addCommand({
         name: "beautify",
-        bindKey: {win: "Shift-Alt-f", mac: "Shift-Alt-f"},
+        bindKey: {win: "Ctrl-Alt-f", mac: "Cmd-Alt-f"},
         exec: function (editor) {
             beautifying = true;
             beautiful.beautify(editor.session);
@@ -20,13 +21,15 @@ window.code_snippets_editor = (function (editor_atts) {
         }
     });
 
-    editor.commands.addCommand({
-        name: "saveSnippet",
-        bindKey: {win: "Ctrl-s", mac: "Cmd-s"},
-        exec: function (editor) {
-            document.getElementById('save_snippet_extra').click();
-        }
-    });
+    if (!preview) {
+        editor.commands.addCommand({
+            name: "saveSnippet",
+            bindKey: {win: "Ctrl-s", mac: "Cmd-s"},
+            exec: function (editor) {
+                document.getElementById('save_snippet_extra').click();
+            }
+        });
+    }
 
     ace.require('ace/ext/language_tools');
     editor.setTheme('ace/theme/iplastic');
@@ -35,6 +38,8 @@ window.code_snippets_editor = (function (editor_atts) {
     const defaultOptions = {
         enableLiveAutocompletion: true,
     };
+
+    editor_atts['theme'] = 'ace/theme/' + editor_atts['theme'];
 
     editor.setOptions(Object.assign(defaultOptions, editor_atts));
     editor.container.style.lineHeight = 1.6;
@@ -81,7 +86,8 @@ window.code_snippets_editor = (function (editor_atts) {
             editor.session.setValue(value);
         }
 
-        textarea.value = value;
+        if (textarea)
+            textarea.value = value;
     });
 
     editor.session.selection.on('changeSelection', function (e) {
@@ -93,9 +99,10 @@ window.code_snippets_editor = (function (editor_atts) {
         }
     });
 
-    textarea.value = editor.session.getValue();
+    if (textarea)
+        textarea.value = editor.session.getValue();
     editor.focus();
     editor.gotoLine(2);
 
     return editor;
-})(code_snippets_editor_atts);
+});

@@ -1,19 +1,21 @@
-/* global ajaxurl, jQuery */
+/* global ajaxurl, jQuery, code_snippets_editor_atts */
 
 import './editor';
 
 'use strict'
+
+window.code_snippets_editor = window.Code_Snippets_Ace('snippet_code', code_snippets_editor_atts);
+window.onbeforeunload = function (e) {
+    e = e || window.event;
+
+    if (e) {
+        e.returnValue = 'Sure?';
+    }
+
+    return 'Sure?';
+};
+
 jQuery(document).ready(function ($) {
-    window.onbeforeunload = function (e) {
-        e = e || window.event;
-
-        if (e) {
-            e.returnValue = 'Sure?';
-        }
-
-        return 'Sure?';
-    };
-
     const outputTextarea = document.getElementById('snippet_output');
     const macrosTbody = $('#snippet_macros tbody');
     const snippetMacrosInput = $('#snippet_macros_input');

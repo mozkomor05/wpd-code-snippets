@@ -3,7 +3,7 @@
 /**
  * This file handles the editor preview setting
  *
- * @since 2.0
+ * @since   2.0
  * @package Code_Snippets
  */
 
@@ -16,39 +16,26 @@ function code_snippets_editor_settings_preview_assets() {
 	// Enqueue scripts for the editor preview
 	code_snippets_enqueue_editor();
 
-	// Enqueue all editor themes
-	$themes = code_snippets_get_available_themes();
-
-	foreach ( $themes as $theme ) {
-		if ( 'default' !== $theme ) {
-			wp_enqueue_style(
-				'code-snippets-editor-theme-' . $theme,
-				plugins_url( "css/min/editor-themes/$theme.css", $plugin->file ),
-				array( 'code-snippets-editor' ), $plugin->version
-			);
-		}
-	}
-
 	// Enqueue the menu scripts
 	wp_enqueue_script(
 		'code-snippets-settings-menu',
 		plugins_url( 'js/min/settings.js', $plugin->file ),
-		array( 'code-snippets-editor' ), $plugin->version, true
+		array(), $plugin->version, true
 	);
 
 	// Extract the CodeMirror-specific editor settings
 	$setting_fields = code_snippets_get_settings_fields();
-	$editor_fields = array();
+	$editor_fields  = array();
 
 	foreach ( $setting_fields['editor'] as $name => $field ) {
-		if ( empty( $field['codemirror'] ) ) {
+		if ( empty( $field['ace'] ) ) {
 			continue;
 		}
 
 		$editor_fields[] = array(
-			'name' => $name,
-			'type' => $field['type'],
-			'codemirror' => addslashes( $field['codemirror'] ),
+			'name'       => $name,
+			'type'       => $field['type'],
+			'ace' => addslashes( $field['ace'] ),
 		);
 	}
 
@@ -64,7 +51,7 @@ function code_snippets_editor_settings_preview_assets() {
  *
  * @param array $atts
  */
-function code_snippets_codemirror_theme_select_field( $atts ) {
+function code_snippets_ace_theme_select_field( $atts ) {
 
 	$saved_value = code_snippets_get_setting( $atts['section'], $atts['id'] );
 
@@ -73,16 +60,11 @@ function code_snippets_codemirror_theme_select_field( $atts ) {
 	// print a dropdown entry for each theme
 	foreach ( code_snippets_get_available_themes() as $theme ) {
 
-		// skip mobile themes
-		if ( 'ambiance-mobile' === $theme ) {
-			continue;
-		}
-
 		printf(
 			'<option value="%s"%s>%s</option>',
 			$theme,
 			selected( $theme, $saved_value, false ),
-			ucwords( str_replace( '-', ' ', $theme ) )
+			ucwords( str_replace( array( '-', '_' ), ' ', $theme ) )
 		);
 	}
 
@@ -93,5 +75,9 @@ function code_snippets_codemirror_theme_select_field( $atts ) {
  * Render the editor preview setting
  */
 function code_snippets_settings_editor_preview() {
-	echo '<div id="code_snippets_editor_preview"></div>';
+	?>
+    <div class="snippet-editor">
+        <div id="code_snippets_editor_preview" spellcheck="false"></div>
+    </div>
+	<?php
 }

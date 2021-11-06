@@ -15,7 +15,6 @@
  * @return bool
  */
 function code_snippets_unified_settings() {
-
 	if ( ! is_multisite() ) {
 		return false;
 	}
@@ -32,7 +31,6 @@ function code_snippets_unified_settings() {
  * @return array
  */
 function code_snippets_get_settings() {
-
 	/* Check if the settings have been cached */
 	if ( $settings = wp_cache_get( 'code_snippets_settings' ) ) {
 		return $settings;
@@ -72,8 +70,8 @@ function code_snippets_get_settings() {
 /**
  * Retrieve an individual setting field value
  *
- * @param  string $section The ID of the section the setting belongs to
- * @param  string $field The ID of the setting field
+ * @param string $section The ID of the section the setting belongs to
+ * @param string $field   The ID of the setting field
  *
  * @return array
  */
@@ -85,6 +83,7 @@ function code_snippets_get_setting( $section, $field ) {
 
 /**
  * Retrieve the settings sections
+ *
  * @return array
  */
 function code_snippets_get_settings_sections() {
@@ -101,7 +100,6 @@ function code_snippets_get_settings_sections() {
  * Register settings sections, fields, etc
  */
 function code_snippets_register_settings() {
-
 	if ( code_snippets_unified_settings() ) {
 
 		if ( ! get_site_option( 'code_snippets_settings', false ) ) {
@@ -130,8 +128,8 @@ function code_snippets_register_settings() {
 	/* Register settings fields */
 	foreach ( code_snippets_get_settings_fields() as $section_id => $fields ) {
 		foreach ( $fields as $field_id => $field ) {
-			$atts = $field;
-			$atts['id'] = $field_id;
+			$atts            = $field;
+			$atts['id']      = $field_id;
 			$atts['section'] = $section_id;
 
 			add_settings_field(
@@ -160,12 +158,12 @@ add_action( 'admin_init', 'code_snippets_register_settings' );
 /**
  * Validate the settings
  *
- * @param  array $input The sent settings
+ * @param array $input The sent settings
  *
  * @return array        The validated settings
  */
 function code_snippets_settings_validate( array $input ) {
-	$settings = code_snippets_get_settings();
+	$settings        = code_snippets_get_settings();
 	$settings_fields = code_snippets_get_settings_fields();
 
 	// Don't directly loop through $input as it does not include as deselected checkboxes
@@ -185,9 +183,9 @@ function code_snippets_settings_validate( array $input ) {
 					$settings[ $section_id ][ $field_id ] = absint( $input[ $section_id ][ $field_id ] );
 					break;
 
-				case 'codemirror_theme_select':
+				case 'ace_theme_select':
 					$available_themes = code_snippets_get_available_themes();
-					$selected_theme = $input[ $section_id ][ $field_id ];
+					$selected_theme   = $input[ $section_id ][ $field_id ];
 
 					if ( in_array( $selected_theme, $available_themes, true ) ) {
 						$settings[ $section_id ][ $field_id ] = $selected_theme;

@@ -1,8 +1,8 @@
 {
   "name": "wpd-code-snippets",
-  "version": "3.1.0",
-  "description": "Manage code snippets running on a WordPress-powered site through a graphical interface",
-  "homepage": "https://wordpress.org/plugins/code-snippets",
+  "version": "0.0.1",
+  "description": "Manage share and download code snippets snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your Wordpress.",
+  "homepage": "https://github.com/mozkomor05/wpd-code-snippets",
   "main": "gulpfile.babel.js",
   "directories": {
     "test": "tests"
@@ -27,7 +27,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sheabunge/code-snippets/issues"
+    "url": "https://github.com/sheabunge/wpd-code-snippets/issues"
   },
   "dependencies": {
     "codemirror": "^5.55.0",

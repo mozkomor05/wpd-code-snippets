@@ -131,7 +131,7 @@ if ( ! $snippet->id ) {
         </h2>
 
         <div class="snippet-editor">
-            <div id="snippet_code" rows="200" spellcheck="false"><?php
+            <div id="snippet_code" spellcheck="false"><?php
 				echo esc_textarea( $snippet->code );
 				?></div>
 
@@ -171,10 +171,9 @@ if ( ! $snippet->id ) {
                         <tr>
                             <td><?php esc_html_e( 'Beautify code', 'code-snippets' ); ?></td>
                             <td>
-                                <kbd><?php echo $keys['Shift']; ?></kbd>&hyphen;<kbd
-                                        class="pc-key"><?php echo $keys['Alt']; ?></kbd><kbd
-                                        class="mac-key"><?php echo $keys['Option']; ?></kbd><span
-                                        class="mac-key">&hyphen;</span>&hyphen;<kbd><?php echo $keys['F']; ?></kbd>
+                                <kbd><?php echo $keys['Ctrl']; ?></kbd><kbd
+                                        class="mac-key"><?php echo $keys['Cmd']; ?></kbd>&hyphen;<kbd
+                                        class="pc-key"><?php echo $keys['Alt']; ?></kbd>-<kbd><?php echo $keys['F']; ?></kbd>
                             </td>
                         </tr>
                         <tr>
