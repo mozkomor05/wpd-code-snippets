@@ -4,13 +4,10 @@ if ( ! class_exists( 'WPD_Snippet' ) ) {
 	require_once dirname( __FILE__ ) . '/wpd_snippet.php';
 }
 
-use WPConsole\Core\Console\Psy\Output\ShellOutput;
-use WPConsole\Core\Console\Psy\Shell;
-
 /**
  * @param string $action Endpoint (or whole URL) to request.
  * @param string $method Request method.
- * @param array $args Additional args.
+ * @param array  $args   Additional args.
  *
  * @return false|array
  */
@@ -64,7 +61,7 @@ function wpd_list_posts( array $args, &$total ) {
 }
 
 /**
- * @param $endpoint string
+ * @param string $endpoint Endpoint.
  *
  * @return bool
  */
@@ -111,7 +108,7 @@ function wpd_push_snippet( $id ) {
 			'title'   => $snippet->name,
 			'content' => $snippet->desc,
 			'code'    => $snippet->code,
-		) )
+		) ),
 	);
 
 	wpd_request( code_snippets()->api::PUSH_URL, 'POST', $args );
@@ -119,7 +116,13 @@ function wpd_push_snippet( $id ) {
 	return true;
 }
 
-function wpd_remote_snippet_exists( $remote_id ) : bool {
+
+/**
+ * @param int $remote_id ID of remote snippet.
+ *
+ * @return bool exists?
+ */
+function wpd_remote_snippet_exists( $remote_id ): bool {
 	/** @var wpdb $wpdb */
 	global $wpdb;
 
@@ -127,5 +130,5 @@ function wpd_remote_snippet_exists( $remote_id ) : bool {
 	$table  = $db->get_table_name();
 	$result = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(1) FROM {$table} WHERE remote_id = %d", $remote_id ) );
 
-	return $result == 1;
+	return 1 === $result;
 }

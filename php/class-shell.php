@@ -32,7 +32,6 @@ class Code_Snippets_Shell extends PsyShell {
 	 *
 	 * @return void
 	 * @since 1.1.0
-	 *
 	 */
 	public function __construct( Configuration $config = null ) {
 		$this->config = $config;
@@ -42,15 +41,15 @@ class Code_Snippets_Shell extends PsyShell {
 	/**
 	 * Helper for throwing an ErrorException.
 	 *
-	 * @since 1.1.0
-	 * @since 1.2.0 Using $errfile and remove line number increament
-	 *
-	 * @param int    $errno   Error type
-	 * @param string $errstr  Message
-	 * @param string $errfile Filename
-	 * @param int    $errline Line number
+	 * @param int    $errno   Error type.
+	 * @param string $errstr  Message.
+	 * @param string $errfile Filename.
+	 * @param int    $errline Line number.
 	 *
 	 * @return void
+	 * @since 1.2.0 Using $errfile and remove line number increament
+	 *
+	 * @since 1.1.0
 	 */
 	public function handleError( $errno, $errstr, $errfile, $errline ) {
 		$this->config->getOutput()->exception = new ErrorException( $errstr, 0, $errno, $errfile, $errline );

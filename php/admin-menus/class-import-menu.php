@@ -2,6 +2,7 @@
 
 /**
  * This class handles the import admin menu
+ *
  * @since 2.4.0
  * @package Code_Snippets
  */

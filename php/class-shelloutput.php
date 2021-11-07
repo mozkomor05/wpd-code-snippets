@@ -30,26 +30,25 @@ class Code_Snippets_ShellOutput extends PsyShellOutput {
 	/**
 	 * Construct a ShellOutput instance.
 	 *
-	 * @param mixed $verbosity (default: self::VERBOSITY_NORMAL)
-	 * @param bool $decorated (default: null)
-	 * @param OutputFormatterInterface $formatter (default: null)
-	 * @param null|string|OutputPager $pager (default: null)
+	 * @param mixed                    $verbosity (default: self::VERBOSITY_NORMAL).
+	 * @param bool                     $decorated (default: null).
+	 * @param OutputFormatterInterface $formatter (default: null).
+	 * @param null|string|OutputPager  $pager     (default: null).
 	 *
 	 * @return void
-	 * @since 1.0.0
-	 *
+	 * @throws InvalidArgumentException Unexpected parameters.
 	 */
 	public function __construct( $verbosity = self::VERBOSITY_NORMAL, $decorated = null, OutputFormatterInterface $formatter = null, $pager = null ) {
 		ConsoleOutput::__construct( $verbosity, $decorated, $formatter );
 
-		if ( $pager === null ) {
+		if ( null === $pager ) {
 			$this->pager = new PassthruPager( $this );
-		} elseif ( \is_string( $pager ) ) {
+		} elseif ( is_string( $pager ) ) {
 			$this->pager = new ProcOutputPager( $this, $pager );
 		} elseif ( $pager instanceof OutputPager ) {
 			$this->pager = $pager;
 		} else {
-			throw new \InvalidArgumentException( 'Unexpected pager parameter: ' . $pager );
+			throw new InvalidArgumentException( 'Unexpected pager parameter: ' . $pager );
 		}
 	}
 
@@ -57,11 +56,10 @@ class Code_Snippets_ShellOutput extends PsyShellOutput {
 	 * Writes a message to the output.
 	 *
 	 * @param string $message A message to write to the output
-	 * @param bool $newline Whether to add a newline or not
+	 * @param bool   $newline Whether to add a newline or not
 	 *
 	 * @return void
 	 * @since 1.0.0
-	 *
 	 */
 	public function doWrite( $message, $newline ) {
 		$this->outputMessage .= $message;

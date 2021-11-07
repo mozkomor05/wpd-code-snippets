@@ -20,6 +20,7 @@ class Code_Snippets {
 
 	/**
 	 * Filesystem path to the main plugin file
+     *
 	 * @var string
 	 */
 	public $file;
@@ -182,7 +183,7 @@ class Code_Snippets {
 	/**
 	 * Fetch the admin menu slug for a snippets menu
 	 *
-	 * @param int $snippet_id The snippet
+	 * @param int    $snippet_id The snippet
 	 * @param string $context The URL scheme to use
 	 *
 	 * @return string The URL to the edit snippet page for that snippet
@@ -237,7 +238,8 @@ class Code_Snippets {
 		if ( is_multisite() ) {
 			$menu_perms = get_site_option( 'menu_items', array() );
 
-			/* If multisite is enabled and the snippet menu is not activated,
+			/*
+			 If multisite is enabled and the snippet menu is not activated,
 			   restrict snippet operations to super admins only */
 			if ( empty( $menu_perms['snippets'] ) ) {
 				return $this->get_network_cap_name();

@@ -2,12 +2,14 @@
 
 /**
  * This class handles the browse admin menu
+ *
  * @package Code_Snippets
  */
 class Code_Snippets_Browse_Menu extends Code_Snippets_Admin_Menu {
 
 	/**
 	 * Holds the list table class
+     *
 	 * @var Code_Snippets_List_Table_Browse
 	 */
 	public $list_table;
@@ -69,7 +71,7 @@ class Code_Snippets_Browse_Menu extends Code_Snippets_Admin_Menu {
 
 		wp_enqueue_script(
 			'code-snippets-browse-js',
-			plugins_url( "js/min/browse.js", $plugin->file ),
+			plugins_url( 'js/min/browse.js', $plugin->file ),
 			array(), $plugin->version, true
 		);
 
@@ -79,7 +81,7 @@ class Code_Snippets_Browse_Menu extends Code_Snippets_Admin_Menu {
 			array(
 				'waiting'       => __( 'Importing...', 'code-snippets' ),
 				'installed'     => __( 'Imported', 'code-snippets' ),
-				'install_error' => __( 'Error occurred', 'code-snippets' )
+				'install_error' => __( 'Error occurred', 'code-snippets' ),
 			)
 		);
 	}

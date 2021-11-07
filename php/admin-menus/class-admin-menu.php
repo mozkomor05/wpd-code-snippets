@@ -24,9 +24,9 @@ class Code_Snippets_Admin_Menu {
 	/**
 	 * Constructor
 	 *
-	 * @param string $name The snippet page short name
-	 * @param string $label The label shown in the admin menu
-	 * @param string $title The text used for the page title
+	 * @param string $name The snippet page short name.
+	 * @param string $label The label shown in the admin menu.
+	 * @param string $title The text used for the page title.
 	 */
 	public function __construct( $name, $label, $title ) {
 		$this->name = $name;
@@ -49,11 +49,12 @@ class Code_Snippets_Admin_Menu {
 
 	/**
 	 * Add a sub-menu to the Snippets menu
+     *
 	 * @uses add_submenu_page() to register a submenu
 	 *
-	 * @param string $slug The slug of the menu
-	 * @param string $label The label shown in the admin menu
-	 * @param string $title The page title
+	 * @param string $slug The slug of the menu.
+	 * @param string $label The label shown in the admin menu.
+	 * @param string $title The page title.
 	 */
 	public function add_menu( $slug, $label, $title ) {
 		$hook = add_submenu_page(

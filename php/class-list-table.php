@@ -21,12 +21,14 @@ class Code_Snippets_List_Table extends WP_List_Table {
 
 	/**
 	 * true if the current screen is in the network admin
+     *
 	 * @var bool
 	 */
 	public $is_network;
 
 	/**
 	 * A list of statuses (views)
+     *
 	 * @var array
 	 */
 	public $statuses = array( 'all', 'active', 'inactive', 'recently_activated' );
@@ -76,7 +78,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 			'convert_chars',
 			'wpautop',
 			'shortcode_unautop',
-			'capital_P_dangit'
+			'capital_P_dangit',
 		);
 
 		foreach ( $filters as $filter ) {
@@ -95,7 +97,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 	 * Define the output of all columns that have no callback function
 	 *
 	 * @param Code_Snippet $snippet The snippet used for the current row
-	 * @param string $column_name The name of the column being printed
+	 * @param string       $column_name The name of the column being printed
 	 *
 	 * @return string The content of the column to output
 	 */
@@ -114,9 +116,9 @@ class Code_Snippets_List_Table extends WP_List_Table {
 	/**
 	 * Retrieve a URL to perform an action on a snippet
 	 *
-	 * @param string $action Name of action to perform.
+	 * @param string       $action Name of action to perform.
 	 * @param Code_Snippet $snippet Snippet object.
-	 * @param bool $escape Whether to escape the generated URL for output.
+	 * @param bool         $escape Whether to escape the generated URL for output.
 	 *
 	 * @return string
 	 */
@@ -273,7 +275,6 @@ class Code_Snippets_List_Table extends WP_List_Table {
 			$out .= ' <span class="remote-badge"><span class="dashicons dashicons-admin-site-alt3"></span> Remote</span>';
 		}
 
-
 		/* Return the name contents */
 
 		$out = apply_filters( 'code_snippets/list_table/column_name', $out, $snippet );
@@ -306,7 +307,6 @@ class Code_Snippets_List_Table extends WP_List_Table {
 	 *
 	 * @return string The column output
 	 * @since 2.0
-	 *
 	 */
 	protected function column_tags( $snippet ) {
 
@@ -500,6 +500,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 
 	/**
 	 * Gets the tags of the snippets currently being viewed in the table
+     *
 	 * @since 2.0
 	 */
 	public function get_current_tags() {
@@ -608,14 +609,13 @@ class Code_Snippets_List_Table extends WP_List_Table {
 	/**
 	 * Perform an action on a single snippet
 	 *
-	 * @param int $id
+	 * @param int    $id
 	 * @param string $action
 	 *
 	 * @return bool|string Result of performing action
 	 * @uses activate_snippet() to activate snippets
 	 * @uses deactivate_snippet() to deactivate snippets
 	 * @uses delete_snippet() to delete snippets
-	 *
 	 */
 	private function perform_action( $id, $action ) {
 
@@ -681,7 +681,6 @@ class Code_Snippets_List_Table extends WP_List_Table {
 				} );
 				wpd_push_snippet( $id );
 				break;
-
 
 			case 'download':
 				download_snippets( array( $id ) );
@@ -971,7 +970,8 @@ class Code_Snippets_List_Table extends WP_List_Table {
 		/* Get the current data */
 		$data = $snippets[ $status ];
 
-		/* Decide how many records per page to show by
+		/*
+		 Decide how many records per page to show by
 		   getting the user's setting in the Screen Options panel */
 		$sort_by  = $screen->get_option( 'per_page', 'option' );
 		$per_page = get_user_meta( $user, $sort_by, true );
@@ -992,11 +992,13 @@ class Code_Snippets_List_Table extends WP_List_Table {
 		/* Check how many items are in the data array */
 		$total_items = count( $data );
 
-		/* The WP_List_Table class does not handle pagination for us, so we need
+		/*
+		 The WP_List_Table class does not handle pagination for us, so we need
 		   to ensure that the data is trimmed to only the current page. */
 		$data = array_slice( $data, ( ( $current_page - 1 ) * $per_page ), $per_page );
 
-		/* Now we can add our *sorted* data to the items property,
+		/*
+		 Now we can add our *sorted* data to the items property,
 		   where it can be used by the rest of the class. */
 		$this->items = $data;
 
@@ -1149,6 +1151,7 @@ class Code_Snippets_List_Table extends WP_List_Table {
 
 	/**
 	 * Display a notice showing the current search terms
+     *
 	 * @since 1.7
 	 */
 	public function search_notice() {

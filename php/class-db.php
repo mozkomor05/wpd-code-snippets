@@ -87,7 +87,6 @@ class Code_Snippets_DB {
 	 *
 	 * @return string The snippet table name
 	 * @since 2.0
-	 *
 	 */
 	function get_table_name( $multisite = null ) {
 
@@ -113,8 +112,7 @@ class Code_Snippets_DB {
 	 *
 	 * @phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching
 	 */
-	public static function table_exists( $table_name ) {
-		/** @var wpdb $wpdb */
+	public static function table_exists( $table_name ): bool {
 		global $wpdb;
 
 		return $wpdb->get_var( sprintf( "SHOW TABLES LIKE '%s'", $table_name ) ) === $table_name;
@@ -206,7 +204,7 @@ class Code_Snippets_DB {
 	/**
 	 * Build a list of formatting placeholders for an array of data.
 	 *
-	 * @param int $count Length of data.
+	 * @param int    $count Length of data.
 	 * @param string $placeholder Placeholder to use. Defaults to string placeholder.
 	 *
 	 * @return string List of placeholders, ready for inclusion in query.
@@ -219,7 +217,7 @@ class Code_Snippets_DB {
 	 * Generate the SQL for fetching active snippets from the database
 	 *
 	 * @param array|string $scopes List of scopes to retrieve in.
-	 * @param string $select_list List of table columns in SQL format.
+	 * @param string       $select_list List of table columns in SQL format.
 	 *
 	 * @return array List of SQL queries
 	 */

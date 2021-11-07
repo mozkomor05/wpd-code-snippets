@@ -2,6 +2,7 @@
 
 /**
  * Retrieve the default setting values
+ *
  * @return array
  */
 function code_snippets_get_default_settings() {
@@ -26,6 +27,7 @@ function code_snippets_get_default_settings() {
 
 /**
  * Retrieve the settings fields
+ *
  * @return array
  */
 function code_snippets_get_settings_fields() {

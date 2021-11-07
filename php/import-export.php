@@ -7,8 +7,8 @@
 /**
  * @access private
  *
- * @param array $snippets
- * @param null $multisite
+ * @param array  $snippets
+ * @param null   $multisite
  * @param string $dup_action
  *
  * @return array
@@ -61,17 +61,16 @@ function _code_snippets_save_imported_snippets( $snippets, $multisite = null, $d
 /**f
  * Imports snippets from a JSON file
  *
- * @param string $file The path to the file to import
- * @param bool|null $multisite Import into network-wide table or site-wide table?
- * @param string $dup_action Action to take if duplicate snippets are detected. Can be 'skip', 'ignore', or 'replace'
+ * @param string    $file       The path to the file to import.
+ * @param bool|null $multisite  Import into network-wide table or site-wide table.
+ * @param string    $dup_action Action to take if duplicate snippets are detected. Can be 'skip', 'ignore', or 'replace'.
  *
  * @return array|bool An array of imported snippet IDs on success, false on failure
  * @since 2.9.7
  *
  * @uses  save_snippet() to add the snippets to the database
- *
  */
-function import_snippets_json( $file, $multisite = null, $dup_action = 'ignore' ) {
+function import_snippets_json( string $file, bool $multisite = null, string $dup_action = 'ignore' ) {
 
 	if ( ! file_exists( $file ) || ! is_file( $file ) ) {
 		return false;
@@ -97,15 +96,14 @@ function import_snippets_json( $file, $multisite = null, $dup_action = 'ignore' 
 /**
  * Imports snippets from an XML file
  *
- * @param string $file The path to the file to import
- * @param bool|null $multisite Import into network-wide table or site-wide table?
- * @param string $dup_action Action to take if duplicate snippets are detected. Can be 'skip', 'ignore', or 'replace'
+ * @param string    $file       The path to the file to import
+ * @param bool|null $multisite  Import into network-wide table or site-wide table?
+ * @param string    $dup_action Action to take if duplicate snippets are detected. Can be 'skip', 'ignore', or 'replace'
  *
  * @return array|bool An array of imported snippet IDs on success, false on failure
  * @since 2.0
  *
  * @uses  save_snippet() to add the snippets to the database
- *
  */
 function import_snippets_xml( $file, $multisite = null, $dup_action = 'ignore' ) {
 
@@ -162,7 +160,7 @@ function import_snippets_xml( $file, $multisite = null, $dup_action = 'ignore' )
  * Set up the current page to act like a downloadable file instead of being shown in the browser
  *
  * @param string $format
- * @param array $ids
+ * @param array  $ids
  * @param string $table_name
  * @param string $mime_type
  *
@@ -248,7 +246,7 @@ function download_snippets( $ids, $table_name = '' ) {
 /**
  * Export snippets in JSON format
  *
- * @param array $ids list of snippet IDs to export
+ * @param array  $ids        list of snippet IDs to export
  * @param string $table_name name of the database table to fetch snippets from
  */
 function export_snippets( $ids, $table_name = '' ) {
@@ -258,7 +256,17 @@ function export_snippets( $ids, $table_name = '' ) {
 	foreach ( $raw_snippets as $snippet ) {
 		$snippet = new Code_Snippet( $snippet );
 
-		$fields        = array( 'name', 'desc', 'tags', 'scope', 'code', 'priority', 'remote_status', 'remote_id', 'macros' );
+		$fields        = array(
+			'name',
+			'desc',
+			'tags',
+			'scope',
+			'code',
+			'priority',
+			'remote_status',
+			'remote_id',
+			'macros'
+		);
 		$final_snippet = array();
 
 		foreach ( $fields as $field ) {

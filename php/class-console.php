@@ -1,119 +1,126 @@
 <?php
 
 use \Psy\Configuration;
+use Symfony\Component\Console\Output\OutputInterface;
 
-class Code_Snippets_Console
-{
-
-    public function __construct()
-    {
-        add_action('wp_ajax_wpd_evaluate_code', array($this, 'evaluate_wpd_console'));
-    }
+/**
+ * Debug console code evaluation and ajax registration.
+ */
+class Code_Snippets_Console {
 
 
-    /**
-     * Generates output array with both - original html and encoded text
-     *
-     * @param string $msg Output message.
-     *
-     * @return array
-     */
-    protected function output_array($msg)
-    {
-        return array(
-            'html' => $msg,
-            'text' => htmlspecialchars($msg),
-        );
-    }
+	/**
+	 * Add ajax action on init.
+	 */
+	public function __construct() {
+		add_action( 'wp_ajax_wpd_evaluate_code', array( $this, 'evaluate_wpd_console' ) );
+	}
 
-    /**
-     * Evaluates PHP code
-     *
-     * @param string $input PHP code input.
-     */
-    public function evaluate_code($input, $strict = false)
-    {
-        $config = new Configuration(array(
-            'configDir' => WP_CONTENT_DIR,
-        ));
 
-        $output = new Code_Snippets_ShellOutput(Code_Snippets_ShellOutput::VERBOSITY_DEBUG, true);
+	/**
+	 * Generates output array with both - original html and encoded text
+	 *
+	 * @param mixed $msg Output message.
+	 *
+	 * @return array
+	 */
+	protected function output_array( $msg ): array {
+		return array(
+			'html' => $msg,
+			'text' => htmlspecialchars( $msg ),
+		);
+	}
 
-        $config->setOutput($output);
-        $config->setColorMode(Configuration::COLOR_MODE_AUTO);
-        $config->setYolo(true);
+	/**
+	 * Evaluates PHP code
+	 *
+	 * @param string $input  PHP code input.
+	 * @param bool   $strict Evaluate in strict mode.
+	 *
+	 */
+	public function evaluate_code( string $input, bool $strict = false ): array {
+		$config = new Configuration( array(
+			'configDir' => WP_CONTENT_DIR,
+		) );
 
-        $psysh = new Code_Snippets_Shell($config);
-        $psysh->setOutput($output);
+		$output = new Code_Snippets_ShellOutput( OutputInterface::VERBOSITY_DEBUG, true );
 
-        try {
-            $psysh->addCode($input);
-            $timer = microtime(true);
+		$config->setOutput( $output );
+		$config->setColorMode( Configuration::COLOR_MODE_AUTO );
+		$config->setYolo( true );
 
-            extract($psysh->getScopeVariablesDiff(get_defined_vars()));
-            ob_start(array($psysh, 'writeStdout'), 1);
-            set_error_handler(array($psysh, 'handleError'));
+		$psysh = new Code_Snippets_Shell( $config );
+		$psysh->setOutput( $output );
 
-            if (!$strict) {
-                $code = $psysh->onExecute($psysh->flushCode() ?: $input);
-            } else {
-                $code = $input;
-            }
+		try {
+			$psysh->addCode( $input );
+			$timer = microtime( true );
 
-            $_ = eval($code);
+			// @codingStandardsIgnoreStart
+			extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
+			ob_start( array( $psysh, 'writeStdout' ), 1 );
+			set_error_handler( array( $psysh, 'handleError' ) );
+			// @codingStandardsIgnoreEnd
 
-            restore_error_handler();
+			if ( ! $strict ) {
+				$code = $psysh->onExecute($psysh->flushCode() ?: $input);
+			} else {
+				$code = $input;
+			}
 
-            $psysh->setScopeVariables(get_defined_vars());
-            $psysh->writeReturnValue($_);
+			$_ = eval( $code );
 
-            ob_end_flush();
+			restore_error_handler();
 
-            if ($output->exception) {
-                throw $output->exception;
-            }
+			$psysh->setScopeVariables( get_defined_vars() );
+			$psysh->writeReturnValue( $_ );
 
-            $execution_time = microtime(true) - $timer;
+			ob_end_flush();
 
-            return (array(
-                'output' => $this->output_array($output->outputMessage),
-                'execution_time' => number_format($execution_time, 3, '.', ''),
-            ));
-        } catch (Throwable $e) {
-            ob_end_flush();
+			if ( $output->exception ) {
+				throw $output->exception;
+			}
 
-            return array(
-                'output' => $this->output_array($output->outputMessage),
-                'error' => array(
-                    'message' => $e->getMessage(),
-                    'code' => $e->getCode(),
-                    'file' => $e->getFile(),
-                    'trace' => $e->getTraceAsString(),
-                    'line' => $e->getLine(),
-                ),
-            );
-        }
-    }
+			$execution_time = microtime( true ) - $timer;
 
-    /**
-     * AJAX - Evaluates console
-     */
-    public function evaluate_wpd_console()
-    {
-        $input = stripslashes($_POST['input']);
-        $macros = $_POST['macros'] ?? null;
+			return ( array(
+				'output'         => $this->output_array( (string) $output->outputMessage ),
+				'execution_time' => number_format( $execution_time, 3, '.', '' ),
+			) );
+		} catch ( Throwable $e ) {
+			ob_end_flush();
 
-        if (!empty($macros)) {
-            $input = process_snippet_macros($input, $macros);
-        }
+			return array(
+				'output' => $this->output_array( (string) $output->outputMessage ),
+				'error'  => array(
+					'message' => $e->getMessage(),
+					'code'    => $e->getCode(),
+					'file'    => $e->getFile(),
+					'trace'   => $e->getTraceAsString(),
+					'line'    => $e->getLine(),
+				),
+			);
+		}
+	}
 
-        $output = $this->evaluate_code($input);
+	/**
+	 * AJAX - Evaluates console
+	 */
+	public function evaluate_wpd_console() {
+		$input  = stripslashes( $_POST['input'] );
+		$macros = $_POST['macros'] ?? null;
 
-        if (!isset($output['error'])) {
-            wp_send_json_success($output);
-        } else {
-            $output['status'] = 422;
-            wp_send_json_error($output);
-        }
-    }
+		if ( ! empty( $macros ) ) {
+			$input = process_snippet_macros( $input, $macros );
+		}
+
+		$output = $this->evaluate_code( $input );
+
+		if ( ! isset( $output['error'] ) ) {
+			wp_send_json_success( $output );
+		} else {
+			$output['status'] = 422;
+			wp_send_json_error( $output );
+		}
+	}
 }

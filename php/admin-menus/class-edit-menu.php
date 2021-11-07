@@ -625,7 +625,7 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 * Retrieve a list of submit actions for a given snippet
 	 *
 	 * @param Code_Snippet $snippet
-	 * @param bool $extra_actions
+	 * @param bool         $extra_actions
 	 *
 	 * @return array
 	 */
@@ -670,8 +670,8 @@ class Code_Snippets_Edit_Menu extends Code_Snippets_Admin_Menu {
 	 * Render the submit buttons for a code snippet
 	 *
 	 * @param Code_Snippet $snippet
-	 * @param string $size
-	 * @param bool $extra_actions
+	 * @param string       $size
+	 * @param bool         $extra_actions
 	 */
 	public function render_submit_buttons( $snippet, $size = '', $extra_actions = true ) {
 

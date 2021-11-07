@@ -22,7 +22,7 @@ class Code_Snippets_Upgrade {
 	/**
 	 * Class constructor
 	 *
-	 * @param string $version Current plugin version
+	 * @param string           $version Current plugin version
 	 * @param Code_Snippets_DB $db Instance of database class
 	 */
 	public function __construct( $version, Code_Snippets_DB $db ) {

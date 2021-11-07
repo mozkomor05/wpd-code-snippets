@@ -121,6 +121,7 @@ class Code_Snippets_Validator {
 
 	/**
 	 * Validate the given PHP code and return the result.
+     *
 	 * @return array|bool Array containing message if an error was encountered, false if validation was successful.
 	 */
 	public function validate() {

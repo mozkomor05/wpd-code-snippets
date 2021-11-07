@@ -9,11 +9,11 @@
 /**
  * Retrieve a list of snippets from the database
  *
- * @param array $ids The IDs of the snippets to fetch
+ * @param array     $ids The IDs of the snippets to fetch
  * @param bool|null $multisite Retrieve multisite-wide or site-wide snippets?
  *
- * @param array $args {
- *                                   Optional. Arguments to specify which sorts of snippets to retrieve.
+ * @param array     $args {
+ *                                       Optional. Arguments to specify which sorts of snippets to retrieve.
  *
  * @type bool $active_only Whether to only fetch active snippets. Default false (will fetch both active and inactive snippets).
  * @type int $limit Limit the number of retrieved snippets. Default 0, which will not impose a limit on the results.
@@ -147,7 +147,7 @@ function code_snippets_build_tags_array( $tags ) {
  * Will return empty snippet object if no snippet
  * ID is specified
  *
- * @param int $id The ID of the snippet to retrieve. 0 to build a new snippet
+ * @param int          $id The ID of the snippet to retrieve. 0 to build a new snippet
  * @param boolean|null $multisite Retrieve a multisite-wide or site-wide snippet?
  *
  * @return Code_Snippet A single snippet object
@@ -182,7 +182,7 @@ function get_snippet( $id = 0, $multisite = null ) {
 /**
  * Activates a snippet
  *
- * @param int $id The ID of the snippet to activate
+ * @param int       $id The ID of the snippet to activate
  * @param bool|null $multisite Are the snippets multisite-wide or site-wide?
  *
  * @return int
@@ -223,7 +223,7 @@ function activate_snippet( $id, $multisite = null ) {
 /**
  * Activates multiple snippet.
  *
- * @param array $ids The IDs of the snippets to activate.
+ * @param array     $ids The IDs of the snippets to activate.
  * @param bool|null $multisite Are the snippets multisite-wide or site-wide?
  *
  * @return array The IDs of the snippets which were successfully activated.
@@ -282,7 +282,7 @@ function activate_snippets( array $ids, $multisite = null ) {
 /**
  * Deactivate a snippet
  *
- * @param int $id The ID of the snippet to deactivate
+ * @param int       $id The ID of the snippet to deactivate
  * @param bool|null $multisite Are the snippets multisite-wide or site-wide?
  *
  * @since 2.0
@@ -323,7 +323,7 @@ function deactivate_snippet( $id, $multisite = null ) {
 /**
  * Deletes a snippet from the database
  *
- * @param int $id The ID of the snippet to delete
+ * @param int       $id The ID of the snippet to delete
  * @param bool|null $multisite Delete from site-wide or network-wide table?
  *
  * @since 2.0
@@ -395,9 +395,9 @@ function save_snippet( Code_Snippet $snippet ) {
 /**
  * Update a snippet entry given a list of fields
  *
- * @param int $snippet_id The ID of the snippet to update
+ * @param int   $snippet_id The ID of the snippet to update
  * @param array $fields An array of fields mapped to their values
- * @param bool $network Whether the snippet is network-wide or site-wide
+ * @param bool  $network Whether the snippet is network-wide or site-wide
  */
 function update_snippet_fields( $snippet_id, $fields, $network = null ) {
 	/** @var wpdb $wpdb */
@@ -427,7 +427,7 @@ function update_snippet_fields( $snippet_id, $fields, $network = null ) {
 
 /**
  * @param string $code Snippet code.
- * @param array $macros Array of snippet macros to replace.
+ * @param array  $macros Array of snippet macros to replace.
  *
  * @return string Code with replaced macros.
  */
@@ -449,8 +449,8 @@ function process_snippet_macros( $code, $macros ) {
  * it will be executed directly
  *
  * @param string $code The snippet code to execute
- * @param int $id The snippet ID
- * @param bool $catch_output Whether to attempt to suppress the output of execution using buffers
+ * @param int    $id The snippet ID
+ * @param bool   $catch_output Whether to attempt to suppress the output of execution using buffers
  *
  * @return mixed The result of the code execution
  * @since 2.0
