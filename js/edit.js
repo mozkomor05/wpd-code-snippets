@@ -45,8 +45,10 @@ jQuery(document).ready(function ($) {
 
                 if (document.getElementById('wpd_execute_render_html').checked) {
                     outputTextarea.innerHTML = outputHtml + errorStr;
+                    outputTextarea.style.whiteSpace = 'normal';
                 } else {
                     outputTextarea.innerHTML = outputText + errorStr;
+                    outputTextarea.style.whiteSpace = 'pre-wrap';
                 }
             }
         });
