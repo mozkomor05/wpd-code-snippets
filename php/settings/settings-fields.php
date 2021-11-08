@@ -47,7 +47,7 @@ function code_snippets_get_settings_fields() {
 			'default' => true,
 		),
 
-		'y+disable_prism' => array(
+		'disable_prism' => array(
 			'name'    => __( 'Disable Shortcode Syntax Highlighter', 'code-snippets' ),
 			'type'    => 'checkbox',
 			'label'   => __( 'Disable the syntax highlighting for the [code_snippet] shortcode on the front-end', 'code-snippets' ),
