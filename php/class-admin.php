@@ -17,9 +17,9 @@ class Code_Snippets_Admin {
 	}
 
 	public function load_classes() {
-        $this->menus['manage'] = new Code_Snippets_Manage_Menu();
-        $this->menus['browse'] = new Code_Snippets_Browse_Menu();
-        $this->menus['edit'] = new Code_Snippets_Edit_Menu();
+		$this->menus['manage'] = new Code_Snippets_Manage_Menu();
+		$this->menus['browse'] = new Code_Snippets_Browse_Menu();
+		$this->menus['edit']   = new Code_Snippets_Edit_Menu();
 		$this->menus['import'] = new Code_Snippets_Import_Menu();
 
 		if ( is_network_admin() === code_snippets_unified_settings() ) {
@@ -35,7 +35,10 @@ class Code_Snippets_Admin {
 		add_action( 'init', array( $this, 'load_classes' ), 11 );
 
 		add_filter( 'mu_menu_items', array( $this, 'mu_menu_items' ) );
-		add_filter( 'plugin_action_links_' . plugin_basename( CODE_SNIPPETS_FILE ), array( $this, 'plugin_settings_link' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( CODE_SNIPPETS_FILE ), array(
+			$this,
+			'plugin_settings_link'
+		) );
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_meta_links' ), 10, 2 );
 		add_action( 'code_snippets/admin/manage', array( $this, 'survey_message' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_menu_icon' ) );
@@ -59,14 +62,14 @@ class Code_Snippets_Admin {
 	 * Adds a checkbox to the *Settings > Network Settings*
 	 * network admin menu
 	 *
-	 * @since 1.7.1
-	 *
-	 * @param  array $menu_items The current mu menu items
+	 * @param array $menu_items The current mu menu items
 	 *
 	 * @return array             The modified mu menu items
+	 * @since 1.7.1
+	 *
 	 */
 	function mu_menu_items( $menu_items ) {
-		$menu_items['snippets'] = __( 'Snippets', 'code-snippets' );
+		$menu_items['snippets']          = __( 'Snippets', 'code-snippets' );
 		$menu_items['snippets_settings'] = __( 'Snippets &raquo; Settings', 'code-snippets' );
 
 		return $menu_items;
@@ -88,7 +91,7 @@ class Code_Snippets_Admin {
 	 * Prevent the snippet currently being saved from being executed
 	 * so it is not run twice (once normally, once
 	 *
-	 * @param bool   $exec Whether the snippet will be executed
+	 * @param bool   $exec    Whether the snippet will be executed
 	 * @param int    $exec_id The ID of the snippet being executed
 	 * @param string $table_name
 	 *
@@ -116,11 +119,11 @@ class Code_Snippets_Admin {
 	/**
 	 * Adds a link pointing to the Manage Snippets page
 	 *
-	 * @since 2.0
-	 *
-	 * @param  array $links The existing plugin action links
+	 * @param array $links The existing plugin action links
 	 *
 	 * @return array        The modified plugin action links
+	 * @since 2.0
+	 *
 	 */
 	function plugin_settings_link( $links ) {
 		array_unshift( $links, sprintf(
@@ -136,12 +139,12 @@ class Code_Snippets_Admin {
 	/**
 	 * Adds extra links related to the plugin
 	 *
-	 * @since 2.0
-	 *
-	 * @param  array  $links The existing plugin info links
-	 * @param  string $file The plugin the links are for
+	 * @param array  $links The existing plugin info links
+	 * @param string $file  The plugin the links are for
 	 *
 	 * @return array         The modified plugin info links
+	 * @since 2.0
+	 *
 	 */
 	function plugin_meta_links( $links, $file ) {
 
@@ -156,17 +159,12 @@ class Code_Snippets_Admin {
 
 		return array_merge( $links, array(
 			sprintf( $format,
-				'https://wordpress.org/plugins/code-snippets/',
-				__( 'Visit the WordPress.org plugin page', 'code-snippets' ),
-				__( 'About', 'code-snippets' )
+				'https://github.com/mozkomor05/wpd-code-snippets',
+				__( 'Visit the plugin\'s Github page', 'code-snippets' ),
+				__( 'Github', 'code-snippets' )
 			),
 			sprintf( $format,
-				'https://wordpress.org/support/plugin/code-snippets/',
-				__( 'Visit the support forums', 'code-snippets' ),
-				__( 'Support', 'code-snippets' )
-			),
-			sprintf( $format,
-				'https://sheabunge.com/donate/',
+				'https://wpdistro.com/donate/',
 				__( "Support this plugin's development", 'code-snippets' ),
 				__( 'Donate', 'code-snippets' )
 			),
@@ -176,8 +174,8 @@ class Code_Snippets_Admin {
 	/**
 	 * Print a notice inviting people to participate in the Code Snippets Survey
 	 *
-	 * @since  1.9
 	 * @return void
+	 * @since  1.9
 	 */
 	function survey_message() {
 		global $current_user;
@@ -195,22 +193,22 @@ class Code_Snippets_Admin {
 
 		?>
 
-		<br />
+        <br/>
 
-		<div class="updated code-snippets-survey-message">
-			<p>
+        <div class="updated code-snippets-survey-message">
+            <p>
 
-				<?php _e( "<strong>Have feedback on Code Snippets?</strong> Please take the time to answer a short survey on how you use this plugin and what you'd like to see changed or added in the future.", 'code-snippets' ); ?>
+				<?php _e( "<strong>Have feedback on WPD Code Snippets?</strong> Found a bug? Contact us and tell us your every idea.", 'code-snippets' ); ?>
 
-				<a href="http://sheabunge.polldaddy.com/s/code-snippets-feedback" class="button secondary"
-				   target="_blank" style="margin: auto .5em;">
-					<?php _e( 'Take the survey now', 'code-snippets' ); ?>
-				</a>
+                <a href="http://wpdistro.com/feedback" class="button secondary"
+                   target="_blank" style="margin: auto .5em;">
+					<?php _e( 'Send feedback', 'code-snippets' ); ?>
+                </a>
 
-				<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( $key, true ), $key ) ); ?>"><?php esc_html_e( 'Dismiss', 'code-snippets' ); ?></a>
+                <a href="<?php echo esc_url( wp_nonce_url( add_query_arg( $key, true ), $key ) ); ?>"><?php esc_html_e( 'Dismiss', 'code-snippets' ); ?></a>
 
-			</p>
-		</div>
+            </p>
+        </div>
 
 		<?php
 	}
