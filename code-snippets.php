@@ -1,30 +1,30 @@
 <?php
 /**
- * Code Snippets - An easy, clean and simple way to add code snippets to your site.
+ * WPD Code Snippets - An easy, clean and simple way to add, manage and share code snippets on your site.
  *
  * If you're interested in helping to develop Code Snippets, or perhaps contribute
- * to the localization, please see https://github.com/sheabunge/code-snippets
+ * to the localization, please see https://github.com/mozkomor05/wpd-code-snippets
  *
- * @package   Code_Snippets
- * @author    Shea Bunge <shea@sheabunge.com>
- * @copyright 2012-2020 Shea Bunge
+ * @package   WPD_Code_Snippets
+ * @author    WPDistro <info@wpdistro.com>
+ * @copyright 2021 WPDistro
  * @license   MIT http://opensource.org/licenses/MIT
- * @version   2.14.0
+ * @version   1.0.0
  * @link      https://github.com/sheabunge/code-snippets
- */
-
-/*
-Plugin Name: WPDistro Code Snippets
-Plugin URI:  https://github.com/mozkomor05/wpd-code-snippets
-Description: A fork of Code Snippets, that allows you to share and download snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your Wordpress Distribution.
-Author:      WPDistro
-Author URI:  https://wpdistro.com
-Version:     2.14.0
-License:     MIT
-License URI: license.txt
-Text Domain: code-snippets
-Domain Path: /languages
-*/
+ *
+ * @wordpress-plugin
+ * Plugin Name: WPDistro Code Snippets
+ * Plugin URI:  https://wpdistro.com
+ * Description: Manage share and download code snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your WordPress.
+ * Author:      WPDistro
+ * Author URI:  https://github.com/mozkomor05
+ * Version:     1.0.0
+ * License:     MIT
+ * License URI: license.txt
+ * Requires PHP: 7.0
+ * Text Domain: code-snippets
+ * Domain Path: /languages
+ **/
 
 /* Exit if accessed directly */
 if ( ! defined( 'ABSPATH' ) ) {
