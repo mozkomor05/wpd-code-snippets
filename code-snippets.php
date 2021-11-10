@@ -9,7 +9,7 @@
  * @author    WPDistro <info@wpdistro.com>
  * @copyright 2021 WPDistro
  * @license   MIT http://opensource.org/licenses/MIT
- * @version   1.0.0
+ * @version   1.0.1
  * @link      https://github.com/sheabunge/code-snippets
  *
  * @wordpress-plugin
@@ -18,7 +18,7 @@
  * Description: Manage share and download code snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your WordPress.
  * Author:      WPDistro
  * Author URI:  https://github.com/mozkomor05
- * Version:     1.0.0
+ * Version:     1.0.1
  * License:     MIT
  * License URI: license.txt
  * Requires PHP: 7.0
@@ -101,7 +101,7 @@ if ( ! function_exists( 'code_snippets' ) ) {
 		static $plugin;
 
 		if ( is_null( $plugin ) ) {
-			$plugin = new Code_Snippets( '1.0.0', __FILE__ );
+			$plugin = new Code_Snippets( '1.0.1', __FILE__ );
 		}
 
 		return $plugin;

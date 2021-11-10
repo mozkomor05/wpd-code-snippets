@@ -34,11 +34,10 @@ class Code_Snippets_Console {
 	/**
 	 * Evaluates PHP code
 	 *
-	 * @param string $input  PHP code input.
-	 * @param bool   $strict Evaluate in strict mode.
-	 *
+	 * @param string $input          PHP code input.
+	 * @param bool   $basic_validity Check only basic validity.
 	 */
-	public function evaluate_code( string $input, bool $strict = false ): array {
+	public function evaluate_code( string $input, bool $basic_validity = false ): array {
 		$config = new Configuration( array(
 			'configDir' => WP_CONTENT_DIR,
 		) );
@@ -49,44 +48,63 @@ class Code_Snippets_Console {
 		$config->setColorMode( Configuration::COLOR_MODE_AUTO );
 		$config->setYolo( true );
 
+		if ( ! $basic_validity ) {
+			$config->setVerbosity( Configuration::VERBOSITY_DEBUG );
+		}
+
 		$psysh = new Code_Snippets_Shell( $config );
 		$psysh->setOutput( $output );
 
 		try {
-			$psysh->addCode( $input );
-			$timer = microtime( true );
+			try {
+				$psysh->addCode( $input );
+				$timer = microtime( true );
 
-			// @codingStandardsIgnoreStart
-			extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
-			ob_start( array( $psysh, 'writeStdout' ), 1 );
-			set_error_handler( array( $psysh, 'handleError' ) );
-			// @codingStandardsIgnoreEnd
+				// @codingStandardsIgnoreStart
+				extract( $psysh->getScopeVariablesDiff( get_defined_vars() ) );
+				ob_start( array( $psysh, 'writeStdout' ), 1 );
+				set_error_handler( array( $psysh, 'handleError' ) );
+				// @codingStandardsIgnoreEnd
 
-			if ( ! $strict ) {
-				$code = $psysh->onExecute($psysh->flushCode() ?: $input);
-			} else {
-				$code = $input;
+				if ( ! $basic_validity ) {
+					$code = $psysh->onExecute( $psysh->flushCode() ?: $input );
+				} else {
+					$code = $input;
+				}
+
+				$_ = eval( $code );
+
+				restore_error_handler();
+
+				$psysh->setScopeVariables( get_defined_vars() );
+				$psysh->writeReturnValue( $_ );
+
+				ob_end_flush();
+
+				if ( $output->exception ) {
+					throw $output->exception;
+				}
+
+				$execution_time = microtime( true ) - $timer;
+
+				return ( array(
+					'output'         => $this->output_array( (string) $output->outputMessage ),
+					'execution_time' => number_format( $execution_time, 3, '.', '' ),
+				) );
+			} catch ( ErrorException $e ) {
+				/**
+				 * Debug console? Mark as error everything - even warnings.
+				 */
+				if ( ! $basic_validity || in_array( $e->getSeverity(), array(
+					E_ERROR,
+					E_CORE_ERROR,
+					E_USER_ERROR,
+				), true ) ) {
+					throw $e;
+				}
+
+				return array();
 			}
-
-			$_ = eval( $code );
-
-			restore_error_handler();
-
-			$psysh->setScopeVariables( get_defined_vars() );
-			$psysh->writeReturnValue( $_ );
-
-			ob_end_flush();
-
-			if ( $output->exception ) {
-				throw $output->exception;
-			}
-
-			$execution_time = microtime( true ) - $timer;
-
-			return ( array(
-				'output'         => $this->output_array( (string) $output->outputMessage ),
-				'execution_time' => number_format( $execution_time, 3, '.', '' ),
-			) );
 		} catch ( Throwable $e ) {
 			ob_end_flush();
 
