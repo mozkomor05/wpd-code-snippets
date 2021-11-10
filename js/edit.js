@@ -4,15 +4,23 @@ import './editor';
 
 'use strict'
 
+let wpdFormSubmitted = false;
+let wpdFormChanged = false;
+
 window.code_snippets_editor = window.Code_Snippets_Ace('snippet_code', code_snippets_editor_atts);
+window.code_snippets_editor.on('change', function () {
+    wpdFormChanged = true;
+})
 window.onbeforeunload = function (e) {
-    e = e || window.event;
+    if (wpdFormChanged && !wpdFormSubmitted) {
+        e = e || window.event;
 
-    if (e) {
-        e.returnValue = 'Sure?';
+        if (e) {
+            e.returnValue = 'Sure?';
+        }
+
+        return 'Sure?';
     }
-
-    return 'Sure?';
 };
 
 jQuery(document).ready(function ($) {
@@ -155,6 +163,8 @@ jQuery(document).ready(function ($) {
     };
 
     $('#snippet-form').submit(function () {
+        wpdFormSubmitted = true;
+
         snippetMacrosInput.val(JSON.stringify(getMacrosArr()));
     });
 
