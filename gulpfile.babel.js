@@ -9,7 +9,7 @@ import rename from 'gulp-rename';
 import clean from 'gulp-clean';
 import copy from 'gulp-copy';
 import change from 'gulp-change';
-import archiver from 'gulp-archiver';
+import zip from 'gulp-zip';
 
 import postcss from 'gulp-postcss';
 import precss from 'precss';
@@ -174,7 +174,7 @@ gulp.task('package', gulp.series(
     () => gulp.src('js/autocompletions/**/*.js')
         .pipe(gulp.dest(pkg.name + '/js/autocompletions')),
     () => gulp.src(pkg.name + '/**/*', {base: '.'})
-        .pipe(archiver(`${pkg.name}.${pkg.version}.zip`))
+        .pipe(zip(`${pkg.name}.${pkg.version}.zip`))
         .pipe(gulp.dest('.')),
     (done) =>
         fs.rename(pkg.name, 'dist', err => {

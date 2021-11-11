@@ -100,8 +100,18 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 						$args['search'] = $term;
 						break;
 					case 'author':
-						$args['author'] = $term;
+					{
+						$authors = wpd_list_authors();
+						$author  = 0;
+						foreach ( $authors as $person ) {
+							if ( $person['name'] === $term ) {
+								$author = $person['id'];
+								break;
+							}
+						}
+						$args['author'] = $author;
 						break;
+					}
 				}
 
 				break;
@@ -120,7 +130,7 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 
 		$this->set_pagination_args(
 			array(
-				'total_items' => $total,
+				'total_items' => (int) $total,
 				'per_page'    => $per_page,
 			)
 		);
@@ -183,9 +193,9 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 	/**
 	 * Retrieve a URL to perform an action on a snippet
 	 *
-	 * @param string              $action Name of action to perform.
+	 * @param string $action Name of action to perform.
 	 * @param Code_Snippet|string $snippet Snippet object.
-	 * @param bool                $escape Whether to escape the generated URL for output.
+	 * @param bool $escape Whether to escape the generated URL for output.
 	 *
 	 * @return string
 	 */
@@ -223,10 +233,10 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 			if ( $author_info ) {
 				/* translators: %s: Plugin author. */
 				$author = ' <cite>' . __( 'By', 'code-snippets' ) . sprintf( ' <a href="%s" aria-label="%s" data-title="%s">%s</a>',
-                    esc_url( $author_info->link ),
-                    esc_attr( sprintf( __( 'Author of %s' ), $name ) ),
-                    esc_attr( $name ),
-                $author_name ) . '</cite>';
+						esc_url( $author_info->link ),
+						esc_attr( sprintf( __( 'Author of %s' ), $name ) ),
+						esc_attr( $name ),
+						$author_name ) . '</cite>';
 			}
 
 			$requires_php = $wpd_snippet['requires_php'] ?? null;
@@ -342,11 +352,11 @@ class Code_Snippets_List_Table_Browse extends WP_List_Table {
 								if ( ! empty( $plugin_icon_url ) ) :
 									?>
                                     <img src="<?php echo esc_attr( $plugin_icon_url ); ?>" class="plugin-icon" alt=""/>
-									<?php
+								<?php
 								else :
 									?>
                                     <div class="default-snippet-icon plugin-icon"></div>
-									<?php
+								<?php
 								endif;
 								?>
                             </a>
