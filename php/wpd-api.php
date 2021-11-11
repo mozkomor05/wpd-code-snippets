@@ -7,7 +7,7 @@ if ( ! class_exists( 'WPD_Snippet' ) ) {
 /**
  * @param string $action Endpoint (or whole URL) to request.
  * @param string $method Request method.
- * @param array  $args   Additional args.
+ * @param array $args Additional args.
  *
  * @return false|array
  */
@@ -58,6 +58,18 @@ function wpd_list_posts( array $args, &$total ) {
 	$total = wp_remote_retrieve_header( $res, 'x-wp-total' );
 
 	return is_wp_error( $res ) ? false : json_decode( wp_remote_retrieve_body( $res ), true );
+}
+
+/**
+ * @return array
+ */
+function wpd_list_authors() {
+	$path = 'https://wpdistro.com/wp-json/wp/v2/users';
+	$res  = wpd_request( $path, 'GET', array(
+		'retrieve_body' => false,
+	) );
+
+	return is_wp_error( $res ) ? array() : json_decode( wp_remote_retrieve_body( $res ), true );
 }
 
 /**
