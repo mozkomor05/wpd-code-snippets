@@ -19,7 +19,9 @@ function code_snippets_checkbox_field( $atts ) {
 	$input_name = sprintf( 'code_snippets_settings[%s][%s]', $atts['section'], $atts['id'] );
 
 	$output = sprintf(
-		'<input type="checkbox" name="%s"%s>',
+		'<input type="checkbox" id="%s"%s name="%s"%s>',
+		esc_attr( $input_name ),
+		checked( $saved_value, true, false ),
 		esc_attr( $input_name ),
 		checked( $saved_value, true, false )
 	);
