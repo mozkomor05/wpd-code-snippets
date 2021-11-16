@@ -25,6 +25,8 @@ import './editor';
                 switch (setting.type) {
                     case 'ace_theme_select':
                         return 'ace/theme/' + element.options[element.selectedIndex].value;
+                    case 'ace_font_select':
+                        return element.options[element.selectedIndex].value;
                     case 'checkbox':
                         return element.checked;
                     case 'number':

@@ -193,6 +193,16 @@ function code_snippets_settings_validate( array $input ) {
 
 					break;
 
+				case 'ace_font_select':
+					$available_fonts = code_snippets_get_available_fonts();
+					$selected_font   = $input[ $section_id ][ $field_id ];
+
+					if ( in_array( $selected_font, $available_fonts, true ) ) {
+						$settings[ $section_id ][ $field_id ] = $selected_font;
+					}
+
+					break;
+
 				default:
 					break;
 
