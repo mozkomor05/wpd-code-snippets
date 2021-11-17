@@ -106,6 +106,62 @@ function code_snippets_get_settings_fields() {
 			'ace'     => 'theme',
 		),
 
+		'font_size' => array(
+			'name'    => __( 'Font Size', 'code-snippets' ),
+			'type'    => 'number',
+			'label'   => __( 'px', 'code-snippets' ),
+			'default' => 12,
+			'min'     => 5,
+			'ace'     => 'fontSize',
+		),
+
+		'highlight_active_line' => array(
+			'name'    => __( 'Highlight Active Line', 'code-snippets' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Enable highlighting of the active line', 'code-snippets' ),
+			'default' => true,
+			'ace'     => 'highlightActiveLine',
+		),
+
+		'show_line_numbers' => array(
+			'name'    => __( 'Show Line Numbers', 'code-snippets' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Enable showing of line numbers', 'code-snippets' ),
+			'default' => true,
+			'ace'     => 'showLineNumbers',
+		),
+
+		'relative_line_numbers' => array(
+			'name'    => __( 'Relative Line Numbers', 'code-snippets' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Enable relative line numbers to active line', 'code-snippets' ),
+			'default' => false,
+			'ace'     => 'relativeLineNumbers',
+		),
+
+		'show_invisibles' => array(
+			'name'    => __( 'Show Invisibles', 'code-snippets' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Enable invisible characters', 'code-snippets' ),
+			'default' => false,
+			'ace'     => 'showInvisibles',
+		),
+
+		'enable_auto_indent' => array(
+			'name'    => __( 'Enable Auto Indent', 'code-snippets' ),
+			'type'    => 'checkbox',
+			'label'   => __( 'Enable auto adding the blank space in the beginning of an indented line', 'code-snippets' ),
+			'default' => true,
+			'ace'     => 'enableAutoIndent',
+		),
+
+		'font_family' => array(
+			'name'    => __( 'Font Family', 'code-snippets' ),
+			'type'    => 'ace_font_select',
+			'default' => 'monospace',
+			'ace'     => 'fontFamily',
+		),
+
 	);
 
 	$fields = apply_filters( 'code_snippets_settings_fields', $fields );

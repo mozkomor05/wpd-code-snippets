@@ -69,3 +69,43 @@ function code_snippets_get_available_themes() {
 
 	return $themes;
 }
+
+/**
+ * Get the list of ACE supported font-families
+ *
+ * @returns array
+ */
+function code_snippets_get_available_fonts() {
+	static $fonts = null;
+
+	if ( ! is_null( $fonts ) ) {
+		return $fonts;
+	}
+
+	$fonts = array(
+		'arial',
+		'century',
+		'comic',
+		'courier',
+		'cursive',
+		'fantasy',
+		'garamond',
+		'georgia',
+		'helvetica',
+		'impact',
+		'lucida',
+		'monospace',
+		'sans-serif',
+		'serif',
+		'symbol',
+		'system',
+		'tahoma',
+		'times',
+		'trebuchet',
+		'utopia',
+		'verdana',
+		'webdings',
+	);
+
+	return $fonts;
+}
