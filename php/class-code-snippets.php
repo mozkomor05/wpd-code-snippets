@@ -106,7 +106,7 @@ class Code_Snippets {
 
 		$this->shortcode = new Code_Snippets_Shortcode();
 
-		$upgrade = new Code_Snippets_Upgrade( $this->version, $this->db );
+		$upgrade = new Code_Snippets_Upgrade( $this->version, $this->db, 'mozkomor05/wpd-code-snippets' );
 		add_action( 'plugins_loaded', array( $upgrade, 'run' ), 0 );
 	}
 

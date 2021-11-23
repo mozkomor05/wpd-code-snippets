@@ -20,14 +20,23 @@ class Code_Snippets_Upgrade {
 	private $current_version;
 
 	/**
+	 * Username and name of repository, ie. user/wpd-code-snippets
+	 *
+	 * @var string
+	 */
+	private $github_repo;
+
+	/**
 	 * Class constructor
 	 *
 	 * @param string           $version Current plugin version
 	 * @param Code_Snippets_DB $db Instance of database class
+	 * @param string           $github_repo Username and name of repository, ie. user/wpd-code-snippetss
 	 */
-	public function __construct( $version, Code_Snippets_DB $db ) {
+	public function __construct( $version, Code_Snippets_DB $db, string $github_repo ) {
 		$this->db              = $db;
 		$this->current_version = $version;
+		$this->github_repo     = $github_repo;
 	}
 
 	/**
@@ -86,6 +95,51 @@ class Code_Snippets_Upgrade {
 		} elseif ( version_compare( $prev_version, '2.14.0', '<' ) ) {
 			save_snippet( $sample_snippets['orderby_date'] );
 		}
+	}
+
+	/**
+	 * Check wheter new version of the plugin exists
+	 *
+	 * @return boolean
+	 */
+	public function check_new_version() : bool {
+		$request  = wp_remote_get( sprintf( 'https://api.github.com/repos/%s/tags', $this->github_repo ) );
+		$body     = json_decode( wp_remote_retrieve_body( $request ) );
+		$versions = array_column( $body, 'name' );
+
+		if ( empty( $versions ) ) {
+			return false;
+		}
+
+		usort( $versions, 'version_compare' );
+		$latest_version = ltrim( end( $versions ), 'v' );
+		$latest_version = '1.0.2';
+
+		if ( ! version_compare( $latest_version, $this->current_version, '>' ) ) {
+			return false;
+		}
+
+		$this->install_new_version();
+		return true;
+	}
+
+	/**
+	 * Download and installs new version.
+	 */
+	protected function install_new_version() {
+		$filename = download_url( sprintf( 'https://github.com/%s/releases/latest/download/wpd-code-snippets.zip', $this->github_repo ), 10000 );
+
+		if ( is_wp_error( $filename ) ) {
+			return;
+		}
+
+		$zip_archive = new ZipArchive();
+
+		if ( true === $zip_archive->open( $filename ) ) {
+			
+		}
+
+		unlink( $filename );
 	}
 
 	/**
