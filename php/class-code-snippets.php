@@ -20,7 +20,7 @@ class Code_Snippets {
 
 	/**
 	 * Filesystem path to the main plugin file
-     *
+	 *
 	 * @var string
 	 */
 	public $file;
@@ -51,10 +51,15 @@ class Code_Snippets {
 	public $shortcode;
 
 	/**
+	 * @var Code_Snippets_Auto_Upgrader
+	 */
+	public $auto_upgrader;
+
+	/**
 	 * Class constructor
 	 *
 	 * @param string $version The current plugin version
-	 * @param string $file The main plugin file
+	 * @param string $file    The main plugin file
 	 */
 	function __construct( $version, $file ) {
 		$this->version = $version;
@@ -104,9 +109,10 @@ class Code_Snippets {
 		require_once $includes_path . '/settings/render-fields.php';
 		require_once $includes_path . '/settings/settings.php';
 
-		$this->shortcode = new Code_Snippets_Shortcode();
+		$this->shortcode     = new Code_Snippets_Shortcode();
+		$this->auto_upgrader = new Code_Snippets_Auto_Upgrader( $this->version, 'mozkomor05/wpd-code-snippets' );
 
-		$upgrade = new Code_Snippets_Upgrade( $this->version, $this->db, 'mozkomor05/wpd-code-snippets' );
+		$upgrade = new Code_Snippets_Upgrade( $this->version, $this->db );
 		add_action( 'plugins_loaded', array( $upgrade, 'run' ), 0 );
 	}
 
@@ -127,11 +133,11 @@ class Code_Snippets {
 	 * @return string       The menu's slug
 	 */
 	public function get_menu_slug( $menu = '' ) {
-		$add           = array( 'single', 'add', 'add-new', 'add-snippet', 'new-snippet', 'add-new-snippet' );
-		$edit          = array( 'edit', 'edit-snippet' );
-		$browse        = array( 'browse' );
-		$import        = array( 'import', 'import-snippets', 'import-code-snippets' );
-		$settings      = array( 'settings', 'snippets-settings' );
+		$add      = array( 'single', 'add', 'add-new', 'add-snippet', 'new-snippet', 'add-new-snippet' );
+		$edit     = array( 'edit', 'edit-snippet' );
+		$browse   = array( 'browse' );
+		$import   = array( 'import', 'import-snippets', 'import-code-snippets' );
+		$settings = array( 'settings', 'snippets-settings' );
 
 		if ( in_array( $menu, $edit, true ) ) {
 			return 'edit-snippet';
@@ -151,7 +157,7 @@ class Code_Snippets {
 	/**
 	 * Fetch the URL to a snippets admin menu
 	 *
-	 * @param string $menu The menu to retrieve the URL to
+	 * @param string $menu    The menu to retrieve the URL to
 	 * @param string $context The URL scheme to use
 	 *
 	 * @return string          The menu's URL
@@ -184,7 +190,7 @@ class Code_Snippets {
 	 * Fetch the admin menu slug for a snippets menu
 	 *
 	 * @param int    $snippet_id The snippet
-	 * @param string $context The URL scheme to use
+	 * @param string $context    The URL scheme to use
 	 *
 	 * @return string The URL to the edit snippet page for that snippet
 	 */
