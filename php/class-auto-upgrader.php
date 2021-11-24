@@ -93,7 +93,6 @@ class Code_Snippets_Auto_Upgrader {
 
 		usort( $versions, 'version_compare' );
 		$latest_version = ltrim( end( $versions ), 'v' );
-		$latest_version = '1.0.2';
 
 		if ( version_compare( $this->current_version, $latest_version, '<' ) ) {
 			return $latest_version;
