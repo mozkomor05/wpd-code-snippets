@@ -1,6 +1,6 @@
 {
   "name": "wpd-code-snippets",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Manage share and download code snippets snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your Wordpress.",
   "homepage": "https://github.com/mozkomor05/wpd-code-snippets",
   "main": "gulpfile.babel.js",

@@ -3,7 +3,7 @@
 /vendor
 
 # Built plugin
-code-snippets.*.zip
+wpd-code-snippets.*.zip
 /dist
 /css/min
 /js/min
