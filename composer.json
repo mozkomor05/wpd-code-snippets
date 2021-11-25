@@ -3,9 +3,7 @@
   "description": "Manage share and download code snippets snippets with other people. Contribute to the community of WP developers and let them download the amazing hacks on your Wordpress.",
   "license": "MIT",
   "autoload": {
-    "psr-4": {
-      "Mozkomor05\\WpdCodeSnippets\\": "src/"
-    }
+    "classmap": ["php/"]
   },
   "scripts": {
     "phpcs": "phpcs --standard=phpcs.xml"
@@ -20,7 +18,10 @@
     "ext-dom": "*",
     "ext-json": "*",
     "php": ">=7.0",
-    "psy/psysh": "@stable"
+    "symfony/console": "~3.0|^2.4.2|~2.3.10",
+    "symfony/var-dumper" : "~2.7|~3.0",
+    "symfony/debug": "~2.8|~3.0",
+    "psy/psysh": "^0.10.0"
   },
   "require-dev": {
     "wp-coding-standards/wpcs": "^2.3",
