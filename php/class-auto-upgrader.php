@@ -85,6 +85,10 @@ class Code_Snippets_Auto_Upgrader {
 
 		$body = json_decode( $body, true );
 
+		if ( empty( $body ) ) {
+			return false;
+		}
+
 		$versions = array_column( $body, 'name' );
 
 		if ( empty( $versions ) ) {
