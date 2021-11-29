@@ -10,13 +10,14 @@
 /**
  * Render a checkbox field for a setting
  *
+ * @param array $atts The setting field's attributes
+ *
  * @since 2.0.0
  *
- * @param array $atts The setting field's attributes
  */
 function code_snippets_checkbox_field( $atts ) {
 	$saved_value = code_snippets_get_setting( $atts['section'], $atts['id'] );
-	$input_name = sprintf( 'code_snippets_settings[%s][%s]', $atts['section'], $atts['id'] );
+	$input_name  = sprintf( 'code_snippets_settings[%s][%s]', $atts['section'], $atts['id'] );
 
 	$output = sprintf(
 		'<input type="checkbox" id="%s"%s name="%s"%s>',
@@ -42,9 +43,10 @@ function code_snippets_checkbox_field( $atts ) {
 /**
  * Render a number select field for an editor setting
  *
+ * @param array $atts The setting field's attributes
+ *
  * @since 2.0.0
  *
- * @param array $atts The setting field's attributes
  */
 function code_snippets_number_field( $atts ) {
 
