@@ -3,7 +3,7 @@
 /**
  * This class handles the settings admin menu
  *
- * @since 2.4.0
+ * @since   2.4.0
  * @package Code_Snippets
  */
 class Code_Snippets_Settings_Menu extends Code_Snippets_Admin_Menu {
@@ -32,7 +32,7 @@ class Code_Snippets_Settings_Menu extends Code_Snippets_Admin_Menu {
 			} else {
 				delete_option( 'code_snippets_settings' );
 			}
-            delete_user_meta(get_current_user_id(), 'code_snippets_settings');
+			delete_user_meta( get_current_user_id(), 'code_snippets_settings' );
 
 			add_settings_error(
 				'code-snippets-settings-notices',
@@ -80,48 +80,48 @@ class Code_Snippets_Settings_Menu extends Code_Snippets_Admin_Menu {
 		$update_url = is_network_admin() ? add_query_arg( 'update_site_option', true ) : admin_url( 'options.php' );
 
 		?>
-		<div class="wrap">
-			<h1><?php esc_html_e( 'Settings', 'code-snippets' );
+        <div class="wrap">
+            <h1><?php esc_html_e( 'Settings', 'code-snippets' );
 
 				if ( code_snippets()->admin->is_compact_menu() ) {
 
-				printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
-				esc_html_x( 'Manage', 'snippets', 'code-snippets' ),
-				code_snippets()->get_menu_url()
-			);
+					printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
+						esc_html_x( 'Manage', 'snippets', 'code-snippets' ),
+						code_snippets()->get_menu_url()
+					);
 
-			printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
-                esc_html_x( 'Add New', 'snippet', 'code-snippets' ),
-                code_snippets()->get_menu_url( 'add' )
-			);
+					printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
+						esc_html_x( 'Add New', 'snippet', 'code-snippets' ),
+						code_snippets()->get_menu_url( 'add' )
+					);
 
-			printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
-                esc_html_x( 'Import', 'snippets', 'code-snippets' ),
-                code_snippets()->get_menu_url( 'import' )
-			);
+					printf( '<a href="%2$s" class="page-title-action">%1$s</a>',
+						esc_html_x( 'Import', 'snippets', 'code-snippets' ),
+						code_snippets()->get_menu_url( 'import' )
+					);
 				}
 
 				?></h1>
 
 			<?php settings_errors( 'code-snippets-settings-notices' ); ?>
 
-			<form action="<?php echo esc_url( $update_url ); ?>" method="post">
+            <form action="<?php echo esc_url( $update_url ); ?>" method="post">
 				<?php
 
 				settings_fields( 'code-snippets' );
 				do_settings_sections( 'code-snippets' );
 
 				?>
-				<p class="submit" style="max-width: 1020px;">
+                <p class="submit" style="max-width: 1020px;">
 					<?php submit_button( null, 'primary', 'submit', false ); ?>
 
-					<a class="button button-secondary" style="float: right;"
-					   href="<?php echo esc_url( add_query_arg( 'reset_settings', true ) ); ?>">
+                    <a class="button button-secondary" style="float: right;"
+                       href="<?php echo esc_url( add_query_arg( 'reset_settings', true ) ); ?>">
 						<?php esc_html_e( 'Reset to Default', 'code-snippets' ); ?>
-					</a>
-				</p>
-			</form>
-		</div>
+                    </a>
+                </p>
+            </form>
+        </div>
 		<?php
 	}
 

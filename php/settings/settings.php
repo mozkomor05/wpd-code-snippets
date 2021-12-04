@@ -14,7 +14,7 @@
  *
  * @return bool
  */
-function code_snippets_unified_settings() {
+function code_snippets_unified_settings(): bool {
 	if ( ! is_multisite() ) {
 		return false;
 	}
@@ -30,7 +30,7 @@ function code_snippets_unified_settings() {
  *
  * @return array
  */
-function code_snippets_get_settings() {
+function code_snippets_get_settings(): array {
 	/* Check if the settings have been cached */
 	if ( $settings = wp_cache_get( 'code_snippets_settings' ) ) {
 		return $settings;
@@ -41,9 +41,7 @@ function code_snippets_get_settings() {
 
 	/* Retrieve saved settings from the database */
 	$saved = array_merge(
-		code_snippets_unified_settings() ?
-			get_site_option( 'code_snippets_settings', array() ) :
-			get_option( 'code_snippets_settings', array() ),
+		code_snippets_unified_settings() ? get_site_option( 'code_snippets_settings', array() ) : get_option( 'code_snippets_settings', array() ),
 		code_snippets_get_current_user_settings()
 	);
 
@@ -73,12 +71,12 @@ function code_snippets_get_settings() {
 /**
  * Retrieve an individual setting field value
  *
- * @param string $section The ID of the section the setting belongs to
- * @param string $field The ID of the setting field
+ * @param string $section The ID of the section the setting belongs to.
+ * @param string $field   The ID of the setting field.
  *
- * @return array
+ * @return mixed
  */
-function code_snippets_get_setting( $section, $field ) {
+function code_snippets_get_setting( string $section, string $field ) {
 	$settings = code_snippets_get_settings();
 
 	return $settings[ $section ][ $field ];
@@ -89,7 +87,7 @@ function code_snippets_get_setting( $section, $field ) {
  *
  * @return array
  */
-function code_snippets_get_settings_sections() {
+function code_snippets_get_settings_sections(): array {
 	$sections = array(
 		'general'            => __( 'General', 'code-snippets' ),
 		'description_editor' => __( 'Description Editor', 'code-snippets' ),
@@ -161,11 +159,11 @@ add_action( 'admin_init', 'code_snippets_register_settings' );
 /**
  * Validate the settings
  *
- * @param array $input The sent settings
+ * @param array $input The sent settings.
  *
- * @return array        The validated settings
+ * @return array       The validated settings
  */
-function code_snippets_settings_validate( array $input ) {
+function code_snippets_settings_validate( array $input ): array {
 	$settings        = code_snippets_get_settings();
 	$settings_fields = code_snippets_get_settings_fields();
 
@@ -231,37 +229,41 @@ function code_snippets_settings_validate( array $input ) {
  * @return array
  */
 function code_snippets_get_current_user_settings(): array {
-	$saved = get_user_meta( get_current_user_id(), 'code_snippets_settings' );
+	$saved = get_user_option( 'code_snippets_settings', get_current_user_id() );
 	if ( empty( $saved ) ) {
 		return array();
 	}
 
-	return $saved[0];
+	return $saved;
 }
+
 
 /**
  * Hooks to options.php and separates user based settings to save them to user meta
+ *
+ * @param array  $new_value   Original option object.
+ * @param array  $old_value   Original option value before edit.
+ * @param string $option_name Name of the edited option.
+ *
+ * @return array
  */
-function code_snippets_separate_settings() {
-	if ( empty( get_user_meta( get_current_user_id(), 'code_snippets_settings' ) ) ) {
-		add_user_meta( get_current_user_id(), 'code_snippets_settings', '' );
+function code_snippets_separate_user_settings( array $new_value, array $old_value, string $option_name ): array {
+	if ( 'code_snippets_settings' !== $option_name ) {
+		return $new_value;
 	}
-	add_filter( "pre_update_option_code_snippets_settings", 'remove_user_settings', 10, 1 );
-	function remove_user_settings( $new_value ): array {
-		$user_settings   = array();
-		$global_settings = array();
-		foreach ( $new_value as $field => $value ) {
-			if ( $field === 'editor' ) {
-				$user_settings[ $field ] = $value;
-				continue;
-			}
-			$global_settings[ $field ] = $value;
+
+	$user_settings   = array();
+	$global_settings = array();
+	foreach ( $new_value as $field => $value ) {
+		if ( 'editor' === $field ) {
+			$user_settings[ $field ] = $value;
+			continue;
 		}
-		update_user_meta( get_current_user_id(), 'code_snippets_settings', $user_settings );
-
-		return $global_settings;
+		$global_settings[ $field ] = $value;
 	}
+	update_user_option( get_current_user_id(), 'code_snippets_settings', $user_settings );
 
+	return $global_settings;
 }
 
-code_snippets_separate_settings();
+add_filter( 'pre_update_option_code_snippets_settings', 'code_snippets_separate_user_settings', 10, 3 );
