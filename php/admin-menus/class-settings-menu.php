@@ -32,6 +32,7 @@ class Code_Snippets_Settings_Menu extends Code_Snippets_Admin_Menu {
 			} else {
 				delete_option( 'code_snippets_settings' );
 			}
+            delete_user_meta(get_current_user_id(), 'code_snippets_settings');
 
 			add_settings_error(
 				'code-snippets-settings-notices',

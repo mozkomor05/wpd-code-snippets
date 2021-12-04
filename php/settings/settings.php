@@ -40,9 +40,12 @@ function code_snippets_get_settings() {
 	$settings = code_snippets_get_default_settings();
 
 	/* Retrieve saved settings from the database */
-	$saved = code_snippets_unified_settings() ?
-		get_site_option( 'code_snippets_settings', array() ) :
-		get_option( 'code_snippets_settings', array() );
+	$saved = array_merge(
+		code_snippets_unified_settings() ?
+			get_site_option( 'code_snippets_settings', array() ) :
+			get_option( 'code_snippets_settings', array() ),
+		code_snippets_get_current_user_settings()
+	);
 
 	/* Replace the default field values with the ones saved in the database */
 	if ( function_exists( 'array_replace_recursive' ) ) {
@@ -71,7 +74,7 @@ function code_snippets_get_settings() {
  * Retrieve an individual setting field value
  *
  * @param string $section The ID of the section the setting belongs to
- * @param string $field   The ID of the setting field
+ * @param string $field The ID of the setting field
  *
  * @return array
  */
@@ -220,3 +223,45 @@ function code_snippets_settings_validate( array $input ) {
 
 	return $settings;
 }
+
+
+/**
+ * Get saved user settings
+ *
+ * @return array
+ */
+function code_snippets_get_current_user_settings(): array {
+	$saved = get_user_meta( get_current_user_id(), 'code_snippets_settings' );
+	if ( empty( $saved ) ) {
+		return array();
+	}
+
+	return $saved[0];
+}
+
+/**
+ * Hooks to options.php and separates user based settings to save them to user meta
+ */
+function code_snippets_separate_settings() {
+	if ( empty( get_user_meta( get_current_user_id(), 'code_snippets_settings' ) ) ) {
+		add_user_meta( get_current_user_id(), 'code_snippets_settings', '' );
+	}
+	add_filter( "pre_update_option_code_snippets_settings", 'remove_user_settings', 10, 1 );
+	function remove_user_settings( $new_value ): array {
+		$user_settings   = array();
+		$global_settings = array();
+		foreach ( $new_value as $field => $value ) {
+			if ( $field === 'editor' ) {
+				$user_settings[ $field ] = $value;
+				continue;
+			}
+			$global_settings[ $field ] = $value;
+		}
+		update_user_meta( get_current_user_id(), 'code_snippets_settings', $user_settings );
+
+		return $global_settings;
+	}
+
+}
+
+code_snippets_separate_settings();
