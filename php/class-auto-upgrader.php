@@ -38,8 +38,6 @@ class Code_Snippets_Auto_Upgrader {
 		$this->plugin_basename = plugin_basename( CODE_SNIPPETS_FILE );
 
 		add_filter( 'pre_set_site_transient_update_plugins', array( &$this, 'check_update' ) );
-
-		set_site_transient( 'update_plugins', get_site_transient( 'update_plugins' ) );
 	}
 
 	/**
